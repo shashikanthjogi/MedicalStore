@@ -1,0 +1,13 @@
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\MedicalStore.exe.config
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\MedicalStore.exe
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\MedicalStore.pdb
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.csprojResolveAssemblyReference.cache
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.Properties.Resources.resources
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.csproj.GenerateResource.Cache
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.exe
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.pdb
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.dll
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.xml
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.UserLogin.resources
