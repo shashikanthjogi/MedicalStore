@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Medical_StoreModelStoreContainer" CdmEntityContainer="Medical_StoreEntities">
+  <EntityContainerMapping StorageEntityContainer="Medical_StoreModelStoreContainer" CdmEntityContainer="Medical_StoreEntities1">
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="Medical_StoreModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
@@ -33,15 +33,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GET_ValidateLogin" FunctionName="Medical_StoreModel.Store.GET_ValidateLogin">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_ValidateLogin_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_ValidateLogin" FunctionName="Medical_StoreModel.Store.GET_ValidateLogin" />
   </EntityContainerMapping>
 </Mapping>

@@ -16,7 +16,7 @@ namespace MedicalStore
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserLogin());
+            Application.Run(new MasterFrom());
         }
     }
 }

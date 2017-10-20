@@ -10,4 +10,6 @@ C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\
 C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.xml
 C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.UserLogin.resources
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.MasterFrom.resources
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.LoginUC.resources
+C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.StockUC.resources
