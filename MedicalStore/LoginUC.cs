@@ -12,6 +12,7 @@ namespace MedicalStore
 {
     public partial class LoginUC : UserControl
     {
+        public static MasterFrom ParentFormName { get; set; }
         private static LoginUC _instance;
         public static LoginUC Instance
         {
@@ -39,6 +40,10 @@ namespace MedicalStore
             {
                 //MasterFrom mf = new MasterFrom();
                 MasterFrom mf   = (MasterFrom)this.Parent.Parent;
+                if (ParentFormName == null)
+                    return;
+                else
+                    ParentFormName = mf;
                 Panel pp = mf.Controls["panel1"] as Panel;
                 MenuStrip menuStrip1 = mf.Controls["menuStrip1"] as MenuStrip;
                 menuStrip1.Items.Clear();
@@ -107,10 +112,7 @@ namespace MedicalStore
         }
         private void LogOut_Click(object sender, EventArgs e)
         {
-            this.Parent = new MasterFrom();
-            Form mf = (this.Parent as Form);
-
-            //MasterFrom mf = new MasterFrom();
+            MasterFrom mf = ParentFormName;
             Panel pp = mf.Controls["panel1"] as Panel;
             MenuStrip menuStrip1 = mf.Controls["menuStrip1"] as MenuStrip;
             menuStrip1.Hide();
@@ -122,6 +124,8 @@ namespace MedicalStore
             }
             else
                 LoginUC.Instance.BringToFront();
+            textBox1.Clear();
+            textBox2.Clear();
         }
         private void Item_Click(object sender, EventArgs e)
         {

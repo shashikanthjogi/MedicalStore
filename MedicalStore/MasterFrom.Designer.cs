@@ -37,7 +37,7 @@
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1202, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1210, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -45,7 +45,7 @@
             // 
             this.panel1.Location = new System.Drawing.Point(26, 120);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1155, 291);
+            this.panel1.Size = new System.Drawing.Size(1155, 354);
             this.panel1.TabIndex = 13;
             // 
             // label1
@@ -64,12 +64,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1202, 423);
+            this.ClientSize = new System.Drawing.Size(1210, 575);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "MasterFrom";
             this.Text = "MasterFrom";
+            this.Load += new System.EventHandler(this.MasterFrom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

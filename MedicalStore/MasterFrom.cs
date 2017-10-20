@@ -15,7 +15,7 @@ namespace MedicalStore
         public MasterFrom()
         {
             InitializeComponent();
-
+            LoginUC.ParentFormName = this;
             menuStrip1.Hide();
             if (!panel1.Controls.Contains(LoginUC.Instance))
             {
@@ -24,6 +24,11 @@ namespace MedicalStore
             }
             else
                 LoginUC.Instance.BringToFront();
+        }
+
+        private void MasterFrom_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
