@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Medical_StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DealerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
@@ -34,6 +44,44 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Employee_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="TotalQuantity" Type="int" Nullable="false" />
+          <Property Name="SellQuantity" Type="int" Nullable="false" />
+          <Property Name="AvailableQuantity" Type="int" Nullable="false" />
+          <Property Name="TotalPrice" Type="int" Nullable="false" />
+          <Property Name="SellPrice" Type="int" Nullable="false" />
+          <Property Name="AvailablePrice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockIn">
+          <Key>
+            <PropertyRef Name="I_Id" />
+          </Key>
+          <Property Name="I_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="I_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="I_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="I_Quantity" Type="int" Nullable="false" />
+          <Property Name="I_Price" Type="int" Nullable="false" />
+          <Property Name="V_Name" Type="int" Nullable="false" />
+          <Property Name="I_Exp_Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockOut">
+          <Key>
+            <PropertyRef Name="O_Id" />
+          </Key>
+          <Property Name="O_Id" Type="int" Nullable="false" />
+          <Property Name="C_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="O_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="O_Quantity" Type="int" Nullable="false" />
+          <Property Name="O_Price" Type="int" Nullable="false" />
+          <Property Name="O_TotalPrice" Type="int" Nullable="false" />
+          <Property Name="O_Date" Type="date" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Employee_Employee_LookUp">
           <End Role="Employee_LookUp" Type="Self.Employee_LookUp" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -58,14 +106,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Stock_Vendor">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="TotalPrice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockIn_Vendor">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="StockIn">
+              <PropertyRef Name="I_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DEL_Company" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GET_Companies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_ValidateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
           <Parameter Name="Password" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="INS_Company" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DealerName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Medical_StoreModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Employee_Employee_LookUp" Association="Self.FK_Employee_Employee_LookUp">
             <End Role="Employee_LookUp" EntitySet="Employee_LookUp" />
             <End Role="Employee" EntitySet="Employee" />
@@ -73,6 +159,14 @@
           <AssociationSet Name="FK_Login_Employee" Association="Self.FK_Login_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Vendor" Association="Self.FK_Stock_Vendor">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_Vendor" Association="Self.FK_StockIn_Vendor">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="StockIn" EntitySet="StockIn" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -152,7 +246,117 @@
             <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Stocks" EntityType="Medical_StoreModel.Stock" />
+          <EntitySet Name="StockIns" EntityType="Medical_StoreModel.StockIn" />
+          <EntitySet Name="StockOuts" EntityType="Medical_StoreModel.StockOut" />
+          <FunctionImport Name="GET_ALL_VENDORS" />
+          <FunctionImport Name="DEL_Company">
+          <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GET_Companies" EntitySet="Companies" ReturnType="Collection(Medical_StoreModel.Company)" />
+          <FunctionImport Name="INS_Company">
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="DealerName" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Companies" EntityType="Medical_StoreModel.Company" />
+          <AssociationSet Name="FK_Stock_Vendor" Association="Medical_StoreModel.FK_Stock_Vendor">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_Vendor" Association="Medical_StoreModel.FK_StockIn_Vendor">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="StockIn" EntitySet="StockIns" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="TotalQuantity" Type="Int32" Nullable="false" />
+          <Property Name="SellQuantity" Type="Int32" Nullable="false" />
+          <Property Name="AvailableQuantity" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Int32" Nullable="false" />
+          <Property Name="SellPrice" Type="Int32" Nullable="false" />
+          <Property Name="AvailablePrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Stock" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="StockIn">
+          <Key>
+            <PropertyRef Name="I_Id" />
+          </Key>
+          <Property Name="I_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="I_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="I_Price" Type="Int32" Nullable="false" />
+          <Property Name="V_Name" Type="Int32" Nullable="false" />
+          <Property Name="I_Exp_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_StockIn_Vendor" FromRole="StockIn" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="StockOut">
+          <Key>
+            <PropertyRef Name="O_Id" />
+          </Key>
+          <Property Name="O_Id" Type="Int32" Nullable="false" />
+          <Property Name="C_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="O_Price" Type="Int32" Nullable="false" />
+          <Property Name="O_TotalPrice" Type="Int32" Nullable="false" />
+          <Property Name="O_Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <ComplexType Name="GET_ALL_VENDORS_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Mobile" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GET_Companies_Result">
+          <Property Type="Int32" Name="C_Id" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DealerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Mobile" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DealerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Stock_Vendor">
+          <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="Medical_StoreModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="TotalPrice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockIn_Vendor">
+          <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="Medical_StoreModel.StockIn" Role="StockIn" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="StockIn">
+              <PropertyRef Name="I_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -193,7 +397,63 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GET_ValidateLogin" FunctionName="Medical_StoreModel.Store.GET_ValidateLogin">
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="Medical_StoreModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="AvailablePrice" ColumnName="AvailablePrice" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
+                <ScalarProperty Name="SellQuantity" ColumnName="SellQuantity" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockIns">
+            <EntityTypeMapping TypeName="Medical_StoreModel.StockIn">
+              <MappingFragment StoreEntitySet="StockIn">
+                <ScalarProperty Name="I_Exp_Date" ColumnName="I_Exp_Date" />
+                <ScalarProperty Name="V_Name" ColumnName="V_Name" />
+                <ScalarProperty Name="I_Price" ColumnName="I_Price" />
+                <ScalarProperty Name="I_Quantity" ColumnName="I_Quantity" />
+                <ScalarProperty Name="I_Description" ColumnName="I_Description" />
+                <ScalarProperty Name="I_Name" ColumnName="I_Name" />
+                <ScalarProperty Name="I_Id" ColumnName="I_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockOuts">
+            <EntityTypeMapping TypeName="Medical_StoreModel.StockOut">
+              <MappingFragment StoreEntitySet="StockOut">
+                <ScalarProperty Name="O_Date" ColumnName="O_Date" />
+                <ScalarProperty Name="O_TotalPrice" ColumnName="O_TotalPrice" />
+                <ScalarProperty Name="O_Price" ColumnName="O_Price" />
+                <ScalarProperty Name="O_Quantity" ColumnName="O_Quantity" />
+                <ScalarProperty Name="O_Name" ColumnName="O_Name" />
+                <ScalarProperty Name="C_Name" ColumnName="C_Name" />
+                <ScalarProperty Name="O_Id" ColumnName="O_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DEL_Company" FunctionName="Medical_StoreModel.Store.DEL_Company" />
+          <FunctionImportMapping FunctionImportName="GET_Companies" FunctionName="Medical_StoreModel.Store.GET_Companies">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="INS_Company" FunctionName="Medical_StoreModel.Store.INS_Company" />
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="Medical_StoreModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

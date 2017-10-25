@@ -14,6 +14,8 @@ namespace MedicalStore
     {
         public static MasterFrom ParentFormName { get; set; }
         private static LoginUC _instance;
+        Control[] ct;
+
         public static LoginUC Instance
         {
             get
@@ -45,58 +47,17 @@ namespace MedicalStore
                 else
                     ParentFormName = mf;
                 Panel pp = mf.Controls["panel1"] as Panel;
-                MenuStrip menuStrip1 = mf.Controls["menuStrip1"] as MenuStrip;
-                menuStrip1.Items.Clear();
-                menuStrip1.Show();
-                ToolStripMenuItem item, submenu, stock;
-
-                submenu = new ToolStripMenuItem();
-                submenu.Text = "Home";
-
-                item = new ToolStripMenuItem();
-                item.Text = "Log Out";
-                item.Click += LogOut_Click;
-                submenu.DropDownItems.Add(item);
-
-                item = new ToolStripMenuItem();
-                item.Click += new EventHandler(exitToolStripMenuItem_Click);
-                item.Text = "Exit";
-                submenu.DropDownItems.Add(item);
-
-                stock = new ToolStripMenuItem();
-                stock.Text = "Stock";
-
-                item = new ToolStripMenuItem();
-                item.Text = "New Stock";
-                item.Click += Item_Click;
-                stock.DropDownItems.Add(item);
-                item = new ToolStripMenuItem();
-                item.Text = "Update Stock";
-                item.Click += Item_Click;
-                stock.DropDownItems.Add(item);
-                item = new ToolStripMenuItem();
-                item.Text = "Delete Stock";
-                item.Click += Item_Click;
-                stock.DropDownItems.Add(item);
-
-                if (result == 1)
-                {
-                    item = new ToolStripMenuItem();
-                    item.Text = "Reports";
-                    item.Click += Item_Click;
-                    stock.DropDownItems.Add(item);
-                }
-                menuStrip1.Items.Add(submenu);
-                menuStrip1.Items.Add(stock);
+                
                 pp.Controls.Remove(LoginUC.Instance);
-                if (!pp.Controls.Contains(StockUC.Instance))
+                if (!pp.Controls.Contains(HomePage.Instance))
                 {
-                    pp.Controls.Add(StockUC.Instance);
-                    StockUC.Instance.BringToFront();
+                    pp.Controls.Add(HomePage.Instance);
+                    HomePage.Instance.BringToFront();
                 }
                 else
-                    StockUC.Instance.BringToFront();
+                    HomePage.Instance.BringToFront();
 
+                BuildMenu(mf, result);
             }
         }
 
@@ -104,6 +65,70 @@ namespace MedicalStore
         {
             textBox1.Clear();
             textBox2.Clear();
+        }
+
+        private void BuildMenu(MasterFrom mf,int? result)
+        {
+            MenuStrip menuStrip1 = mf.Controls["menuStrip1"] as MenuStrip;
+            menuStrip1.Items.Clear();
+            menuStrip1.Show();
+            ToolStripMenuItem item, submenu, stock,company;
+
+            submenu = new ToolStripMenuItem();
+            submenu.Text = "Home";
+
+            item = new ToolStripMenuItem();
+            item.Text = "Log Out";
+            item.Click += LogOut_Click;
+            submenu.DropDownItems.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Click += new EventHandler(exitToolStripMenuItem_Click);
+            item.Text = "Exit";
+            submenu.DropDownItems.Add(item);
+
+            stock = new ToolStripMenuItem();
+            stock.Text = "Stock";
+
+            item = new ToolStripMenuItem();
+            item.Text = "New Stock";
+            item.Click += Item_Click;
+            stock.DropDownItems.Add(item);
+            item = new ToolStripMenuItem();
+            item.Text = "Update Stock";
+            item.Click += Item_Click;
+            stock.DropDownItems.Add(item);
+            item = new ToolStripMenuItem();
+            item.Text = "Delete Stock";
+            item.Click += Item_Click;
+            stock.DropDownItems.Add(item);
+
+            company = new ToolStripMenuItem();
+            company.Text = "Company";
+
+            item = new ToolStripMenuItem();
+            item.Text = "Add Company";
+            item.Click += Item_Click;
+            company.DropDownItems.Add(item);
+            item = new ToolStripMenuItem();
+            item.Text = "Remove Company";
+            item.Click += Item_Click;
+            company.DropDownItems.Add(item);
+            item = new ToolStripMenuItem();
+            item.Text = "View Companies";
+            item.Click += Item_Click;
+            company.DropDownItems.Add(item);
+
+            if (result == 1)
+            {
+                item = new ToolStripMenuItem();
+                item.Text = "Reports";
+                item.Click += Item_Click;
+                stock.DropDownItems.Add(item);
+            }
+            menuStrip1.Items.Add(submenu);
+            menuStrip1.Items.Add(stock);
+            menuStrip1.Items.Add(company);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -117,7 +142,7 @@ namespace MedicalStore
             MenuStrip menuStrip1 = mf.Controls["menuStrip1"] as MenuStrip;
             menuStrip1.Hide();
             pp.Controls.Remove(StockUC.Instance);
-            if (!pp.Controls.Contains(LoginUC.Instance))
+            if (!pp.Controls.Contains(CompanyUC.Instance))
             {
                 pp.Controls.Add(LoginUC.Instance);
                 LoginUC.Instance.BringToFront();
@@ -129,7 +154,49 @@ namespace MedicalStore
         }
         private void Item_Click(object sender, EventArgs e)
         {
+            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
+            if (mi.Text == "Add Company")
+            {
+                SelectCompanyTabs(0);
+            }
+            else if (mi.Text == "Remove Company")
+            {
+                SelectCompanyTabs(1);
+            }
+            else if(mi.Text == "View Companies")
+            {
+                SelectCompanyTabs(2);
+            }
         }
 
+        private void RemoveAllInstances()
+        {
+            MasterFrom mf = ParentFormName;
+            Panel pp = mf.Controls["panel1"] as Panel;
+            pp.Controls.Remove(StockUC.Instance);
+            pp.Controls.Remove(HomePage.Instance);
+            pp.Controls.Remove(CompanyUC.Instance);
+        }
+
+        private void SelectCompanyTabs(int index)
+        {
+            MasterFrom mf = ParentFormName;
+            Panel pp = mf.Controls["panel1"] as Panel;
+            RemoveAllInstances();
+            CompanyUC uc = new CompanyUC();
+            if (!pp.Controls.Contains(CompanyUC.Instance))
+            {
+                pp.Controls.Add(CompanyUC.Instance);
+                CompanyUC.Instance.BringToFront();
+            }
+            else
+                CompanyUC.Instance.BringToFront();
+
+            ct = uc.Controls.Find("tabcontrol1", true);
+            TabControl tc = (TabControl)ct[0];
+            TabPage t = tc.TabPages[index];
+            tc.SelectTab(t);
+            tc.SelectedIndex = 2;
+        }
     }
 }

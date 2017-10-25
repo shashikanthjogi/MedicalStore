@@ -1,0 +1,16 @@
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.CompanyUC.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.HomePage.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.LoginUC.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.MasterFrom.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.Properties.Resources.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.StockUC.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.csproj.GenerateResource.Cache
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\MedicalStore.exe.config
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\MedicalStore.exe
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\MedicalStore.pdb
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\EntityFramework.dll
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\EntityFramework.xml
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.exe
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.pdb

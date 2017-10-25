@@ -30,6 +30,10 @@ namespace MedicalStore
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Employee_LookUp> Employee_LookUp { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
+        public virtual DbSet<StockOut> StockOuts { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GET_ValidateLogin(string userName, string password)
         {
@@ -42,6 +46,51 @@ namespace MedicalStore
                 new ObjectParameter("Password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GET_ValidateLogin", userNameParameter, passwordParameter);
+        }
+    
+        public virtual int GET_ALL_VENDORS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GET_ALL_VENDORS");
+        }
+    
+        public virtual int DEL_Company(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DEL_Company", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<Company> GET_Companies()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Company>("GET_Companies");
+        }
+    
+        public virtual ObjectResult<Company> GET_Companies(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Company>("GET_Companies", mergeOption);
+        }
+    
+        public virtual int INS_Company(string companyName, string dealerName, string address, Nullable<int> mobile)
+        {
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("CompanyName", companyName) :
+                new ObjectParameter("CompanyName", typeof(string));
+    
+            var dealerNameParameter = dealerName != null ?
+                new ObjectParameter("DealerName", dealerName) :
+                new ObjectParameter("DealerName", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var mobileParameter = mobile.HasValue ?
+                new ObjectParameter("Mobile", mobile) :
+                new ObjectParameter("Mobile", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Company", companyNameParameter, dealerNameParameter, addressParameter, mobileParameter);
         }
     }
 }

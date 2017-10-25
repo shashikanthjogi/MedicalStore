@@ -25,6 +25,7 @@ namespace MedicalStore
         public StockUC()
         {
             InitializeComponent();
+            //FillCompanyList();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -45,6 +46,23 @@ namespace MedicalStore
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void FillCompanyList()
+        {
+            using (Medical_StoreEntities1 context=new Medical_StoreEntities1())
+            {
+                //var result = context.GET_ALL_VENDORS();
+                //Dictionary<string, string> item = new Dictionary<string, string>();
+                //foreach (var c in result)
+                //{
+                //    item.Add(c.Id.ToString(), c.Name);
+                    
+                //}
+                //cmbCompanies.DataSource = new BindingSource(item, null);
+                //cmbCompanies.DisplayMember = "Value";
+                //cmbCompanies.ValueMember = "Key";
+            }
         }
     }
 }

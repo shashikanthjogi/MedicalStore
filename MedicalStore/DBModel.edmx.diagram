@@ -10,7 +10,13 @@
         <EntityTypeShape EntityType="Medical_StoreModel.Login" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="Medical_StoreModel.FK_Employee_Employee_LookUp" ManuallyRouted="false" />
         <AssociationConnector Association="Medical_StoreModel.FK_Login_Employee" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="Medical_StoreModel.Stock" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="Medical_StoreModel.StockIn" Width="1.5" PointX="3" PointY="8.875" />
+        <EntityTypeShape EntityType="Medical_StoreModel.StockOut" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Medical_StoreModel.Company" Width="1.5" PointX="0.75" PointY="7.125" />
+        <AssociationConnector Association="Medical_StoreModel.FK_Stock_Vendor" />
+        <AssociationConnector Association="Medical_StoreModel.FK_StockIn_Vendor" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
