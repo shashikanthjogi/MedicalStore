@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Medical_StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Mobile" Type="Int64" Nullable="false" />
-    <Property Name="Designation_Id" Type="Int32" Nullable="false" />
-    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <NavigationProperty Name="Employee_LookUp" Relationship="Self.FK_Employee_Employee_LookUp" FromRole="Employee" ToRole="Employee_LookUp" />
-    <NavigationProperty Name="Logins" Relationship="Self.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
-  </EntityType>
   <EntityType Name="Employee_LookUp">
     <Key>
       <PropertyRef Name="Id" />
@@ -21,7 +7,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Employee_LookUp" FromRole="Employee_LookUp" ToRole="Employee" />
   </EntityType>
   <EntityType Name="Login">
     <Key>
@@ -31,50 +16,15 @@
     <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Employee_Id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_Login_Employee" FromRole="Login" ToRole="Employee" />
+    <NavigationProperty Name="Employee" Relationship="Medical_StoreModel.FK_Login_Employee" FromRole="Login" ToRole="Employee" />
   </EntityType>
-  <Association Name="FK_Employee_Employee_LookUp">
-    <End Role="Employee_LookUp" Type="Self.Employee_LookUp" Multiplicity="1" />
-    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee_LookUp">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="Designation_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Login_Employee">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="Login" Type="Self.Login" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Login">
-        <PropertyRef Name="Employee_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="Medical_StoreEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" />
     <EntitySet Name="Logins" EntityType="Self.Login" />
-    <AssociationSet Name="FK_Employee_Employee_LookUp" Association="Self.FK_Employee_Employee_LookUp">
-      <End Role="Employee_LookUp" EntitySet="Employee_LookUp" />
-      <End Role="Employee" EntitySet="Employees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Login_Employee" Association="Self.FK_Login_Employee">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="Login" EntitySet="Logins" />
-    </AssociationSet>
-    <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Int32)">
+    <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Medical_StoreModel.GET_ValidateLogin_Result)">
       <Parameter Name="UserName" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="Stocks" EntityType="Medical_StoreModel.Stock" />
-    <EntitySet Name="StockIns" EntityType="Medical_StoreModel.StockIn" />
     <EntitySet Name="StockOuts" EntityType="Medical_StoreModel.StockOut" />
     <FunctionImport Name="GET_ALL_VENDORS" />
     <FunctionImport Name="DEL_Company">
@@ -88,43 +38,38 @@
       <Parameter Name="Mobile" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Companies" EntityType="Medical_StoreModel.Company" />
+    <FunctionImport Name="GET_Employee_LookUp" ReturnType="Collection(Medical_StoreModel.GET_Employee_LookUp_Result)" />
+    <FunctionImport Name="GET_Employees" ReturnType="Collection(Medical_StoreModel.GET_Employees_Result)" />
+    <EntitySet Name="Stocks" EntityType="Medical_StoreModel.Stock" />
     <AssociationSet Name="FK_Stock_Vendor" Association="Medical_StoreModel.FK_Stock_Vendor">
       <End Role="Company" EntitySet="Companies" />
       <End Role="Stock" EntitySet="Stocks" />
     </AssociationSet>
-    <AssociationSet Name="FK_StockIn_Vendor" Association="Medical_StoreModel.FK_StockIn_Vendor">
+    <EntitySet Name="StockIns" EntityType="Medical_StoreModel.StockIn" />
+    <AssociationSet Name="FK_StockIn_StockIn" Association="Medical_StoreModel.FK_StockIn_StockIn">
       <End Role="Company" EntitySet="Companies" />
       <End Role="StockIn" EntitySet="StockIns" />
     </AssociationSet>
+    <EntitySet Name="Employees" EntityType="Medical_StoreModel.Employee" />
+    <AssociationSet Name="FK_Login_Employee" Association="Medical_StoreModel.FK_Login_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Login" EntitySet="Logins" />
+    </AssociationSet>
+    <FunctionImport Name="INS_Login">
+      <Parameter Name="UName" Mode="In" Type="String" />
+      <Parameter Name="Pass" Mode="In" Type="String" />
+      <Parameter Name="E_Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="INS_Employee">
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="Int32" />
+      <Parameter Name="Designation_Id" Mode="In" Type="Int32" />
+      <Parameter Name="Salary" Mode="In" Type="Int32" />
+      <Parameter Name="Eid" Mode="InOut" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="Stock">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Int32" Nullable="false" />
-    <Property Name="TotalQuantity" Type="Int32" Nullable="false" />
-    <Property Name="SellQuantity" Type="Int32" Nullable="false" />
-    <Property Name="AvailableQuantity" Type="Int32" Nullable="false" />
-    <Property Name="TotalPrice" Type="Int32" Nullable="false" />
-    <Property Name="SellPrice" Type="Int32" Nullable="false" />
-    <Property Name="AvailablePrice" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Stock" ToRole="Company" />
-  </EntityType>
-  <EntityType Name="StockIn">
-    <Key>
-      <PropertyRef Name="I_Id" />
-    </Key>
-    <Property Name="I_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="I_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="I_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="I_Quantity" Type="Int32" Nullable="false" />
-    <Property Name="I_Price" Type="Int32" Nullable="false" />
-    <Property Name="V_Name" Type="Int32" Nullable="false" />
-    <Property Name="I_Exp_Date" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_StockIn_Vendor" FromRole="StockIn" ToRole="Company" />
-  </EntityType>
   <EntityType Name="StockOut">
     <Key>
       <PropertyRef Name="O_Id" />
@@ -136,6 +81,7 @@
     <Property Name="O_Price" Type="Int32" Nullable="false" />
     <Property Name="O_TotalPrice" Type="Int32" Nullable="false" />
     <Property Name="O_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="O_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <ComplexType Name="GET_ALL_VENDORS_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -159,6 +105,36 @@
     <Property Name="DealerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Stocks" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Company" ToRole="Stock" />
+    <NavigationProperty Name="StockIns" Relationship="Medical_StoreModel.FK_StockIn_StockIn" FromRole="Company" ToRole="StockIn" />
+  </EntityType>
+  <ComplexType Name="GET_Employee_LookUp_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GET_Employees_Result">
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="Mobile" Nullable="false" />
+    <Property Type="Int32" Name="Designation_Id" Nullable="false" />
+    <Property Type="Int32" Name="Salary" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="S_Id" />
+    </Key>
+    <Property Name="S_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="S_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="S_Price" Type="Int32" Nullable="false" />
+    <Property Name="S_TotalQuantity" Type="Int32" Nullable="false" />
+    <Property Name="S_SellQuantity" Type="Int32" Nullable="false" />
+    <Property Name="S_AvailableQuantity" Type="Int32" Nullable="false" />
+    <Property Name="S_TotalPrice" Type="Int32" Nullable="false" />
+    <Property Name="S_SellPrice" Type="Int32" Nullable="false" />
+    <Property Name="S_AvailablePrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Stock" ToRole="Company" />
   </EntityType>
   <Association Name="FK_Stock_Vendor">
     <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
@@ -168,20 +144,62 @@
         <PropertyRef Name="C_Id" />
       </Principal>
       <Dependent Role="Stock">
-        <PropertyRef Name="TotalPrice" />
+        <PropertyRef Name="S_TotalPrice" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StockIn_Vendor">
+  <EntityType Name="StockIn">
+    <Key>
+      <PropertyRef Name="I_Id" />
+    </Key>
+    <Property Name="I_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="I_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="I_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="I_Quantity" Type="Int32" Nullable="false" />
+    <Property Name="I_Price" Type="Int32" Nullable="false" />
+    <Property Name="C_Id" Type="Int32" Nullable="false" />
+    <Property Name="I_Exp_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_StockIn_StockIn" FromRole="StockIn" ToRole="Company" />
+  </EntityType>
+  <Association Name="FK_StockIn_StockIn">
     <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
-    <End Type="Medical_StoreModel.StockIn" Role="StockIn" Multiplicity="0..1" />
+    <End Type="Medical_StoreModel.StockIn" Role="StockIn" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
         <PropertyRef Name="C_Id" />
       </Principal>
       <Dependent Role="StockIn">
-        <PropertyRef Name="I_Id" />
+        <PropertyRef Name="C_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <Property Name="Designation_Id" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Logins" Relationship="Medical_StoreModel.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
+  </EntityType>
+  <Association Name="FK_Login_Employee">
+    <End Type="Medical_StoreModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="Medical_StoreModel.Login" Role="Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GET_ValidateLogin_Result">
+    <Property Type="Int32" Name="Designation_Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+  </ComplexType>
 </Schema>

@@ -14,3 +14,4 @@ C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.exe
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.pdb
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.csprojResolveAssemblyReference.cache

@@ -14,10 +14,22 @@ namespace MedicalStore
     
     public partial class Company
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Company()
+        {
+            this.Stocks = new HashSet<Stock>();
+            this.StockIns = new HashSet<StockIn>();
+        }
+    
         public int C_Id { get; set; }
         public string CompanyName { get; set; }
         public string DealerName { get; set; }
         public string Address { get; set; }
         public long Mobile { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stock> Stocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockIn> StockIns { get; set; }
     }
 }

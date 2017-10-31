@@ -10,17 +10,14 @@
 namespace MedicalStore
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class StockOut
+    public partial class GET_Employees_Result
     {
-        public int O_Id { get; set; }
-        public string C_Name { get; set; }
-        public string O_Name { get; set; }
-        public int O_Quantity { get; set; }
-        public int O_Price { get; set; }
-        public int O_TotalPrice { get; set; }
-        public System.DateTime O_Date { get; set; }
-        public string O_Description { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public long Mobile { get; set; }
+        public int Designation_Id { get; set; }
+        public int Salary { get; set; }
     }
 }

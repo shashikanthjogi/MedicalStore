@@ -13,6 +13,8 @@ namespace MedicalStore
     public partial class LoginUC : UserControl
     {
         public static MasterFrom ParentFormName { get; set; }
+        public static int? EMP_TYPE { get; set; }
+        public static string Emp_Name { get; set; }
         private static LoginUC _instance;
         Control[] ct;
 
@@ -33,13 +35,17 @@ namespace MedicalStore
         private void button1_Click(object sender, EventArgs e)
         {
             Medical_StoreEntities1 db = new Medical_StoreEntities1();
-            int? result = db.GET_ValidateLogin(textBox1.Text, textBox2.Text).FirstOrDefault();
+            var result = db.GET_ValidateLogin(textBox1.Text, textBox2.Text).FirstOrDefault();
+            EMP_TYPE = result.Designation_Id;
+            Emp_Name = result.FirstName;
             if (result == null)
             {
                 MessageBox.Show("Invalid Login Details. Please try again");
             }
             else
             {
+                label1.Text = "WELCOME";
+                label4.Text = Emp_Name;
                 //MasterFrom mf = new MasterFrom();
                 MasterFrom mf   = (MasterFrom)this.Parent.Parent;
                 if (ParentFormName == null)
@@ -57,7 +63,7 @@ namespace MedicalStore
                 else
                     HomePage.Instance.BringToFront();
 
-                BuildMenu(mf, result);
+                BuildMenu(mf, EMP_TYPE);
             }
         }
 
@@ -142,7 +148,8 @@ namespace MedicalStore
             MenuStrip menuStrip1 = mf.Controls["menuStrip1"] as MenuStrip;
             menuStrip1.Hide();
             pp.Controls.Remove(StockUC.Instance);
-            if (!pp.Controls.Contains(CompanyUC.Instance))
+            pp.Controls.Remove(CompanyUC.Instance);
+            if (!pp.Controls.Contains(LoginUC.Instance))
             {
                 pp.Controls.Add(LoginUC.Instance);
                 LoginUC.Instance.BringToFront();
@@ -183,7 +190,6 @@ namespace MedicalStore
             MasterFrom mf = ParentFormName;
             Panel pp = mf.Controls["panel1"] as Panel;
             RemoveAllInstances();
-            CompanyUC uc = new CompanyUC();
             if (!pp.Controls.Contains(CompanyUC.Instance))
             {
                 pp.Controls.Add(CompanyUC.Instance);
@@ -192,11 +198,16 @@ namespace MedicalStore
             else
                 CompanyUC.Instance.BringToFront();
 
-            ct = uc.Controls.Find("tabcontrol1", true);
+            ControlCollection cc = pp.Controls;
+            ct = cc[0].Controls.Find("tabcontrol1", true);
             TabControl tc = (TabControl)ct[0];
             TabPage t = tc.TabPages[index];
             tc.SelectTab(t);
-            tc.SelectedIndex = 2;
+        }
+
+        private void LoginUC_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

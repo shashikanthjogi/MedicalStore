@@ -10,17 +10,11 @@
 namespace MedicalStore
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class StockOut
+    public partial class GET_Employee_LookUp_Result
     {
-        public int O_Id { get; set; }
-        public string C_Name { get; set; }
-        public string O_Name { get; set; }
-        public int O_Quantity { get; set; }
-        public int O_Price { get; set; }
-        public int O_TotalPrice { get; set; }
-        public System.DateTime O_Date { get; set; }
-        public string O_Description { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public string Description { get; set; }
     }
 }

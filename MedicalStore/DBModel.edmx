@@ -21,11 +21,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="bigint" Nullable="false" />
           <Property Name="Designation_Id" Type="int" Nullable="false" />
-          <Property Name="Salary" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee_LookUp">
           <Key>
@@ -46,17 +46,17 @@
         </EntityType>
         <EntityType Name="Stock">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="S_Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
-          <Property Name="TotalQuantity" Type="int" Nullable="false" />
-          <Property Name="SellQuantity" Type="int" Nullable="false" />
-          <Property Name="AvailableQuantity" Type="int" Nullable="false" />
-          <Property Name="TotalPrice" Type="int" Nullable="false" />
-          <Property Name="SellPrice" Type="int" Nullable="false" />
-          <Property Name="AvailablePrice" Type="int" Nullable="false" />
+          <Property Name="S_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="S_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="S_Price" Type="int" Nullable="false" />
+          <Property Name="S_TotalQuantity" Type="int" Nullable="false" />
+          <Property Name="S_SellQuantity" Type="int" Nullable="false" />
+          <Property Name="S_AvailableQuantity" Type="int" Nullable="false" />
+          <Property Name="S_TotalPrice" Type="int" Nullable="false" />
+          <Property Name="S_SellPrice" Type="int" Nullable="false" />
+          <Property Name="S_AvailablePrice" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="StockIn">
           <Key>
@@ -67,7 +67,7 @@
           <Property Name="I_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="I_Quantity" Type="int" Nullable="false" />
           <Property Name="I_Price" Type="int" Nullable="false" />
-          <Property Name="V_Name" Type="int" Nullable="false" />
+          <Property Name="C_Id" Type="int" Nullable="false" />
           <Property Name="I_Exp_Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="StockOut">
@@ -81,31 +81,8 @@
           <Property Name="O_Price" Type="int" Nullable="false" />
           <Property Name="O_TotalPrice" Type="int" Nullable="false" />
           <Property Name="O_Date" Type="date" Nullable="false" />
+          <Property Name="O_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Employee_Employee_LookUp">
-          <End Role="Employee_LookUp" Type="Self.Employee_LookUp" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee_LookUp">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="Designation_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Login_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Login" Type="Self.Login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Login">
-              <PropertyRef Name="Employee_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Stock_Vendor">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
@@ -114,19 +91,19 @@
               <PropertyRef Name="C_Id" />
             </Principal>
             <Dependent Role="Stock">
-              <PropertyRef Name="TotalPrice" />
+              <PropertyRef Name="S_TotalPrice" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StockIn_Vendor">
+        <Association Name="FK_StockIn_StockIn">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="StockIn" Type="Self.StockIn" Multiplicity="0..1" />
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="C_Id" />
             </Principal>
             <Dependent Role="StockIn">
-              <PropertyRef Name="I_Id" />
+              <PropertyRef Name="C_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -134,6 +111,8 @@
           <Parameter Name="CompanyId" Type="int" Mode="In" />
         </Function>
         <Function Name="GET_Companies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_Employee_LookUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_Employees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_ValidateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
           <Parameter Name="Password" Type="nvarchar" Mode="In" />
@@ -144,6 +123,20 @@
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
           <Parameter Name="Mobile" Type="int" Mode="In" />
         </Function>
+        <Function Name="INS_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="int" Mode="In" />
+          <Parameter Name="Designation_Id" Type="int" Mode="In" />
+          <Parameter Name="Salary" Type="int" Mode="In" />
+          <Parameter Name="Eid" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="INS_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Pass" Type="nvarchar" Mode="In" />
+          <Parameter Name="E_Id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Medical_StoreModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -152,19 +145,11 @@
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Employee_Employee_LookUp" Association="Self.FK_Employee_Employee_LookUp">
-            <End Role="Employee_LookUp" EntitySet="Employee_LookUp" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Login_Employee" Association="Self.FK_Login_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Login" EntitySet="Login" />
-          </AssociationSet>
           <AssociationSet Name="FK_Stock_Vendor" Association="Self.FK_Stock_Vendor">
             <End Role="Company" EntitySet="Company" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
-          <AssociationSet Name="FK_StockIn_Vendor" Association="Self.FK_StockIn_Vendor">
+          <AssociationSet Name="FK_StockIn_StockIn" Association="Self.FK_StockIn_StockIn">
             <End Role="Company" EntitySet="Company" />
             <End Role="StockIn" EntitySet="StockIn" />
           </AssociationSet>
@@ -173,20 +158,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Medical_StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Mobile" Type="Int64" Nullable="false" />
-          <Property Name="Designation_Id" Type="Int32" Nullable="false" />
-          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="Employee_LookUp" Relationship="Self.FK_Employee_Employee_LookUp" FromRole="Employee" ToRole="Employee_LookUp" />
-          <NavigationProperty Name="Logins" Relationship="Self.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
-        </EntityType>
         <EntityType Name="Employee_LookUp">
           <Key>
             <PropertyRef Name="Id" />
@@ -194,7 +165,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Employee_LookUp" FromRole="Employee_LookUp" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -204,50 +174,15 @@
           <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Employee_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Login_Employee" FromRole="Login" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="Medical_StoreModel.FK_Login_Employee" FromRole="Login" ToRole="Employee" />
         </EntityType>
-        <Association Name="FK_Employee_Employee_LookUp">
-          <End Role="Employee_LookUp" Type="Self.Employee_LookUp" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee_LookUp">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="Designation_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Login_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Login" Type="Self.Login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Login">
-              <PropertyRef Name="Employee_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Medical_StoreEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" />
           <EntitySet Name="Logins" EntityType="Self.Login" />
-          <AssociationSet Name="FK_Employee_Employee_LookUp" Association="Self.FK_Employee_Employee_LookUp">
-            <End Role="Employee_LookUp" EntitySet="Employee_LookUp" />
-            <End Role="Employee" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Login_Employee" Association="Self.FK_Login_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Login" EntitySet="Logins" />
-          </AssociationSet>
-          <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Int32)">
+          <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Medical_StoreModel.GET_ValidateLogin_Result)">
             <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Stocks" EntityType="Medical_StoreModel.Stock" />
-          <EntitySet Name="StockIns" EntityType="Medical_StoreModel.StockIn" />
           <EntitySet Name="StockOuts" EntityType="Medical_StoreModel.StockOut" />
           <FunctionImport Name="GET_ALL_VENDORS" />
           <FunctionImport Name="DEL_Company">
@@ -261,43 +196,38 @@
             <Parameter Name="Mobile" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Companies" EntityType="Medical_StoreModel.Company" />
+          <FunctionImport Name="GET_Employee_LookUp" ReturnType="Collection(Medical_StoreModel.GET_Employee_LookUp_Result)" />
+          <FunctionImport Name="GET_Employees" ReturnType="Collection(Medical_StoreModel.GET_Employees_Result)" />
+          <EntitySet Name="Stocks" EntityType="Medical_StoreModel.Stock" />
           <AssociationSet Name="FK_Stock_Vendor" Association="Medical_StoreModel.FK_Stock_Vendor">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
-          <AssociationSet Name="FK_StockIn_Vendor" Association="Medical_StoreModel.FK_StockIn_Vendor">
+          <EntitySet Name="StockIns" EntityType="Medical_StoreModel.StockIn" />
+          <AssociationSet Name="FK_StockIn_StockIn" Association="Medical_StoreModel.FK_StockIn_StockIn">
             <End Role="Company" EntitySet="Companies" />
             <End Role="StockIn" EntitySet="StockIns" />
           </AssociationSet>
+          <EntitySet Name="Employees" EntityType="Medical_StoreModel.Employee" />
+          <AssociationSet Name="FK_Login_Employee" Association="Medical_StoreModel.FK_Login_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Login" EntitySet="Logins" />
+          </AssociationSet>
+          <FunctionImport Name="INS_Login">
+            <Parameter Name="UName" Mode="In" Type="String" />
+            <Parameter Name="Pass" Mode="In" Type="String" />
+            <Parameter Name="E_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="INS_Employee">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="Int32" />
+            <Parameter Name="Designation_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Salary" Mode="In" Type="Int32" />
+            <Parameter Name="Eid" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="Stock">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="TotalQuantity" Type="Int32" Nullable="false" />
-          <Property Name="SellQuantity" Type="Int32" Nullable="false" />
-          <Property Name="AvailableQuantity" Type="Int32" Nullable="false" />
-          <Property Name="TotalPrice" Type="Int32" Nullable="false" />
-          <Property Name="SellPrice" Type="Int32" Nullable="false" />
-          <Property Name="AvailablePrice" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Stock" ToRole="Company" />
-        </EntityType>
-        <EntityType Name="StockIn">
-          <Key>
-            <PropertyRef Name="I_Id" />
-          </Key>
-          <Property Name="I_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="I_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="I_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="I_Quantity" Type="Int32" Nullable="false" />
-          <Property Name="I_Price" Type="Int32" Nullable="false" />
-          <Property Name="V_Name" Type="Int32" Nullable="false" />
-          <Property Name="I_Exp_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_StockIn_Vendor" FromRole="StockIn" ToRole="Company" />
-        </EntityType>
         <EntityType Name="StockOut">
           <Key>
             <PropertyRef Name="O_Id" />
@@ -309,6 +239,7 @@
           <Property Name="O_Price" Type="Int32" Nullable="false" />
           <Property Name="O_TotalPrice" Type="Int32" Nullable="false" />
           <Property Name="O_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="O_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="GET_ALL_VENDORS_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -332,6 +263,36 @@
           <Property Name="DealerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Stocks" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Company" ToRole="Stock" />
+          <NavigationProperty Name="StockIns" Relationship="Medical_StoreModel.FK_StockIn_StockIn" FromRole="Company" ToRole="StockIn" />
+        </EntityType>
+        <ComplexType Name="GET_Employee_LookUp_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GET_Employees_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Mobile" Nullable="false" />
+          <Property Type="Int32" Name="Designation_Id" Nullable="false" />
+          <Property Type="Int32" Name="Salary" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="S_Id" />
+          </Key>
+          <Property Name="S_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="S_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="S_Price" Type="Int32" Nullable="false" />
+          <Property Name="S_TotalQuantity" Type="Int32" Nullable="false" />
+          <Property Name="S_SellQuantity" Type="Int32" Nullable="false" />
+          <Property Name="S_AvailableQuantity" Type="Int32" Nullable="false" />
+          <Property Name="S_TotalPrice" Type="Int32" Nullable="false" />
+          <Property Name="S_SellPrice" Type="Int32" Nullable="false" />
+          <Property Name="S_AvailablePrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_Stock_Vendor" FromRole="Stock" ToRole="Company" />
         </EntityType>
         <Association Name="FK_Stock_Vendor">
           <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
@@ -341,41 +302,70 @@
               <PropertyRef Name="C_Id" />
             </Principal>
             <Dependent Role="Stock">
-              <PropertyRef Name="TotalPrice" />
+              <PropertyRef Name="S_TotalPrice" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StockIn_Vendor">
+        <EntityType Name="StockIn">
+          <Key>
+            <PropertyRef Name="I_Id" />
+          </Key>
+          <Property Name="I_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="I_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="I_Price" Type="Int32" Nullable="false" />
+          <Property Name="C_Id" Type="Int32" Nullable="false" />
+          <Property Name="I_Exp_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_StockIn_StockIn" FromRole="StockIn" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_StockIn_StockIn">
           <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
-          <End Type="Medical_StoreModel.StockIn" Role="StockIn" Multiplicity="0..1" />
+          <End Type="Medical_StoreModel.StockIn" Role="StockIn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="C_Id" />
             </Principal>
             <Dependent Role="StockIn">
-              <PropertyRef Name="I_Id" />
+              <PropertyRef Name="C_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Designation_Id" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Logins" Relationship="Medical_StoreModel.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK_Login_Employee">
+          <End Type="Medical_StoreModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Medical_StoreModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GET_ValidateLogin_Result">
+          <Property Type="Int32" Name="Designation_Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Medical_StoreModelStoreContainer" CdmEntityContainer="Medical_StoreEntities1">
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="Medical_StoreModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
-                <ScalarProperty Name="Salary" ColumnName="Salary" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Employee_LookUp">
             <EntityTypeMapping TypeName="Medical_StoreModel.Employee_LookUp">
               <MappingFragment StoreEntitySet="Employee_LookUp">
@@ -396,38 +386,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GET_ValidateLogin" FunctionName="Medical_StoreModel.Store.GET_ValidateLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_ValidateLogin_Result">
+                <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Stocks">
-            <EntityTypeMapping TypeName="Medical_StoreModel.Stock">
-              <MappingFragment StoreEntitySet="Stock">
-                <ScalarProperty Name="AvailablePrice" ColumnName="AvailablePrice" />
-                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
-                <ScalarProperty Name="SellQuantity" ColumnName="SellQuantity" />
-                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StockIns">
-            <EntityTypeMapping TypeName="Medical_StoreModel.StockIn">
-              <MappingFragment StoreEntitySet="StockIn">
-                <ScalarProperty Name="I_Exp_Date" ColumnName="I_Exp_Date" />
-                <ScalarProperty Name="V_Name" ColumnName="V_Name" />
-                <ScalarProperty Name="I_Price" ColumnName="I_Price" />
-                <ScalarProperty Name="I_Quantity" ColumnName="I_Quantity" />
-                <ScalarProperty Name="I_Description" ColumnName="I_Description" />
-                <ScalarProperty Name="I_Name" ColumnName="I_Name" />
-                <ScalarProperty Name="I_Id" ColumnName="I_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StockOuts">
             <EntityTypeMapping TypeName="Medical_StoreModel.StockOut">
               <MappingFragment StoreEntitySet="StockOut">
+                <ScalarProperty Name="O_Description" ColumnName="O_Description" />
                 <ScalarProperty Name="O_Date" ColumnName="O_Date" />
                 <ScalarProperty Name="O_TotalPrice" ColumnName="O_TotalPrice" />
                 <ScalarProperty Name="O_Price" ColumnName="O_Price" />
@@ -453,6 +422,70 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GET_Employee_LookUp" FunctionName="Medical_StoreModel.Store.GET_Employee_LookUp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employee_LookUp_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_Employees" FunctionName="Medical_StoreModel.Store.GET_Employees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employees_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="Medical_StoreModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="S_AvailablePrice" ColumnName="S_AvailablePrice" />
+                <ScalarProperty Name="S_SellPrice" ColumnName="S_SellPrice" />
+                <ScalarProperty Name="S_TotalPrice" ColumnName="S_TotalPrice" />
+                <ScalarProperty Name="S_AvailableQuantity" ColumnName="S_AvailableQuantity" />
+                <ScalarProperty Name="S_SellQuantity" ColumnName="S_SellQuantity" />
+                <ScalarProperty Name="S_TotalQuantity" ColumnName="S_TotalQuantity" />
+                <ScalarProperty Name="S_Price" ColumnName="S_Price" />
+                <ScalarProperty Name="S_Name" ColumnName="S_Name" />
+                <ScalarProperty Name="S_Id" ColumnName="S_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockIns">
+            <EntityTypeMapping TypeName="Medical_StoreModel.StockIn">
+              <MappingFragment StoreEntitySet="StockIn">
+                <ScalarProperty Name="I_Exp_Date" ColumnName="I_Exp_Date" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+                <ScalarProperty Name="I_Price" ColumnName="I_Price" />
+                <ScalarProperty Name="I_Quantity" ColumnName="I_Quantity" />
+                <ScalarProperty Name="I_Description" ColumnName="I_Description" />
+                <ScalarProperty Name="I_Name" ColumnName="I_Name" />
+                <ScalarProperty Name="I_Id" ColumnName="I_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Medical_StoreModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="INS_Login" FunctionName="Medical_StoreModel.Store.INS_Login" />
+          <FunctionImportMapping FunctionImportName="INS_Employee" FunctionName="Medical_StoreModel.Store.INS_Employee" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

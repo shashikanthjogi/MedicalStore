@@ -27,15 +27,15 @@ namespace MedicalStore
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Employee_LookUp> Employee_LookUp { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; }
-        public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     
-        public virtual ObjectResult<Nullable<int>> GET_ValidateLogin(string userName, string password)
+        public virtual ObjectResult<GET_ValidateLogin_Result> GET_ValidateLogin(string userName, string password)
         {
             var userNameParameter = userName != null ?
                 new ObjectParameter("UserName", userName) :
@@ -45,7 +45,7 @@ namespace MedicalStore
                 new ObjectParameter("Password", password) :
                 new ObjectParameter("Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GET_ValidateLogin", userNameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ValidateLogin_Result>("GET_ValidateLogin", userNameParameter, passwordParameter);
         }
     
         public virtual int GET_ALL_VENDORS()
@@ -91,6 +91,62 @@ namespace MedicalStore
                 new ObjectParameter("Mobile", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Company", companyNameParameter, dealerNameParameter, addressParameter, mobileParameter);
+        }
+    
+        public virtual ObjectResult<GET_Employee_LookUp_Result> GET_Employee_LookUp()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employee_LookUp_Result>("GET_Employee_LookUp");
+        }
+    
+        public virtual ObjectResult<GET_Employees_Result> GET_Employees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employees_Result>("GET_Employees");
+        }
+    
+        public virtual int INS_Login(string uName, string pass, Nullable<int> e_Id)
+        {
+            var uNameParameter = uName != null ?
+                new ObjectParameter("UName", uName) :
+                new ObjectParameter("UName", typeof(string));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("Pass", pass) :
+                new ObjectParameter("Pass", typeof(string));
+    
+            var e_IdParameter = e_Id.HasValue ?
+                new ObjectParameter("E_Id", e_Id) :
+                new ObjectParameter("E_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Login", uNameParameter, passParameter, e_IdParameter);
+        }
+    
+        public virtual int INS_Employee(string firstName, string lastName, string address, Nullable<int> mobile, Nullable<int> designation_Id, Nullable<int> salary, ObjectParameter eid)
+        {
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var mobileParameter = mobile.HasValue ?
+                new ObjectParameter("Mobile", mobile) :
+                new ObjectParameter("Mobile", typeof(int));
+    
+            var designation_IdParameter = designation_Id.HasValue ?
+                new ObjectParameter("Designation_Id", designation_Id) :
+                new ObjectParameter("Designation_Id", typeof(int));
+    
+            var salaryParameter = salary.HasValue ?
+                new ObjectParameter("Salary", salary) :
+                new ObjectParameter("Salary", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Employee", firstNameParameter, lastNameParameter, addressParameter, mobileParameter, designation_IdParameter, salaryParameter, eid);
         }
     }
 }
