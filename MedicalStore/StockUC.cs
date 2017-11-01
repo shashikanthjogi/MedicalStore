@@ -28,10 +28,13 @@ namespace MedicalStore
             InitializeComponent();
             textBox5.Enabled = false;
             textBox7.Enabled = false;
-            FillCompanyList();
-            BindStocks();
-            textBox7.Text = GetQuantity(Convert.ToInt32(comboBox4.SelectedValue.ToString())).ToString();
-            textBox5.Text = GetQuantity(Convert.ToInt32(comboBox3.SelectedValue.ToString())).ToString();
+            if (!LoginUC.isLogOut)
+            {
+                FillCompanyList();
+                BindStocks();
+                textBox7.Text = GetQuantity(Convert.ToInt32(comboBox4.SelectedValue.ToString())).ToString();
+                textBox5.Text = GetQuantity(Convert.ToInt32(comboBox3.SelectedValue.ToString())).ToString();
+            }
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -48,10 +51,10 @@ namespace MedicalStore
         {
             try
             {
-                using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
                 {
-                    var result = context.INS_StockIn(textBox1.Text, textBox2.Text, Convert.ToInt32(textBox4.Text),
-                        Convert.ToInt32(textBox3.Text), Convert.ToInt32(cmbCompanies.SelectedValue.ToString()), Convert.ToDateTime(dateTimePicker2.Value.ToShortDateString()), Convert.ToDateTime(DateTime.Now),LoginUC.Emp_Name);
+                    var result = context.INS_StockIn(textBox1.Text, "ADD", Convert.ToInt32(textBox4.Text),
+                        Convert.ToInt32(textBox3.Text), Convert.ToInt32(cmbCompanies.SelectedValue.ToString()), Convert.ToDateTime(dateTimePicker2.Value.ToShortDateString()), Convert.ToDateTime(DateTime.Now),LoginUC.employeeName);
                     MessageBox.Show("Stock Added Successfully");
                     ClearAddStockFields();
                     BindStocks();
@@ -70,13 +73,13 @@ namespace MedicalStore
 
         private void FillCompanyList()
         {
-            using (Medical_StoreEntitiy context =new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context =new MedicalDBEntityModelConnection())
             {
                 var result = context.GET_Companies().ToList();
                 Dictionary<string, string> item = new Dictionary<string, string>();
                 foreach (var c in result)
                 {
-                    item.Add(c.C_Id.ToString(), c.CompanyName);
+                    item.Add(c.Id.ToString(), c.CompanyName);
                 }
                 cmbCompanies.DataSource = new BindingSource(item, null);
                 cmbCompanies.DisplayMember = "Value";
@@ -87,7 +90,6 @@ namespace MedicalStore
         private void ClearAddStockFields()
         {
             textBox1.Clear();
-            textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
             cmbCompanies.SelectedIndex = 0;
@@ -96,7 +98,7 @@ namespace MedicalStore
 
         private void BindStocks()
         {
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
                 sd = context.GET_StockDetails().ToList();
                 Dictionary<string, string> item = new Dictionary<string, string>();
@@ -140,11 +142,11 @@ namespace MedicalStore
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Warning!!!... This will update the existing stock quantity and price details for the item selected");
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
                 var text = ((System.Collections.Generic.KeyValuePair<string, string>)comboBox3.SelectedItem).Value;
                 var result = context.UPD_StockIn(Convert.ToInt32(comboBox3.SelectedValue.ToString()), text, Convert.ToInt32(textBox6.Text), Convert.ToInt32(textBox8.Text)
-                    ,"UPDATE", Convert.ToDateTime(DateTime.Now), LoginUC.Emp_Name);
+                    ,"UPDATE", Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
             }
             MessageBox.Show("Stock Details Updated Successfully");
             BindStocks();
@@ -155,10 +157,10 @@ namespace MedicalStore
         private void button3_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Warning!!!... This will delete the existing stock");
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
                 var text = ((System.Collections.Generic.KeyValuePair<string, string>)comboBox4.SelectedItem).Value;
-                var result = context.DEL_Stock(text, "DELETE STOCK", Convert.ToDateTime(DateTime.Now),LoginUC.Emp_Name);
+                var result = context.DEL_Stock(text, "DELETE STOCK", Convert.ToDateTime(DateTime.Now),LoginUC.employeeName);
             }
             MessageBox.Show("Stock deleted Successfully");
             BindStocks();

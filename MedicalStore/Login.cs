@@ -18,5 +18,7 @@ namespace MedicalStore
         public string LoginName { get; set; }
         public string Password { get; set; }
         public int Employee_Id { get; set; }
+    
+        public virtual Employee Employee { get; set; }
     }
 }

@@ -15,3 +15,4 @@ C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\
 C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.StockUC.resources
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.HomePage.resources
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.CompanyUC.resources
+C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.BillingUC.resources

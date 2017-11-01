@@ -12,6 +12,9 @@ namespace MedicalStore
 {
     public partial class CompanyUC : UserControl
     {
+
+        #region Fields
+
         private static CompanyUC _instance;
         public static CompanyUC Instance
         {
@@ -22,77 +25,97 @@ namespace MedicalStore
                 return _instance;
             }
         }
+
+        #endregion
+
+        #region Constructor
+
         public CompanyUC()
         {
             InitializeComponent();
-            FillCompanyList();
-
+            if(!LoginUC.isLogOut)
+                FillCompanyList();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Events
+
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
                 try
                 {
-                    var result = context.INS_Company(textBox1.Text,
-                        textBox2.Text,
-                        textBox3.Text,
-                        Convert.ToInt32(textBox4.Text)
+                    var result = context.INS_Company(txtCompanyName.Text,
+                        txtDealerName.Text,
+                        txtAddress.Text,
+                        Convert.ToInt32(txtMobile.Text)
                         );
                     FillCompanyList();
-                    MessageBox.Show("New company added successfully.");
+                    txtCompanyName.Clear();
+                    txtAddress.Clear();
+                    txtDealerName.Clear();
+                    txtMobile.Clear();
+                    MessageBox.Show(Constants.COMPANY_ADD_SUCCESS);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry!! An error occured during the addition.");
+                    MessageBox.Show(Constants.COMPANY_FAILURE);
                 }
-                
+
             }
         }
 
-        private void FillCompanyList()
+        private void btnDel_Click(object sender, EventArgs e)
         {
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
-            {
-                var result = context.GET_Companies().ToList();
-                dataGridView1.DataSource = result;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
-                Dictionary<string, string> item = new Dictionary<string, string>();
-                foreach (var c in result)
-                {
-                    item.Add(c.C_Id.ToString(), c.CompanyName);
-
-                }
-                cmbCompanies.DataSource = new BindingSource(item, null);
-                cmbCompanies.DisplayMember = "Value";
-                cmbCompanies.ValueMember = "Key";
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
                 try
                 {
                     var result = context.DEL_Company(Convert.ToInt32(cmbCompanies.SelectedValue.ToString()));
                     FillCompanyList();
-                    MessageBox.Show("Company removed successfully.");
+                    MessageBox.Show(Constants.COMPANY_DEL_SUCCESS);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sorry!! An error occured during the deletion.");
+                    MessageBox.Show(Constants.COMPANY_FAILURE);
                 }
             }
         }
+
+        #endregion
+
+        #region Methods
+
+        private void FillCompanyList()
+        {
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+            {
+                var companyList = context.GET_Companies().ToList();
+                if (companyList.Count > 0)
+                {
+                    dgCompanyList.DataSource = companyList;
+                    dgCompanyList.Columns[0].Visible = false;
+                    dgCompanyList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+
+                    Dictionary<string, string> item = new Dictionary<string, string>();
+                    foreach (var c in companyList)
+                    {
+                        item.Add(c.Id.ToString(), c.CompanyName);
+
+                    }
+                    cmbCompanies.DataSource = new BindingSource(item, null);
+                    cmbCompanies.DisplayMember = "Value";
+                    cmbCompanies.ValueMember = "Key";
+                }
+                else
+                    MessageBox.Show(Constants.COMPANY_NONE);
+            }
+        }
+
+        #endregion
+
+        
     }
 }

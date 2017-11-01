@@ -29,198 +29,207 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.TabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tbHome = new System.Windows.Forms.TabControl();
+            this.tbRegistration = new System.Windows.Forms.TabPage();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.cmbDesignation = new System.Windows.Forms.ComboBox();
+            this.txtSalary = new System.Windows.Forms.TextBox();
+            this.txtMobile = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtLName = new System.Windows.Forms.TextBox();
+            this.lblSalary = new System.Windows.Forms.Label();
+            this.lblDesignation = new System.Windows.Forms.Label();
+            this.lblMobile = new System.Windows.Forms.Label();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.lblLName = new System.Windows.Forms.Label();
+            this.txtFName = new System.Windows.Forms.TextBox();
+            this.lblFName = new System.Windows.Forms.Label();
+            this.tbViewEmp = new System.Windows.Forms.TabPage();
+            this.dgViewEmp = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
-            this.TabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tbHome.SuspendLayout();
+            this.tbRegistration.SuspendLayout();
+            this.tbViewEmp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewEmp)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(388, 41);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
+            this.label1.Location = new System.Drawing.Point(400, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(266, 13);
+            this.label1.Size = new System.Drawing.Size(448, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Welcome User. Please select an option from the menu.";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // tabControl1
+            // tbHome
             // 
-            this.tabControl1.Controls.Add(this.TabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(190, 67);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(859, 446);
-            this.tabControl1.TabIndex = 1;
+            this.tbHome.Controls.Add(this.tbRegistration);
+            this.tbHome.Controls.Add(this.tbViewEmp);
+            this.tbHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbHome.Location = new System.Drawing.Point(190, 67);
+            this.tbHome.Name = "tbHome";
+            this.tbHome.SelectedIndex = 0;
+            this.tbHome.Size = new System.Drawing.Size(859, 446);
+            this.tbHome.TabIndex = 1;
             // 
-            // TabPage1
+            // tbRegistration
             // 
-            this.TabPage1.Controls.Add(this.button1);
-            this.TabPage1.Controls.Add(this.comboBox1);
-            this.TabPage1.Controls.Add(this.textBox5);
-            this.TabPage1.Controls.Add(this.textBox4);
-            this.TabPage1.Controls.Add(this.textBox3);
-            this.TabPage1.Controls.Add(this.textBox2);
-            this.TabPage1.Controls.Add(this.label7);
-            this.TabPage1.Controls.Add(this.label6);
-            this.TabPage1.Controls.Add(this.label5);
-            this.TabPage1.Controls.Add(this.label4);
-            this.TabPage1.Controls.Add(this.label3);
-            this.TabPage1.Controls.Add(this.textBox1);
-            this.TabPage1.Controls.Add(this.label2);
-            this.TabPage1.Location = new System.Drawing.Point(4, 22);
-            this.TabPage1.Name = "TabPage1";
-            this.TabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage1.Size = new System.Drawing.Size(851, 420);
-            this.TabPage1.TabIndex = 0;
-            this.TabPage1.Text = "Registration";
-            this.TabPage1.UseVisualStyleBackColor = true;
+            this.tbRegistration.BackColor = System.Drawing.Color.NavajoWhite;
+            this.tbRegistration.Controls.Add(this.btnRegister);
+            this.tbRegistration.Controls.Add(this.cmbDesignation);
+            this.tbRegistration.Controls.Add(this.txtSalary);
+            this.tbRegistration.Controls.Add(this.txtMobile);
+            this.tbRegistration.Controls.Add(this.txtAddress);
+            this.tbRegistration.Controls.Add(this.txtLName);
+            this.tbRegistration.Controls.Add(this.lblSalary);
+            this.tbRegistration.Controls.Add(this.lblDesignation);
+            this.tbRegistration.Controls.Add(this.lblMobile);
+            this.tbRegistration.Controls.Add(this.lblAddress);
+            this.tbRegistration.Controls.Add(this.lblLName);
+            this.tbRegistration.Controls.Add(this.txtFName);
+            this.tbRegistration.Controls.Add(this.lblFName);
+            this.tbRegistration.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbRegistration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbRegistration.Location = new System.Drawing.Point(4, 25);
+            this.tbRegistration.Name = "tbRegistration";
+            this.tbRegistration.Padding = new System.Windows.Forms.Padding(3);
+            this.tbRegistration.Size = new System.Drawing.Size(851, 417);
+            this.tbRegistration.TabIndex = 0;
+            this.tbRegistration.Text = "Registration";
             // 
-            // tabPage2
+            // btnRegister
             // 
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(851, 420);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "View Employees";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.btnRegister.BackColor = System.Drawing.Color.LightGreen;
+            this.btnRegister.Location = new System.Drawing.Point(387, 207);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(128, 45);
+            this.btnRegister.TabIndex = 12;
+            this.btnRegister.Text = "REGISTER";
+            this.btnRegister.UseVisualStyleBackColor = false;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // dataGridView1
+            // cmbDesignation
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(38, 28);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(759, 187);
-            this.dataGridView1.TabIndex = 0;
+            this.cmbDesignation.FormattingEnabled = true;
+            this.cmbDesignation.Location = new System.Drawing.Point(417, 138);
+            this.cmbDesignation.Name = "cmbDesignation";
+            this.cmbDesignation.Size = new System.Drawing.Size(168, 24);
+            this.cmbDesignation.TabIndex = 11;
             // 
-            // label2
+            // txtSalary
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(218, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "First Name";
+            this.txtSalary.Location = new System.Drawing.Point(417, 169);
+            this.txtSalary.Name = "txtSalary";
+            this.txtSalary.Size = new System.Drawing.Size(168, 23);
+            this.txtSalary.TabIndex = 10;
             // 
-            // textBox1
+            // txtMobile
             // 
-            this.textBox1.Location = new System.Drawing.Point(327, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(168, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtMobile.Location = new System.Drawing.Point(417, 107);
+            this.txtMobile.Name = "txtMobile";
+            this.txtMobile.Size = new System.Drawing.Size(168, 23);
+            this.txtMobile.TabIndex = 9;
             // 
-            // label3
+            // txtAddress
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(218, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Last Name";
+            this.txtAddress.Location = new System.Drawing.Point(417, 77);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(168, 23);
+            this.txtAddress.TabIndex = 8;
             // 
-            // label4
+            // txtLName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(218, 97);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Address";
+            this.txtLName.Location = new System.Drawing.Point(417, 44);
+            this.txtLName.Name = "txtLName";
+            this.txtLName.Size = new System.Drawing.Size(168, 23);
+            this.txtLName.TabIndex = 7;
             // 
-            // label5
+            // lblSalary
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(218, 126);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Mobile";
+            this.lblSalary.AutoSize = true;
+            this.lblSalary.Location = new System.Drawing.Point(308, 172);
+            this.lblSalary.Name = "lblSalary";
+            this.lblSalary.Size = new System.Drawing.Size(54, 17);
+            this.lblSalary.TabIndex = 6;
+            this.lblSalary.Text = "Salary";
             // 
-            // label6
+            // lblDesignation
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(218, 161);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Designation";
+            this.lblDesignation.AutoSize = true;
+            this.lblDesignation.Location = new System.Drawing.Point(307, 138);
+            this.lblDesignation.Name = "lblDesignation";
+            this.lblDesignation.Size = new System.Drawing.Size(94, 17);
+            this.lblDesignation.TabIndex = 5;
+            this.lblDesignation.Text = "Designation";
             // 
-            // label7
+            // lblMobile
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(218, 191);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Salary";
+            this.lblMobile.AutoSize = true;
+            this.lblMobile.Location = new System.Drawing.Point(308, 107);
+            this.lblMobile.Name = "lblMobile";
+            this.lblMobile.Size = new System.Drawing.Size(55, 17);
+            this.lblMobile.TabIndex = 4;
+            this.lblMobile.Text = "Mobile";
             // 
-            // textBox2
+            // lblAddress
             // 
-            this.textBox2.Location = new System.Drawing.Point(327, 67);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(168, 20);
-            this.textBox2.TabIndex = 7;
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Location = new System.Drawing.Point(308, 78);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(67, 17);
+            this.lblAddress.TabIndex = 3;
+            this.lblAddress.Text = "Address";
             // 
-            // textBox3
+            // lblLName
             // 
-            this.textBox3.Location = new System.Drawing.Point(327, 94);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(168, 20);
-            this.textBox3.TabIndex = 8;
+            this.lblLName.AutoSize = true;
+            this.lblLName.Location = new System.Drawing.Point(308, 49);
+            this.lblLName.Name = "lblLName";
+            this.lblLName.Size = new System.Drawing.Size(85, 17);
+            this.lblLName.TabIndex = 2;
+            this.lblLName.Text = "Last Name";
             // 
-            // textBox4
+            // txtFName
             // 
-            this.textBox4.Location = new System.Drawing.Point(327, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(168, 20);
-            this.textBox4.TabIndex = 9;
+            this.txtFName.Location = new System.Drawing.Point(417, 11);
+            this.txtFName.Name = "txtFName";
+            this.txtFName.Size = new System.Drawing.Size(168, 23);
+            this.txtFName.TabIndex = 1;
             // 
-            // textBox5
+            // lblFName
             // 
-            this.textBox5.Location = new System.Drawing.Point(327, 188);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(168, 20);
-            this.textBox5.TabIndex = 10;
+            this.lblFName.AutoSize = true;
+            this.lblFName.Location = new System.Drawing.Point(308, 14);
+            this.lblFName.Name = "lblFName";
+            this.lblFName.Size = new System.Drawing.Size(86, 17);
+            this.lblFName.TabIndex = 0;
+            this.lblFName.Text = "First Name";
             // 
-            // comboBox1
+            // tbViewEmp
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(327, 161);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(168, 21);
-            this.comboBox1.TabIndex = 11;
+            this.tbViewEmp.BackColor = System.Drawing.Color.NavajoWhite;
+            this.tbViewEmp.Controls.Add(this.dgViewEmp);
+            this.tbViewEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbViewEmp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbViewEmp.Location = new System.Drawing.Point(4, 25);
+            this.tbViewEmp.Name = "tbViewEmp";
+            this.tbViewEmp.Padding = new System.Windows.Forms.Padding(3);
+            this.tbViewEmp.Size = new System.Drawing.Size(851, 417);
+            this.tbViewEmp.TabIndex = 1;
+            this.tbViewEmp.Text = "View Employees";
             // 
-            // button1
+            // dgViewEmp
             // 
-            this.button1.Location = new System.Drawing.Point(327, 223);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Register";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dgViewEmp.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgViewEmp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgViewEmp.GridColor = System.Drawing.Color.Gainsboro;
+            this.dgViewEmp.Location = new System.Drawing.Point(38, 28);
+            this.dgViewEmp.Name = "dgViewEmp";
+            this.dgViewEmp.Size = new System.Drawing.Size(773, 214);
+            this.dgViewEmp.TabIndex = 0;
             // 
             // label9
             // 
@@ -234,16 +243,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tbHome);
             this.Controls.Add(this.label1);
             this.Name = "HomePage";
             this.Size = new System.Drawing.Size(1120, 526);
-            this.tabControl1.ResumeLayout(false);
-            this.TabPage1.ResumeLayout(false);
-            this.TabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tbHome.ResumeLayout(false);
+            this.tbRegistration.ResumeLayout(false);
+            this.tbRegistration.PerformLayout();
+            this.tbViewEmp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewEmp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,23 +262,23 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage TabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabControl tbHome;
+        private System.Windows.Forms.TabPage tbRegistration;
+        private System.Windows.Forms.TabPage tbViewEmp;
+        private System.Windows.Forms.DataGridView dgViewEmp;
+        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.ComboBox cmbDesignation;
+        private System.Windows.Forms.TextBox txtSalary;
+        private System.Windows.Forms.TextBox txtMobile;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtLName;
+        private System.Windows.Forms.Label lblSalary;
+        private System.Windows.Forms.Label lblDesignation;
+        private System.Windows.Forms.Label lblMobile;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.Label lblLName;
+        private System.Windows.Forms.TextBox txtFName;
+        private System.Windows.Forms.Label lblFName;
         private System.Windows.Forms.Label label9;
     }
 }

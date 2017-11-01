@@ -12,6 +12,24 @@ namespace MedicalStore
 {
     public partial class HomePage : UserControl
     {
+
+        #region Constructor
+
+        public HomePage()
+        {
+            InitializeComponent();
+            GetAllEmployees();
+            GetAllEmployeeLookUpData();
+            if (LoginUC.employeeType == (int)Constants.EMPLOYEETYPE.ADMIN || LoginUC.employeeType == (int)Constants.EMPLOYEETYPE.MANAGER)
+                tbHome.Show();
+            else
+                tbHome.Hide();
+        }
+
+        #endregion
+
+        #region Fields
+
         private static HomePage _instance;
         public static HomePage Instance
         {
@@ -22,89 +40,79 @@ namespace MedicalStore
                 return _instance;
             }
         }
-        public HomePage()
-        {
-            InitializeComponent();
-            GetAllEmployees();
-            GetAllEmployeeLookUpData();
-            if (LoginUC.EMP_TYPE == 1 || LoginUC.EMP_TYPE == 2)
-            {
-                tabControl1.Show();
-            }
-            else
-            {
-                tabControl1.Hide();
-            }
-        }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+        #endregion
 
-        }
+        #region Events
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
             try
             {
-                int e_id = 0;
-                using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+                int employeeId = 0;
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
                 {
 
                     System.Data.Entity.Core.Objects.ObjectParameter objParam = new System.Data.Entity.Core.Objects.ObjectParameter("eid", typeof(Int32));
-                    var eid = context.INS_Employee(textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text), Convert.ToInt32(comboBox1.SelectedValue)
-                        , Convert.ToInt32(textBox5.Text), objParam);
-                    e_id = Convert.ToInt32(objParam.Value);
+                    var eid = context.INS_Employee(txtFName.Text, txtLName.Text, txtAddress.Text, Convert.ToInt32(txtMobile.Text), Convert.ToInt32(cmbDesignation.SelectedValue)
+                        , Convert.ToInt32(txtSalary.Text), objParam);
+                    employeeId = Convert.ToInt32(objParam.Value);
 
                 }
-                if (e_id > 0)
+                if (employeeId > 0)
                 {
-                    using (Medical_StoreEntitiy context1 = new Medical_StoreEntitiy())
+                    using (MedicalDBEntityModelConnection loginContext = new MedicalDBEntityModelConnection())
                     {
-                        string loginid = textBox1.Text + GenerateRandomNo();
-                        string pass = "Pass" + GenerateRandomNo();
-                        var aaa = context1.INS_Login(loginid, pass, e_id);
-                        MessageBox.Show("Registration Success" + Environment.NewLine +
-                        "Your Login ID is " + loginid + Environment.NewLine +
-                        "Your password is " + pass + Environment.NewLine);
+                        string loginId = txtFName.Text + GenerateRandomNo();
+                        string password = Constants.PASS + GenerateRandomNo();
+                        var aaa = loginContext.INS_Login(loginId, password, employeeId);
+                        MessageBox.Show(Constants.REGISTRATION_SUCCESS + Environment.NewLine +
+                        Constants.LOGIN_ID + loginId + Environment.NewLine +
+                        Constants.PASSWORD + password + Environment.NewLine);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Sorry!!! Registration Failed");
+                    MessageBox.Show(Constants.REGISTRATION_FAILED);
                 }
                 ClearAllFields();
             }
             catch (Exception ex)
             {
                 ClearAllFields();
-                MessageBox.Show("Sorry!!! Registration Failed");
+                MessageBox.Show(Constants.REGISTRATION_FAILED);
             }
         }
+
+        #endregion
+
+        #region Methods
+
         private void GetAllEmployees()
         {
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
-                var result = context.GET_Employees().ToList();
-                dataGridView1.DataSource = result;
-                dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                var employeeList = context.GET_Employees().ToList();
+                dgViewEmp.DataSource = employeeList;
+                dgViewEmp.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
             }
         }
 
         public void GetAllEmployeeLookUpData()
         {
-            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
-                var result = context.GET_Employee_LookUp().ToList();
+                var employyeLookUp = context.GET_Employee_LookUp().ToList();
 
                 Dictionary<string, string> item = new Dictionary<string, string>();
-                foreach (var c in result)
+                foreach (var c in employyeLookUp)
                 {
                     item.Add(c.Id.ToString(), c.Type);
 
                 }
-                comboBox1.DataSource = new BindingSource(item, null);
-                comboBox1.DisplayMember = "Value";
-                comboBox1.ValueMember = "Key";
+                cmbDesignation.DataSource = new BindingSource(item, null);
+                cmbDesignation.DisplayMember = "Value";
+                cmbDesignation.ValueMember = "Key";
             }
         }
 
@@ -118,12 +126,15 @@ namespace MedicalStore
 
         private void ClearAllFields()
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox4.Clear();
-            textBox3.Clear();
-            textBox5.Clear();
-            comboBox1.SelectedIndex = 0;
+            txtFName.Clear();
+            txtLName.Clear();
+            txtMobile.Clear();
+            txtAddress.Clear();
+            txtSalary.Clear();
+            cmbDesignation.SelectedIndex = 0;
         }
+
+        #endregion
+
     }
 }

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Medical_StoreModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Medical_StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Company">
     <Key>
-      <PropertyRef Name="C_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DealerName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -28,7 +28,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="Login">
     <Key>
@@ -60,8 +60,8 @@
     <Property Name="I_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="I_Quantity" Type="int" Nullable="false" />
     <Property Name="I_Price" Type="int" Nullable="false" />
-    <Property Name="C_Id" Type="int" Nullable="false" />
-    <Property Name="I_Exp_Date" Type="date" Nullable="false" />
+    <Property Name="I_CompanyId" Type="int" Nullable="false" />
+    <Property Name="I_ExpiryDate" Type="date" Nullable="false" />
     <Property Name="I_CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="I_CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
@@ -70,23 +70,59 @@
       <PropertyRef Name="O_Id" />
     </Key>
     <Property Name="O_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="C_Id" Type="int" Nullable="false" />
-    <Property Name="O_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="O_CompanyId" Type="int" Nullable="false" />
+    <Property Name="O_StockName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="O_Quantity" Type="int" Nullable="false" />
     <Property Name="O_Price" Type="int" Nullable="false" />
     <Property Name="O_Date" Type="date" Nullable="false" />
     <Property Name="O_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="O_RemoveBy" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Employee_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee1" Type="Self.Employee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StockIn_StockIn">
     <End Role="Company" Type="Self.Company" Multiplicity="1" />
     <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
-        <PropertyRef Name="C_Id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StockIn">
-        <PropertyRef Name="C_Id" />
+        <PropertyRef Name="I_CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="O_CompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -120,22 +156,12 @@
     <Parameter Name="Mobile" Type="int" Mode="In" />
     <Parameter Name="Designation_Id" Type="int" Mode="In" />
     <Parameter Name="Salary" Type="int" Mode="In" />
-    <Parameter Name="Eid" Type="int" Mode="InOut" />
+    <Parameter Name="EId" Type="int" Mode="InOut" />
   </Function>
   <Function Name="INS_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UName" Type="nvarchar" Mode="In" />
     <Parameter Name="Pass" Type="nvarchar" Mode="In" />
-    <Parameter Name="E_Id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="INS_Stock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Name" Type="nvarchar" Mode="In" />
-    <Parameter Name="Description" Type="nvarchar" Mode="In" />
-    <Parameter Name="Quantity" Type="int" Mode="In" />
-    <Parameter Name="M_Date" Type="date" Mode="In" />
-    <Parameter Name="E_Date" Type="date" Mode="In" />
-    <Parameter Name="Dealer" Type="nvarchar" Mode="In" />
-    <Parameter Name="Price" Type="int" Mode="In" />
-    <Parameter Name="Vendor_Id" Type="int" Mode="In" />
+    <Parameter Name="EId" Type="int" Mode="In" />
   </Function>
   <Function Name="INS_StockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
@@ -156,7 +182,7 @@
     <Parameter Name="C_Date" Type="datetime" Mode="In" />
     <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
   </Function>
-  <EntityContainer Name="Medical_StoreModel1StoreContainer">
+  <EntityContainer Name="Medical_StoreModelStoreContainer">
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" Schema="dbo" store:Type="Tables" />
@@ -164,9 +190,21 @@
     <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Employee_Employee" Association="Self.FK_Employee_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Employee1" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Employee" Association="Self.FK_Login_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
     <AssociationSet Name="FK_StockIn_StockIn" Association="Self.FK_StockIn_StockIn">
       <End Role="Company" EntitySet="Company" />
       <End Role="StockIn" EntitySet="StockIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Company" Association="Self.FK_StockOut_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="StockOut" EntitySet="StockOut" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

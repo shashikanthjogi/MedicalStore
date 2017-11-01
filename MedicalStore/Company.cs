@@ -18,9 +18,10 @@ namespace MedicalStore
         public Company()
         {
             this.StockIns = new HashSet<StockIn>();
+            this.StockOuts = new HashSet<StockOut>();
         }
     
-        public int C_Id { get; set; }
+        public int Id { get; set; }
         public string CompanyName { get; set; }
         public string DealerName { get; set; }
         public string Address { get; set; }
@@ -28,5 +29,7 @@ namespace MedicalStore
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockOut> StockOuts { get; set; }
     }
 }

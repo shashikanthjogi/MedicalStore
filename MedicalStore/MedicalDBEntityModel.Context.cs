@@ -15,10 +15,10 @@ namespace MedicalStore
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Medical_StoreEntitiy : DbContext
+    public partial class MedicalDBEntityModelConnection : DbContext
     {
-        public Medical_StoreEntitiy()
-            : base("name=Medical_StoreEntitiy")
+        public MedicalDBEntityModelConnection()
+            : base("name=MedicalDBEntityModelConnection")
         {
         }
     
@@ -44,6 +44,27 @@ namespace MedicalStore
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DEL_Company", companyIdParameter);
         }
     
+        public virtual int DEL_Stock(string name, string description, Nullable<System.DateTime> c_Date, string createdBy)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var c_DateParameter = c_Date.HasValue ?
+                new ObjectParameter("C_Date", c_Date) :
+                new ObjectParameter("C_Date", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DEL_Stock", nameParameter, descriptionParameter, c_DateParameter, createdByParameter);
+        }
+    
         public virtual ObjectResult<GET_Companies_Result> GET_Companies()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Companies_Result>("GET_Companies");
@@ -57,6 +78,11 @@ namespace MedicalStore
         public virtual ObjectResult<GET_Employees_Result> GET_Employees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employees_Result>("GET_Employees");
+        }
+    
+        public virtual ObjectResult<GET_StockDetails_Result> GET_StockDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_StockDetails_Result>("GET_StockDetails");
         }
     
         public virtual ObjectResult<GET_ValidateLogin_Result> GET_ValidateLogin(string userName, string password)
@@ -93,7 +119,7 @@ namespace MedicalStore
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Company", companyNameParameter, dealerNameParameter, addressParameter, mobileParameter);
         }
     
-        public virtual int INS_Employee(string firstName, string lastName, string address, Nullable<int> mobile, Nullable<int> designation_Id, Nullable<int> salary, ObjectParameter eid)
+        public virtual int INS_Employee(string firstName, string lastName, string address, Nullable<int> mobile, Nullable<int> designation_Id, Nullable<int> salary, ObjectParameter eId)
         {
             var firstNameParameter = firstName != null ?
                 new ObjectParameter("FirstName", firstName) :
@@ -119,10 +145,10 @@ namespace MedicalStore
                 new ObjectParameter("Salary", salary) :
                 new ObjectParameter("Salary", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Employee", firstNameParameter, lastNameParameter, addressParameter, mobileParameter, designation_IdParameter, salaryParameter, eid);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Employee", firstNameParameter, lastNameParameter, addressParameter, mobileParameter, designation_IdParameter, salaryParameter, eId);
         }
     
-        public virtual int INS_Login(string uName, string pass, Nullable<int> e_Id)
+        public virtual int INS_Login(string uName, string pass, Nullable<int> eId)
         {
             var uNameParameter = uName != null ?
                 new ObjectParameter("UName", uName) :
@@ -132,48 +158,11 @@ namespace MedicalStore
                 new ObjectParameter("Pass", pass) :
                 new ObjectParameter("Pass", typeof(string));
     
-            var e_IdParameter = e_Id.HasValue ?
-                new ObjectParameter("E_Id", e_Id) :
-                new ObjectParameter("E_Id", typeof(int));
+            var eIdParameter = eId.HasValue ?
+                new ObjectParameter("EId", eId) :
+                new ObjectParameter("EId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Login", uNameParameter, passParameter, e_IdParameter);
-        }
-    
-        public virtual int INS_Stock(string name, string description, Nullable<int> quantity, Nullable<System.DateTime> m_Date, Nullable<System.DateTime> e_Date, string dealer, Nullable<int> price, Nullable<int> vendor_Id)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
-    
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("Quantity", quantity) :
-                new ObjectParameter("Quantity", typeof(int));
-    
-            var m_DateParameter = m_Date.HasValue ?
-                new ObjectParameter("M_Date", m_Date) :
-                new ObjectParameter("M_Date", typeof(System.DateTime));
-    
-            var e_DateParameter = e_Date.HasValue ?
-                new ObjectParameter("E_Date", e_Date) :
-                new ObjectParameter("E_Date", typeof(System.DateTime));
-    
-            var dealerParameter = dealer != null ?
-                new ObjectParameter("Dealer", dealer) :
-                new ObjectParameter("Dealer", typeof(string));
-    
-            var priceParameter = price.HasValue ?
-                new ObjectParameter("Price", price) :
-                new ObjectParameter("Price", typeof(int));
-    
-            var vendor_IdParameter = vendor_Id.HasValue ?
-                new ObjectParameter("Vendor_Id", vendor_Id) :
-                new ObjectParameter("Vendor_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Stock", nameParameter, descriptionParameter, quantityParameter, m_DateParameter, e_DateParameter, dealerParameter, priceParameter, vendor_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Login", uNameParameter, passParameter, eIdParameter);
         }
     
         public virtual int INS_StockIn(string name, string description, Nullable<int> quantity, Nullable<int> price, Nullable<int> companyId, Nullable<System.DateTime> e_Date, Nullable<System.DateTime> c_Date, string createdBy)
@@ -213,11 +202,6 @@ namespace MedicalStore
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_StockIn", nameParameter, descriptionParameter, quantityParameter, priceParameter, companyIdParameter, e_DateParameter, c_DateParameter, createdByParameter);
         }
     
-        public virtual ObjectResult<GET_StockDetails_Result> GET_StockDetails()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_StockDetails_Result>("GET_StockDetails");
-        }
-    
         public virtual int UPD_StockIn(Nullable<int> sid, string name, Nullable<int> quantity, Nullable<int> price, string description, Nullable<System.DateTime> c_Date, string createdBy)
         {
             var sidParameter = sid.HasValue ?
@@ -249,27 +233,6 @@ namespace MedicalStore
                 new ObjectParameter("CreatedBy", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UPD_StockIn", sidParameter, nameParameter, quantityParameter, priceParameter, descriptionParameter, c_DateParameter, createdByParameter);
-        }
-    
-        public virtual int DEL_Stock(string name, string description, Nullable<System.DateTime> c_Date, string createdBy)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
-    
-            var c_DateParameter = c_Date.HasValue ?
-                new ObjectParameter("C_Date", c_Date) :
-                new ObjectParameter("C_Date", typeof(System.DateTime));
-    
-            var createdByParameter = createdBy != null ?
-                new ObjectParameter("CreatedBy", createdBy) :
-                new ObjectParameter("CreatedBy", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DEL_Stock", nameParameter, descriptionParameter, c_DateParameter, createdByParameter);
         }
     }
 }

@@ -12,23 +12,22 @@ namespace MedicalStore
 {
     public partial class MasterFrom : Form
     {
+        #region Constructor
+
         public MasterFrom()
         {
             InitializeComponent();
-            LoginUC.ParentFormName = this;
-            menuStrip1.Hide();
-            if (!panel1.Controls.Contains(LoginUC.Instance))
+            LoginUC.parentFormName = this;
+            menuMain.Hide();
+            if (!pnlMaster.Controls.Contains(LoginUC.Instance))
             {
-                panel1.Controls.Add(LoginUC.Instance);
+                pnlMaster.Controls.Add(LoginUC.Instance);
                 LoginUC.Instance.BringToFront();
             }
             else
                 LoginUC.Instance.BringToFront();
         }
 
-        private void MasterFrom_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }
