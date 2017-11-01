@@ -47,7 +47,7 @@ namespace MedicalStore
             try
             {
                 int e_id = 0;
-                using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+                using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
                 {
 
                     System.Data.Entity.Core.Objects.ObjectParameter objParam = new System.Data.Entity.Core.Objects.ObjectParameter("eid", typeof(Int32));
@@ -58,7 +58,7 @@ namespace MedicalStore
                 }
                 if (e_id > 0)
                 {
-                    using (Medical_StoreEntities1 context1 = new Medical_StoreEntities1())
+                    using (Medical_StoreEntitiy context1 = new Medical_StoreEntitiy())
                     {
                         string loginid = textBox1.Text + GenerateRandomNo();
                         string pass = "Pass" + GenerateRandomNo();
@@ -82,7 +82,7 @@ namespace MedicalStore
         }
         private void GetAllEmployees()
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
             {
                 var result = context.GET_Employees().ToList();
                 dataGridView1.DataSource = result;
@@ -92,7 +92,7 @@ namespace MedicalStore
 
         public void GetAllEmployeeLookUpData()
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
             {
                 var result = context.GET_Employee_LookUp().ToList();
 

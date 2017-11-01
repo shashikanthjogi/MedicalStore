@@ -37,7 +37,7 @@ namespace MedicalStore
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
             {
                 try
                 {
@@ -59,7 +59,7 @@ namespace MedicalStore
 
         private void FillCompanyList()
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
             {
                 var result = context.GET_Companies().ToList();
                 dataGridView1.DataSource = result;
@@ -80,7 +80,7 @@ namespace MedicalStore
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            using (Medical_StoreEntitiy context = new Medical_StoreEntitiy())
             {
                 try
                 {

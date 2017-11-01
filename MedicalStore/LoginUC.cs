@@ -34,7 +34,7 @@ namespace MedicalStore
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Medical_StoreEntities1 db = new Medical_StoreEntities1();
+            Medical_StoreEntitiy db = new Medical_StoreEntitiy();
             var result = db.GET_ValidateLogin(textBox1.Text, textBox2.Text).FirstOrDefault();
             EMP_TYPE = result.Designation_Id;
             Emp_Name = result.FirstName;
@@ -125,7 +125,7 @@ namespace MedicalStore
             item.Click += Item_Click;
             company.DropDownItems.Add(item);
 
-            if (result == 1)
+            if (result == 1 || result==2)
             {
                 item = new ToolStripMenuItem();
                 item.Text = "Reports";
@@ -170,9 +170,25 @@ namespace MedicalStore
             {
                 SelectCompanyTabs(1);
             }
-            else if(mi.Text == "View Companies")
+            else if (mi.Text == "View Companies")
             {
                 SelectCompanyTabs(2);
+            }
+            else if (mi.Text == "New Stock")
+            {
+                SelectStockTabs(0);
+            }
+            else if (mi.Text == "Update Stock")
+            {
+                SelectStockTabs(1);
+            }
+            else if (mi.Text == "Delete Stock")
+            {
+                SelectStockTabs(2);
+            }
+            else if (mi.Text == "Reports")
+            {
+                SelectStockTabs(3);
             }
         }
 
@@ -203,6 +219,29 @@ namespace MedicalStore
             TabControl tc = (TabControl)ct[0];
             TabPage t = tc.TabPages[index];
             tc.SelectTab(t);
+        }
+
+        private void SelectStockTabs(int index)
+        {
+            MasterFrom mf = ParentFormName;
+            Panel pp = mf.Controls["panel1"] as Panel;
+            RemoveAllInstances();
+            if (!pp.Controls.Contains(StockUC.Instance))
+            {
+                pp.Controls.Add(StockUC.Instance);
+                StockUC.Instance.BringToFront();
+            }
+            else
+                StockUC.Instance.BringToFront();
+
+            ControlCollection cc = pp.Controls;
+            ct = cc[0].Controls.Find("tabcontrol2", true);
+            TabControl tc = (TabControl)ct[0];
+            TabPage t = tc.TabPages[index];
+            TabPage rt = tc.TabPages[3];
+            tc.SelectTab(t);
+            if (EMP_TYPE == 3 || EMP_TYPE == 4)
+                tc.TabPages.Remove(rt);
         }
 
         private void LoginUC_Load(object sender, EventArgs e)

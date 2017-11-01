@@ -17,13 +17,9 @@ namespace MedicalStore
         public int S_Id { get; set; }
         public string S_Name { get; set; }
         public int S_Price { get; set; }
-        public int S_TotalQuantity { get; set; }
         public int S_SellQuantity { get; set; }
         public int S_AvailableQuantity { get; set; }
-        public int S_TotalPrice { get; set; }
         public int S_SellPrice { get; set; }
         public int S_AvailablePrice { get; set; }
-    
-        public virtual Company Company { get; set; }
     }
 }

@@ -14,12 +14,6 @@ namespace MedicalStore
     
     public partial class Employee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
-        {
-            this.Logins = new HashSet<Login>();
-        }
-    
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -27,8 +21,5 @@ namespace MedicalStore
         public long Mobile { get; set; }
         public int Designation_Id { get; set; }
         public int Salary { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Login> Logins { get; set; }
     }
 }

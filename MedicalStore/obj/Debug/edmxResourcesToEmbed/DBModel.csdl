@@ -21,12 +21,6 @@
   <EntityContainer Name="Medical_StoreEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" />
     <EntitySet Name="Logins" EntityType="Self.Login" />
-    <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Medical_StoreModel.GET_ValidateLogin_Result)">
-      <Parameter Name="UserName" Mode="In" Type="String" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="StockOuts" EntityType="Medical_StoreModel.StockOut" />
-    <FunctionImport Name="GET_ALL_VENDORS" />
     <FunctionImport Name="DEL_Company">
       <Parameter Name="CompanyId" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -69,20 +63,21 @@
       <Parameter Name="Salary" Mode="In" Type="Int32" />
       <Parameter Name="Eid" Mode="InOut" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Medical_StoreModel.GET_ValidateLogin_Result1)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="INS_StockIn">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="Price" Mode="In" Type="Int32" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="E_Date" Mode="In" Type="DateTime" />
+      <Parameter Name="C_Date" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="StockOut">
-    <Key>
-      <PropertyRef Name="O_Id" />
-    </Key>
-    <Property Name="O_Id" Type="Int32" Nullable="false" />
-    <Property Name="C_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="O_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="O_Quantity" Type="Int32" Nullable="false" />
-    <Property Name="O_Price" Type="Int32" Nullable="false" />
-    <Property Name="O_TotalPrice" Type="Int32" Nullable="false" />
-    <Property Name="O_Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="O_Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <ComplexType Name="GET_ALL_VENDORS_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -160,6 +155,8 @@
     <Property Name="C_Id" Type="Int32" Nullable="false" />
     <Property Name="I_Exp_Date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Company" Relationship="Medical_StoreModel.FK_StockIn_StockIn" FromRole="StockIn" ToRole="Company" />
+    <Property Name="I_CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="I_CreatedBy" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_StockIn_StockIn">
     <End Type="Medical_StoreModel.Company" Role="Company" Multiplicity="1" />
@@ -199,6 +196,10 @@
     </ReferentialConstraint>
   </Association>
   <ComplexType Name="GET_ValidateLogin_Result">
+    <Property Type="Int32" Name="Designation_Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GET_ValidateLogin_Result1">
     <Property Type="Int32" Name="Designation_Id" Nullable="false" />
     <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
   </ComplexType>

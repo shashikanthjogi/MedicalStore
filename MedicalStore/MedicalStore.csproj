@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CompanyUC.cs">
       <SubType>UserControl</SubType>
@@ -63,41 +63,26 @@
     <Compile Include="CompanyUC.Designer.cs">
       <DependentUpon>CompanyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Employee.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee_LookUp.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GET_ALL_VENDORS_Result.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_Companies_Result.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_Employees_Result.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_Employee_LookUp_Result.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GET_StockDetails_Result.cs">
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_ValidateLogin_Result.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HomePage.cs">
       <SubType>UserControl</SubType>
@@ -106,7 +91,7 @@
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginUC.cs">
       <SubType>UserControl</SubType>
@@ -120,16 +105,31 @@
     <Compile Include="MasterFrom.Designer.cs">
       <DependentUpon>MasterFrom.cs</DependentUpon>
     </Compile>
+    <Compile Include="MedicalStoreDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicalStoreDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalStoreDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalStoreDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicalStoreDataModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockIn.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockOut.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>MedicalStoreDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StockUC.cs">
       <SubType>UserControl</SubType>
@@ -161,12 +161,12 @@
     <EmbeddedResource Include="StockUC.resx">
       <DependentUpon>StockUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="DBModel.edmx">
+    <EntityDeploy Include="MedicalStoreDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MedicalStoreDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
+    <None Include="MedicalStoreDataModel.edmx.diagram">
+      <DependentUpon>MedicalStoreDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -186,15 +186,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBModel.Context.tt">
+    <Content Include="MedicalStoreDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
+      <DependentUpon>MedicalStoreDataModel.edmx</DependentUpon>
+      <LastGenOutput>MedicalStoreDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DBModel.tt">
+    <Content Include="MedicalStoreDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.cs</LastGenOutput>
+      <DependentUpon>MedicalStoreDataModel.edmx</DependentUpon>
+      <LastGenOutput>MedicalStoreDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

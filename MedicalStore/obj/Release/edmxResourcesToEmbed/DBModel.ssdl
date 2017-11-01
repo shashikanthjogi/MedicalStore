@@ -39,20 +39,6 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Employee_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Stock">
-    <Key>
-      <PropertyRef Name="S_Id" />
-    </Key>
-    <Property Name="S_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="S_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="S_Price" Type="int" Nullable="false" />
-    <Property Name="S_TotalQuantity" Type="int" Nullable="false" />
-    <Property Name="S_SellQuantity" Type="int" Nullable="false" />
-    <Property Name="S_AvailableQuantity" Type="int" Nullable="false" />
-    <Property Name="S_TotalPrice" Type="int" Nullable="false" />
-    <Property Name="S_SellPrice" Type="int" Nullable="false" />
-    <Property Name="S_AvailablePrice" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="StockIn">
     <Key>
       <PropertyRef Name="I_Id" />
@@ -64,32 +50,9 @@
     <Property Name="I_Price" Type="int" Nullable="false" />
     <Property Name="C_Id" Type="int" Nullable="false" />
     <Property Name="I_Exp_Date" Type="date" Nullable="false" />
+    <Property Name="I_CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="I_CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="StockOut">
-    <Key>
-      <PropertyRef Name="O_Id" />
-    </Key>
-    <Property Name="O_Id" Type="int" Nullable="false" />
-    <Property Name="C_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="O_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="O_Quantity" Type="int" Nullable="false" />
-    <Property Name="O_Price" Type="int" Nullable="false" />
-    <Property Name="O_TotalPrice" Type="int" Nullable="false" />
-    <Property Name="O_Date" Type="date" Nullable="false" />
-    <Property Name="O_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Stock_Vendor">
-    <End Role="Company" Type="Self.Company" Multiplicity="1" />
-    <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="C_Id" />
-      </Principal>
-      <Dependent Role="Stock">
-        <PropertyRef Name="S_TotalPrice" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StockIn_StockIn">
     <End Role="Company" Type="Self.Company" Multiplicity="1" />
     <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
@@ -132,18 +95,22 @@
     <Parameter Name="Pass" Type="nvarchar" Mode="In" />
     <Parameter Name="E_Id" Type="int" Mode="In" />
   </Function>
+  <Function Name="INS_StockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="Price" Type="int" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="E_Date" Type="date" Mode="In" />
+    <Parameter Name="C_Date" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="Medical_StoreModelStoreContainer">
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Stock_Vendor" Association="Self.FK_Stock_Vendor">
-      <End Role="Company" EntitySet="Company" />
-      <End Role="Stock" EntitySet="Stock" />
-    </AssociationSet>
     <AssociationSet Name="FK_StockIn_StockIn" Association="Self.FK_StockIn_StockIn">
       <End Role="Company" EntitySet="Company" />
       <End Role="StockIn" EntitySet="StockIn" />
