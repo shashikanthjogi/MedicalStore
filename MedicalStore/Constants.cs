@@ -39,6 +39,9 @@ namespace MedicalStore
         public const string SALES = "Sales";
         public const string NEW_BILL = "New Bill";
         public const string VIEW_BILLS = "View Bills";
+        public const string ADD = "ADD";
+        public const string UPDATE = "UPDATE";
+        public const string DELETE = "DELETE";
         public const string REGISTRATION_FAILED = "Sorry!!! Registration Failed";
         public const string REGISTRATION_SUCCESS = "Registration Success";
         public const string LOGIN_ID = "Your Login ID is ";
@@ -48,6 +51,13 @@ namespace MedicalStore
         public const string COMPANY_DEL_SUCCESS = "Company removed successfully.";
         public const string COMPANY_FAILURE = "Sorry!! An error occured.";
         public const string COMPANY_NONE = "No companies are present. Please add and come back to view";
+        public const string STOCK_ADD = "Stock Added Successfully";
+        public const string STOCK_ADD_FAIL = "Stock Addition Failed";
+        public const string STOCK_DEL_WARNING = "Warning!!!... This will delete the existing stock";
+        public const string STOCK_DEL_SUCCESS = "Stock deleted Successfully";
+        public const string STOCK_UPDATE_WARNING = "Warning!!!... This will update the existing stock quantity and price details for the item selected";
+        public const string STOCK_UPDATE_SUCCESS = "Stock Details Updated Successfully";
+
 
         #endregion
 

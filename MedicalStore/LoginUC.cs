@@ -274,7 +274,7 @@ namespace MedicalStore
         {
             MasterFrom mf = parentFormName;
             Panel panelMaster = mf.Controls["pnlMaster"] as Panel;
-            RemoveAllInstances();
+            //RemoveAllInstances();
             if (!panelMaster.Controls.Contains(StockUC.Instance))
             {
                 panelMaster.Controls.Add(StockUC.Instance);

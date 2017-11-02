@@ -110,7 +110,11 @@ namespace MedicalStore
                     cmbCompanies.ValueMember = "Key";
                 }
                 else
+                {
+                    dgCompanyList.DataSource = null;
+                    cmbCompanies.DataSource = null;
                     MessageBox.Show(Constants.COMPANY_NONE);
+                }
             }
         }
 
