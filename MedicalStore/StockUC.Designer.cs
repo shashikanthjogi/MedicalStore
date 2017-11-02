@@ -187,7 +187,7 @@
             // 
             // lblSItem
             // 
-            this.lblSItem.Location = new System.Drawing.Point(283, 16);
+            this.lblSItem.Location = new System.Drawing.Point(280, 16);
             this.lblSItem.Name = "lblSItem";
             this.lblSItem.Size = new System.Drawing.Size(91, 17);
             this.lblSItem.TabIndex = 2;
@@ -239,6 +239,7 @@
             this.btnUpdateStock.TabIndex = 6;
             this.btnUpdateStock.Text = "Update Stock";
             this.btnUpdateStock.UseVisualStyleBackColor = false;
+            this.btnUpdateStock.Click += new System.EventHandler(this.btnUpdateStock_Click);
             // 
             // txtItQuantity
             // 
@@ -257,7 +258,7 @@
             // cboIName
             // 
             this.cboIName.FormattingEnabled = true;
-            this.cboIName.Location = new System.Drawing.Point(475, 78);
+            this.cboIName.Location = new System.Drawing.Point(475, 72);
             this.cboIName.Name = "cboIName";
             this.cboIName.Size = new System.Drawing.Size(162, 24);
             this.cboIName.TabIndex = 3;
@@ -266,7 +267,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label11.Location = new System.Drawing.Point(317, 140);
+            this.label11.Location = new System.Drawing.Point(317, 138);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 17);
             this.label11.TabIndex = 2;
@@ -276,7 +277,7 @@
             // 
             this.lblIQuantity.AutoSize = true;
             this.lblIQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblIQuantity.Location = new System.Drawing.Point(317, 110);
+            this.lblIQuantity.Location = new System.Drawing.Point(317, 108);
             this.lblIQuantity.Name = "lblIQuantity";
             this.lblIQuantity.Size = new System.Drawing.Size(128, 17);
             this.lblIQuantity.TabIndex = 1;
@@ -286,7 +287,7 @@
             // 
             this.lblIName.AutoSize = true;
             this.lblIName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblIName.Location = new System.Drawing.Point(317, 78);
+            this.lblIName.Location = new System.Drawing.Point(317, 76);
             this.lblIName.Name = "lblIName";
             this.lblIName.Size = new System.Drawing.Size(84, 17);
             this.lblIName.TabIndex = 0;
@@ -346,6 +347,7 @@
             this.btnDelStock.TabIndex = 1;
             this.btnDelStock.Text = "DELETE STOCK";
             this.btnDelStock.UseVisualStyleBackColor = false;
+            this.btnDelStock.Click += new System.EventHandler(this.btnDelStock_Click);
             // 
             // cboItemName
             // 

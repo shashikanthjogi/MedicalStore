@@ -62,6 +62,8 @@ namespace MedicalStore
                         employeeType = loginResult.Designation_Id;
                         employeeName = loginResult.FirstName;
                         MasterFrom masterForm = (MasterFrom)this.Parent.Parent;
+                        Label lblUserName = masterForm.Controls["lblUserName"] as Label;
+                        lblUserName.Text = Constants.WELCOME + " " + employeeName;
                         if (parentFormName == null)
                             return;
                         else
@@ -69,14 +71,9 @@ namespace MedicalStore
                         Panel panelMaster = masterForm.Controls["pnlMaster"] as Panel;
 
                         panelMaster.Controls.Remove(LoginUC.Instance);
-                        if (!panelMaster.Controls.Contains(HomePage.Instance))
-                        {
-                            panelMaster.Controls.Add(HomePage.Instance);
-                            HomePage.Instance.BringToFront();
-                        }
-                        else
-                            HomePage.Instance.BringToFront();
-
+                        HomePage.Instance = null;
+                        panelMaster.Controls.Add(HomePage.Instance);
+                        HomePage.Instance.BringToFront();
                         BuildMenu(masterForm, employeeType);
                     }
                 }
@@ -108,6 +105,8 @@ namespace MedicalStore
                 LoginUC.Instance.BringToFront();
             txtUName.Clear();
             txtPass.Clear();
+            Label lblUserName = mf.Controls["lblUserName"] as Label;
+            lblUserName.Text = string.Empty;
         }
 
         private void Item_Click(object sender, EventArgs e)
@@ -287,10 +286,7 @@ namespace MedicalStore
             controls = cc[0].Controls.Find("tbStock", true);
             TabControl tc = (TabControl)controls[0];
             TabPage tp = tc.TabPages[index];
-            TabPage reportsTab = tc.TabPages[3];
             tc.SelectTab(tp);
-            if (employeeType == (int)Constants.EMPLOYEETYPE.STAFF || employeeType == (int)Constants.EMPLOYEETYPE.TRAINEE)
-                tc.TabPages.Remove(reportsTab);
         }
 
         private void SelectBilling(int index)

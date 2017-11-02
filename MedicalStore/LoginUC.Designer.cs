@@ -62,7 +62,7 @@
             this.tbpgLogin.Controls.Add(this.lblPassword);
             this.tbpgLogin.Controls.Add(this.lblUName);
             this.tbpgLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbpgLogin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tbpgLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tbpgLogin.Location = new System.Drawing.Point(4, 22);
             this.tbpgLogin.Name = "tbpgLogin";
             this.tbpgLogin.Padding = new System.Windows.Forms.Padding(3);
@@ -96,6 +96,7 @@
             // 
             this.txtPass.Location = new System.Drawing.Point(493, 77);
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(208, 20);
             this.txtPass.TabIndex = 5;
             // 
@@ -125,7 +126,20 @@
             this.lblUName.Size = new System.Drawing.Size(83, 17);
             this.lblUName.TabIndex = 2;
             this.lblUName.Text = "UserName";
-            
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 23);
+            this.label4.TabIndex = 0;
             // 
             // LoginUC
             // 
@@ -141,7 +155,6 @@
             this.tbpgLogin.ResumeLayout(false);
             this.tbpgLogin.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

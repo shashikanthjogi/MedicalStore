@@ -31,6 +31,7 @@
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.pnlMaster = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblUserName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // menuMain
@@ -47,14 +48,14 @@
             // 
             this.pnlMaster.Location = new System.Drawing.Point(26, 120);
             this.pnlMaster.Name = "pnlMaster";
-            this.pnlMaster.Size = new System.Drawing.Size(1155, 354);
+            this.pnlMaster.Size = new System.Drawing.Size(1155, 417);
             this.pnlMaster.TabIndex = 13;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Arial Unicode MS", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(306, 33);
+            this.label1.Location = new System.Drawing.Point(254, 33);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(613, 84);
@@ -62,12 +63,25 @@
             this.label1.Text = "Medical Store Interface";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblUserName.Location = new System.Drawing.Point(932, 62);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(163, 20);
+            this.lblUserName.TabIndex = 23;
+            this.lblUserName.Text = "User Logged Name";
+            // 
             // MasterFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1210, 575);
+            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlMaster);
             this.Controls.Add(this.menuMain);
@@ -83,5 +97,6 @@
         private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.Panel pnlMaster;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblUserName;
     }
 }

@@ -108,18 +108,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GET_Employees" FunctionName="Medical_StoreModel.Store.GET_Employees">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employees_Result">
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GET_StockDetails" FunctionName="Medical_StoreModel.Store.GET_StockDetails">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Medical_StoreModel.GET_StockDetails_Result">
@@ -146,5 +134,17 @@
     <FunctionImportMapping FunctionImportName="INS_Login" FunctionName="Medical_StoreModel.Store.INS_Login" />
     <FunctionImportMapping FunctionImportName="INS_StockIn" FunctionName="Medical_StoreModel.Store.INS_StockIn" />
     <FunctionImportMapping FunctionImportName="UPD_StockIn" FunctionName="Medical_StoreModel.Store.UPD_StockIn" />
+    <FunctionImportMapping FunctionImportName="GET_Employees" FunctionName="Medical_StoreModel.Store.GET_Employees">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employees_Result1">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

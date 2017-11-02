@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace MedicalStore
 {
@@ -39,6 +40,10 @@ namespace MedicalStore
                     _instance = new HomePage();
                 return _instance;
             }
+            set
+            {
+                _instance = value;
+            }
         }
 
         #endregion
@@ -47,40 +52,49 @@ namespace MedicalStore
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            try
+            string error = ValidateFields();
+            if (string.IsNullOrEmpty(error))
             {
-                int employeeId = 0;
-                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+                try
                 {
-
-                    System.Data.Entity.Core.Objects.ObjectParameter objParam = new System.Data.Entity.Core.Objects.ObjectParameter("eid", typeof(Int32));
-                    var eid = context.INS_Employee(txtFName.Text, txtLName.Text, txtAddress.Text, Convert.ToInt32(txtMobile.Text), Convert.ToInt32(cmbDesignation.SelectedValue)
-                        , Convert.ToInt32(txtSalary.Text), objParam);
-                    employeeId = Convert.ToInt32(objParam.Value);
-
-                }
-                if (employeeId > 0)
-                {
-                    using (MedicalDBEntityModelConnection loginContext = new MedicalDBEntityModelConnection())
+                    int employeeId = 0;
+                    using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
                     {
-                        string loginId = txtFName.Text + GenerateRandomNo();
-                        string password = Constants.PASS + GenerateRandomNo();
-                        var aaa = loginContext.INS_Login(loginId, password, employeeId);
-                        MessageBox.Show(Constants.REGISTRATION_SUCCESS + Environment.NewLine +
-                        Constants.LOGIN_ID + loginId + Environment.NewLine +
-                        Constants.PASSWORD + password + Environment.NewLine);
+
+                        System.Data.Entity.Core.Objects.ObjectParameter objParam = new System.Data.Entity.Core.Objects.ObjectParameter("eid", typeof(Int32));
+                        var eid = context.INS_Employee(txtFName.Text, txtLName.Text, txtAddress.Text, Convert.ToInt64(txtMobile.Text), Convert.ToInt32(cmbDesignation.SelectedValue)
+                            , Convert.ToInt32(txtSalary.Text), objParam);
+                        employeeId = Convert.ToInt32(objParam.Value);
+
                     }
+                    if (employeeId > 0)
+                    {
+                        using (MedicalDBEntityModelConnection loginContext = new MedicalDBEntityModelConnection())
+                        {
+                            string loginId = txtFName.Text + GenerateRandomNo();
+                            string password = Constants.PASS + GenerateRandomNo();
+                            var aaa = loginContext.INS_Login(loginId, password, employeeId);
+                            MessageBox.Show(Constants.REGISTRATION_SUCCESS + Environment.NewLine +
+                            Constants.LOGIN_ID + loginId + Environment.NewLine +
+                            Constants.PASSWORD + password + Environment.NewLine);
+                        }
+                        GetAllEmployees();
+                    }
+                    else
+                    {
+                        MessageBox.Show(Constants.REGISTRATION_FAILED);
+                    }
+                    ClearAllFields();
                 }
-                else
+                catch (Exception ex)
                 {
+                    ClearAllFields();
                     MessageBox.Show(Constants.REGISTRATION_FAILED);
                 }
-                ClearAllFields();
             }
-            catch (Exception ex)
+            else
             {
-                ClearAllFields();
-                MessageBox.Show(Constants.REGISTRATION_FAILED);
+                MessageBox.Show(error);
             }
         }
 
@@ -132,6 +146,41 @@ namespace MedicalStore
             txtAddress.Clear();
             txtSalary.Clear();
             cmbDesignation.SelectedIndex = 0;
+        }
+
+        private string ValidateFields()
+        {
+            if (string.IsNullOrEmpty(txtFName.Text) || string.IsNullOrEmpty(txtLName.Text) || string.IsNullOrEmpty(txtMobile.Text) ||
+                string.IsNullOrEmpty(txtAddress.Text) || string.IsNullOrEmpty(txtSalary.Text))
+            {
+                return Constants.MANDATORY_FIELDS;
+            }
+            return ValidateMobileAndSalary();
+        }
+
+        private string ValidateMobileAndSalary()
+        {
+            if (!IsNumber(txtMobile.Text))
+            {
+                txtMobile.Focus();
+                return Constants.INVALID_MOBILE;
+            }
+            if (txtMobile.Text.Length != 10)
+            {
+                txtMobile.Focus();
+                return Constants.INVALID_MOBILE;
+            }
+            if (!IsNumber(txtSalary.Text))
+            {
+                txtSalary.Focus();
+                return Constants.INVALID_SALARY;
+            }
+            return string.Empty;
+        }
+
+        public static bool IsNumber(string s)
+        {
+            return s.All(char.IsDigit);
         }
 
         #endregion

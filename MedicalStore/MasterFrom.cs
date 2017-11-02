@@ -19,6 +19,7 @@ namespace MedicalStore
             InitializeComponent();
             LoginUC.parentFormName = this;
             menuMain.Hide();
+            lblUserName.Text = string.Empty;
             if (!pnlMaster.Controls.Contains(LoginUC.Instance))
             {
                 pnlMaster.Controls.Add(LoginUC.Instance);

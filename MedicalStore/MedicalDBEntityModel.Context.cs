@@ -75,11 +75,6 @@ namespace MedicalStore
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employee_LookUp_Result>("GET_Employee_LookUp");
         }
     
-        public virtual ObjectResult<GET_Employees_Result> GET_Employees()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employees_Result>("GET_Employees");
-        }
-    
         public virtual ObjectResult<GET_StockDetails_Result> GET_StockDetails()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_StockDetails_Result>("GET_StockDetails");
@@ -98,7 +93,7 @@ namespace MedicalStore
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ValidateLogin_Result>("GET_ValidateLogin", userNameParameter, passwordParameter);
         }
     
-        public virtual int INS_Company(string companyName, string dealerName, string address, Nullable<int> mobile)
+        public virtual int INS_Company(string companyName, string dealerName, string address, Nullable<long> mobile)
         {
             var companyNameParameter = companyName != null ?
                 new ObjectParameter("CompanyName", companyName) :
@@ -114,12 +109,12 @@ namespace MedicalStore
     
             var mobileParameter = mobile.HasValue ?
                 new ObjectParameter("Mobile", mobile) :
-                new ObjectParameter("Mobile", typeof(int));
+                new ObjectParameter("Mobile", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Company", companyNameParameter, dealerNameParameter, addressParameter, mobileParameter);
         }
     
-        public virtual int INS_Employee(string firstName, string lastName, string address, Nullable<int> mobile, Nullable<int> designation_Id, Nullable<int> salary, ObjectParameter eId)
+        public virtual int INS_Employee(string firstName, string lastName, string address, Nullable<long> mobile, Nullable<int> designation_Id, Nullable<int> salary, ObjectParameter eId)
         {
             var firstNameParameter = firstName != null ?
                 new ObjectParameter("FirstName", firstName) :
@@ -135,7 +130,7 @@ namespace MedicalStore
     
             var mobileParameter = mobile.HasValue ?
                 new ObjectParameter("Mobile", mobile) :
-                new ObjectParameter("Mobile", typeof(int));
+                new ObjectParameter("Mobile", typeof(long));
     
             var designation_IdParameter = designation_Id.HasValue ?
                 new ObjectParameter("Designation_Id", designation_Id) :
@@ -233,6 +228,11 @@ namespace MedicalStore
                 new ObjectParameter("CreatedBy", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UPD_StockIn", sidParameter, nameParameter, quantityParameter, priceParameter, descriptionParameter, c_DateParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<GET_Employees_Result1> GET_Employees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employees_Result1>("GET_Employees");
         }
     }
 }

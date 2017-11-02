@@ -29,236 +29,244 @@
         private void InitializeComponent()
         {
             this.tbBilling = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.tbBill = new System.Windows.Forms.TabPage();
+            this.lblTotalAmountDisplay = new System.Windows.Forms.Label();
+            this.txtMobile = new System.Windows.Forms.TextBox();
+            this.lblMobile = new System.Windows.Forms.Label();
+            this.txtCName = new System.Windows.Forms.TextBox();
+            this.lblCustomer = new System.Windows.Forms.Label();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.dgAllBill = new System.Windows.Forms.DataGridView();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.lblPrice = new System.Windows.Forms.Label();
+            this.btnAddBill = new System.Windows.Forms.Button();
+            this.txtBillingQuantity = new System.Windows.Forms.TextBox();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.cmbItemName = new System.Windows.Forms.ComboBox();
+            this.lblBillingQuantity = new System.Windows.Forms.Label();
+            this.lblCurrentQuantity = new System.Windows.Forms.Label();
+            this.lblIName = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgBillReport = new System.Windows.Forms.DataGridView();
             this.tbBilling.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tbBill.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAllBill)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBillReport)).BeginInit();
             this.SuspendLayout();
             // 
             // tbBilling
             // 
-            this.tbBilling.Controls.Add(this.tabPage1);
+            this.tbBilling.Controls.Add(this.tbBill);
             this.tbBilling.Controls.Add(this.tabPage2);
-            this.tbBilling.Location = new System.Drawing.Point(3, 3);
+            this.tbBilling.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBilling.Location = new System.Drawing.Point(3, 17);
             this.tbBilling.Name = "tbBilling";
             this.tbBilling.SelectedIndex = 0;
-            this.tbBilling.Size = new System.Drawing.Size(1238, 642);
+            this.tbBilling.Size = new System.Drawing.Size(1238, 628);
             this.tbBilling.TabIndex = 0;
             // 
-            // tabPage1
+            // tbBill
             // 
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.textBox6);
-            this.tabPage1.Controls.Add(this.textBox5);
-            this.tabPage1.Controls.Add(this.comboBox3);
-            this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1230, 616);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "New Bill";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tbBill.BackColor = System.Drawing.Color.NavajoWhite;
+            this.tbBill.Controls.Add(this.lblTotalAmountDisplay);
+            this.tbBill.Controls.Add(this.txtMobile);
+            this.tbBill.Controls.Add(this.lblMobile);
+            this.tbBill.Controls.Add(this.txtCName);
+            this.tbBill.Controls.Add(this.lblCustomer);
+            this.tbBill.Controls.Add(this.btnPrint);
+            this.tbBill.Controls.Add(this.dgAllBill);
+            this.tbBill.Controls.Add(this.txtPrice);
+            this.tbBill.Controls.Add(this.lblPrice);
+            this.tbBill.Controls.Add(this.btnAddBill);
+            this.tbBill.Controls.Add(this.txtBillingQuantity);
+            this.tbBill.Controls.Add(this.txtQuantity);
+            this.tbBill.Controls.Add(this.cmbItemName);
+            this.tbBill.Controls.Add(this.lblBillingQuantity);
+            this.tbBill.Controls.Add(this.lblCurrentQuantity);
+            this.tbBill.Controls.Add(this.lblIName);
+            this.tbBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbBill.Location = new System.Drawing.Point(4, 25);
+            this.tbBill.Name = "tbBill";
+            this.tbBill.Padding = new System.Windows.Forms.Padding(3);
+            this.tbBill.Size = new System.Drawing.Size(1230, 599);
+            this.tbBill.TabIndex = 0;
+            this.tbBill.Text = "New Bill";
             // 
-            // label4
+            // lblTotalAmountDisplay
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 33F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label4.Location = new System.Drawing.Point(943, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(145, 52);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "label4";
+            this.lblTotalAmountDisplay.AutoSize = true;
+            this.lblTotalAmountDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 33F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmountDisplay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblTotalAmountDisplay.Location = new System.Drawing.Point(987, 71);
+            this.lblTotalAmountDisplay.Name = "lblTotalAmountDisplay";
+            this.lblTotalAmountDisplay.Size = new System.Drawing.Size(125, 52);
+            this.lblTotalAmountDisplay.TabIndex = 37;
+            this.lblTotalAmountDisplay.Text = "Total";
             // 
-            // textBox3
+            // txtMobile
             // 
-            this.textBox3.Location = new System.Drawing.Point(625, 71);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(121, 20);
-            this.textBox3.TabIndex = 36;
+            this.txtMobile.Location = new System.Drawing.Point(625, 71);
+            this.txtMobile.Name = "txtMobile";
+            this.txtMobile.Size = new System.Drawing.Size(121, 23);
+            this.txtMobile.TabIndex = 36;
             // 
-            // label3
+            // lblMobile
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(551, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 35;
-            this.label3.Text = "Mobile";
+            this.lblMobile.AutoSize = true;
+            this.lblMobile.Location = new System.Drawing.Point(551, 74);
+            this.lblMobile.Name = "lblMobile";
+            this.lblMobile.Size = new System.Drawing.Size(55, 17);
+            this.lblMobile.TabIndex = 35;
+            this.lblMobile.Text = "Mobile";
             // 
-            // textBox2
+            // txtCName
             // 
-            this.textBox2.Location = new System.Drawing.Point(348, 71);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 34;
+            this.txtCName.Location = new System.Drawing.Point(348, 71);
+            this.txtCName.Name = "txtCName";
+            this.txtCName.Size = new System.Drawing.Size(121, 23);
+            this.txtCName.TabIndex = 34;
             // 
-            // label2
+            // lblCustomer
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(274, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "Customer";
+            this.lblCustomer.AutoSize = true;
+            this.lblCustomer.Location = new System.Drawing.Point(239, 77);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(76, 17);
+            this.lblCustomer.TabIndex = 33;
+            this.lblCustomer.Text = "Customer";
             // 
-            // button1
+            // btnPrint
             // 
-            this.button1.Location = new System.Drawing.Point(555, 99);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 32;
-            this.button1.Text = "PRINT";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnPrint.Location = new System.Drawing.Point(588, 102);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 37);
+            this.btnPrint.TabIndex = 32;
+            this.btnPrint.Text = "PRINT";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // dataGridView1
+            // dgAllBill
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(225, 145);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(675, 174);
-            this.dataGridView1.TabIndex = 31;
+            this.dgAllBill.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgAllBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAllBill.Location = new System.Drawing.Point(225, 145);
+            this.dgAllBill.Name = "dgAllBill";
+            this.dgAllBill.Size = new System.Drawing.Size(675, 174);
+            this.dgAllBill.TabIndex = 31;
             // 
-            // textBox1
+            // txtPrice
             // 
-            this.textBox1.Location = new System.Drawing.Point(721, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 30;
+            this.txtPrice.Location = new System.Drawing.Point(636, 33);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(36, 23);
+            this.txtPrice.TabIndex = 30;
             // 
-            // label1
+            // lblPrice
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(660, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Price";
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(585, 36);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(45, 17);
+            this.lblPrice.TabIndex = 29;
+            this.lblPrice.Text = "Price";
             // 
-            // button2
+            // btnAddBill
             // 
-            this.button2.Location = new System.Drawing.Point(425, 99);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 28;
-            this.button2.Text = "Add To Bill";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnAddBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnAddBill.Location = new System.Drawing.Point(390, 99);
+            this.btnAddBill.Name = "btnAddBill";
+            this.btnAddBill.Size = new System.Drawing.Size(110, 40);
+            this.btnAddBill.TabIndex = 28;
+            this.btnAddBill.Text = "Add To Bill";
+            this.btnAddBill.UseVisualStyleBackColor = false;
+            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
             // 
-            // textBox6
+            // txtBillingQuantity
             // 
-            this.textBox6.Location = new System.Drawing.Point(967, 31);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(121, 20);
-            this.textBox6.TabIndex = 27;
+            this.txtBillingQuantity.Location = new System.Drawing.Point(874, 33);
+            this.txtBillingQuantity.Name = "txtBillingQuantity";
+            this.txtBillingQuantity.Size = new System.Drawing.Size(62, 23);
+            this.txtBillingQuantity.TabIndex = 27;
             // 
-            // textBox5
+            // txtQuantity
             // 
-            this.textBox5.Location = new System.Drawing.Point(489, 29);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 20);
-            this.textBox5.TabIndex = 26;
+            this.txtQuantity.Location = new System.Drawing.Point(507, 31);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(36, 23);
+            this.txtQuantity.TabIndex = 26;
             // 
-            // comboBox3
+            // cmbItemName
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(207, 30);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 25;
+            this.cmbItemName.FormattingEnabled = true;
+            this.cmbItemName.Location = new System.Drawing.Point(207, 30);
+            this.cmbItemName.Name = "cmbItemName";
+            this.cmbItemName.Size = new System.Drawing.Size(121, 24);
+            this.cmbItemName.TabIndex = 25;
             // 
-            // label11
+            // lblBillingQuantity
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(864, 36);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 13);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "Quantity To Bill";
+            this.lblBillingQuantity.AutoSize = true;
+            this.lblBillingQuantity.Location = new System.Drawing.Point(709, 36);
+            this.lblBillingQuantity.Name = "lblBillingQuantity";
+            this.lblBillingQuantity.Size = new System.Drawing.Size(120, 17);
+            this.lblBillingQuantity.TabIndex = 24;
+            this.lblBillingQuantity.Text = "Quantity To Bill";
             // 
-            // label10
+            // lblCurrentQuantity
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(373, 33);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(83, 13);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "Current Quantity";
+            this.lblCurrentQuantity.AutoSize = true;
+            this.lblCurrentQuantity.Location = new System.Drawing.Point(373, 33);
+            this.lblCurrentQuantity.Name = "lblCurrentQuantity";
+            this.lblCurrentQuantity.Size = new System.Drawing.Size(128, 17);
+            this.lblCurrentQuantity.TabIndex = 23;
+            this.lblCurrentQuantity.Text = "Current Quantity";
             // 
-            // label9
+            // lblIName
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(112, 33);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 13);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Item Name";
+            this.lblIName.AutoSize = true;
+            this.lblIName.Location = new System.Drawing.Point(112, 33);
+            this.lblIName.Name = "lblIName";
+            this.lblIName.Size = new System.Drawing.Size(84, 17);
+            this.lblIName.TabIndex = 22;
+            this.lblIName.Text = "Item Name";
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.BackColor = System.Drawing.Color.NavajoWhite;
+            this.tabPage2.Controls.Add(this.dgBillReport);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1230, 616);
+            this.tabPage2.Size = new System.Drawing.Size(1230, 599);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Sales";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // dgBillReport
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(71, 6);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1054, 379);
-            this.dataGridView2.TabIndex = 0;
+            this.dgBillReport.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgBillReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBillReport.Location = new System.Drawing.Point(71, 6);
+            this.dgBillReport.Name = "dgBillReport";
+            this.dgBillReport.Size = new System.Drawing.Size(1054, 379);
+            this.dgBillReport.TabIndex = 0;
             // 
             // BillingUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.tbBilling);
             this.Name = "BillingUC";
             this.Size = new System.Drawing.Size(1221, 494);
             this.tbBilling.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tbBill.ResumeLayout(false);
+            this.tbBill.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAllBill)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBillReport)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,24 +274,24 @@
         #endregion
 
         private System.Windows.Forms.TabControl tbBilling;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tbBill;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.DataGridView dgAllBill;
+        private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.Label lblPrice;
+        private System.Windows.Forms.Button btnAddBill;
+        private System.Windows.Forms.TextBox txtBillingQuantity;
+        private System.Windows.Forms.TextBox txtQuantity;
+        private System.Windows.Forms.ComboBox cmbItemName;
+        private System.Windows.Forms.Label lblBillingQuantity;
+        private System.Windows.Forms.Label lblCurrentQuantity;
+        private System.Windows.Forms.Label lblIName;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgBillReport;
+        private System.Windows.Forms.TextBox txtMobile;
+        private System.Windows.Forms.Label lblMobile;
+        private System.Windows.Forms.TextBox txtCName;
+        private System.Windows.Forms.Label lblCustomer;
+        private System.Windows.Forms.Label lblTotalAmountDisplay;
     }
 }

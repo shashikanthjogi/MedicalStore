@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Medical_StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Medical_StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Id" />
@@ -152,13 +152,13 @@
           <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
           <Parameter Name="DealerName" Type="nvarchar" Mode="In" />
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
-          <Parameter Name="Mobile" Type="int" Mode="In" />
+          <Parameter Name="Mobile" Type="bigint" Mode="In" />
         </Function>
         <Function Name="INS_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
           <Parameter Name="LastName" Type="nvarchar" Mode="In" />
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
-          <Parameter Name="Mobile" Type="int" Mode="In" />
+          <Parameter Name="Mobile" Type="bigint" Mode="In" />
           <Parameter Name="Designation_Id" Type="int" Mode="In" />
           <Parameter Name="Salary" Type="int" Mode="In" />
           <Parameter Name="EId" Type="int" Mode="InOut" />
@@ -212,8 +212,7 @@
             <End Role="StockOut" EntitySet="StockOut" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Medical_StoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -376,7 +375,7 @@
             <End Role="Login" EntitySet="Logins" />
           </AssociationSet>
           <FunctionImport Name="DEL_Company">
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DEL_Stock">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -386,7 +385,6 @@
           </FunctionImport>
           <FunctionImport Name="GET_Companies" ReturnType="Collection(Medical_StoreModel.GET_Companies_Result)" />
           <FunctionImport Name="GET_Employee_LookUp" ReturnType="Collection(Medical_StoreModel.GET_Employee_LookUp_Result)" />
-          <FunctionImport Name="GET_Employees" ReturnType="Collection(Medical_StoreModel.GET_Employees_Result)" />
           <FunctionImport Name="GET_StockDetails" ReturnType="Collection(Medical_StoreModel.GET_StockDetails_Result)" />
           <FunctionImport Name="GET_ValidateLogin" ReturnType="Collection(Medical_StoreModel.GET_ValidateLogin_Result)">
             <Parameter Name="UserName" Mode="In" Type="String" />
@@ -396,13 +394,13 @@
             <Parameter Name="CompanyName" Mode="In" Type="String" />
             <Parameter Name="DealerName" Mode="In" Type="String" />
             <Parameter Name="Address" Mode="In" Type="String" />
-            <Parameter Name="Mobile" Mode="In" Type="Int32" />
+            <Parameter Name="Mobile" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="INS_Employee">
             <Parameter Name="FirstName" Mode="In" Type="String" />
             <Parameter Name="LastName" Mode="In" Type="String" />
             <Parameter Name="Address" Mode="In" Type="String" />
-            <Parameter Name="Mobile" Mode="In" Type="Int32" />
+            <Parameter Name="Mobile" Mode="In" Type="Int64" />
             <Parameter Name="Designation_Id" Mode="In" Type="Int32" />
             <Parameter Name="Salary" Mode="In" Type="Int32" />
             <Parameter Name="EId" Mode="InOut" Type="Int32" />
@@ -431,6 +429,7 @@
             <Parameter Name="C_Date" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GET_Employees" ReturnType="Collection(Medical_StoreModel.GET_Employees_Result1)" />
         </EntityContainer>
         <ComplexType Name="GET_Companies_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -464,6 +463,14 @@
         <ComplexType Name="GET_ValidateLogin_Result">
           <Property Type="Int32" Name="Designation_Id" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GET_Employees_Result1">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Mobile" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Salary" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -578,18 +585,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GET_Employees" FunctionName="Medical_StoreModel.Store.GET_Employees">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employees_Result">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
-                <ScalarProperty Name="Salary" ColumnName="Salary" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GET_StockDetails" FunctionName="Medical_StoreModel.Store.GET_StockDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Medical_StoreModel.GET_StockDetails_Result">
@@ -616,6 +611,18 @@
           <FunctionImportMapping FunctionImportName="INS_Login" FunctionName="Medical_StoreModel.Store.INS_Login" />
           <FunctionImportMapping FunctionImportName="INS_StockIn" FunctionName="Medical_StoreModel.Store.INS_StockIn" />
           <FunctionImportMapping FunctionImportName="UPD_StockIn" FunctionName="Medical_StoreModel.Store.UPD_StockIn" />
+          <FunctionImportMapping FunctionImportName="GET_Employees" FunctionName="Medical_StoreModel.Store.GET_Employees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employees_Result1">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

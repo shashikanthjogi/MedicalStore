@@ -147,13 +147,13 @@
     <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
     <Parameter Name="DealerName" Type="nvarchar" Mode="In" />
     <Parameter Name="Address" Type="nvarchar" Mode="In" />
-    <Parameter Name="Mobile" Type="int" Mode="In" />
+    <Parameter Name="Mobile" Type="bigint" Mode="In" />
   </Function>
   <Function Name="INS_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
     <Parameter Name="LastName" Type="nvarchar" Mode="In" />
     <Parameter Name="Address" Type="nvarchar" Mode="In" />
-    <Parameter Name="Mobile" Type="int" Mode="In" />
+    <Parameter Name="Mobile" Type="bigint" Mode="In" />
     <Parameter Name="Designation_Id" Type="int" Mode="In" />
     <Parameter Name="Salary" Type="int" Mode="In" />
     <Parameter Name="EId" Type="int" Mode="InOut" />

@@ -82,6 +82,9 @@
     <Compile Include="GET_Employees_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GET_Employees_Result1.cs">
+      <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GET_Employee_LookUp_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>

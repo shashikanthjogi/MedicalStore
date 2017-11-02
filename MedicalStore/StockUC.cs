@@ -54,58 +54,103 @@ namespace MedicalStore
 
         private void btnAddStock_Click(object sender, EventArgs e)
         {
-            try
+            string error = ValidateFields();
+            if (string.IsNullOrEmpty(error))
             {
-                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+                try
                 {
-                    var result = context.INS_StockIn(txtSItem.Text, Constants.ADD, Convert.ToInt32(txtSQuantity.Text),
-                        Convert.ToInt32(txtSPrice.Text), Convert.ToInt32(cmbCompanies.SelectedValue.ToString()), Convert.ToDateTime(dtEdate.Value.ToShortDateString()), Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
-                    MessageBox.Show(Constants.STOCK_ADD);
-                    ClearAddStockFields();
-                    BindStocks();
+                    using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+                    {
+                        var result = context.INS_StockIn(txtSItem.Text, Constants.ADD, Convert.ToInt32(txtSQuantity.Text),
+                            Convert.ToInt32(txtSPrice.Text), Convert.ToInt32(cmbCompanies.SelectedValue.ToString()), Convert.ToDateTime(dtEdate.Value.ToShortDateString()), Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
+                        MessageBox.Show(Constants.STOCK_ADD);
+                        ClearAddStockFields();
+                        BindStocks();
+                        txtIQuantity.Text = GetQuantity(Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cboIName.SelectedItem).Key)).ToString();
+                        txtItemQuantity.Text = GetQuantity(Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cboItemName.SelectedItem).Key)).ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Constants.STOCK_ADD_FAIL);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(Constants.STOCK_ADD_FAIL);
+                MessageBox.Show(error);
             }
         }
 
         private void cboIName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtIQuantity.Text = GetQuantity(Convert.ToInt32(cboIName.SelectedValue.ToString())).ToString();
+            if (cboIName.Items.Count > 0 && cboIName.SelectedItem != null)
+            {
+                txtIQuantity.Text = GetQuantity(Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cboIName.SelectedItem).Key)).ToString();
+            }
+            else
+                txtIQuantity.Text = string.Empty;
         }
 
         private void cboItemName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtItemQuantity.Text = GetQuantity(Convert.ToInt32(cboItemName.SelectedValue.ToString())).ToString();
+            if (cboItemName.Items.Count > 0 && cboItemName.SelectedItem != null)
+            {
+                txtItemQuantity.Text = GetQuantity(Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cboItemName.SelectedItem).Key)).ToString();
+            }
+            else
+                txtItemQuantity.Text = string.Empty;
         }
 
         private void btnUpdateStock_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Constants.STOCK_UPDATE_WARNING);
-            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+            if (cboItemName.Items.Count > 0)
             {
-                var text = ((System.Collections.Generic.KeyValuePair<string, string>)cboIName.SelectedItem).Value;
-                var result = context.UPD_StockIn(Convert.ToInt32(cboIName.SelectedValue.ToString()), text, Convert.ToInt32(txtItQuantity.Text), Convert.ToInt32(txtItPrice.Text)
-                    , Constants.UPDATE, Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
+                string error = ValidateUpdateFields();
+                if (string.IsNullOrEmpty(error))
+                {
+                    MessageBox.Show(Constants.STOCK_UPDATE_WARNING);
+                    using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+                    {
+                        var text = ((System.Collections.Generic.KeyValuePair<string, string>)cboIName.SelectedItem).Value;
+                        var result = context.UPD_StockIn(Convert.ToInt32(cboIName.SelectedValue.ToString()), text, Convert.ToInt32(txtItQuantity.Text), Convert.ToInt32(txtItPrice.Text)
+                            , Constants.UPDATE, Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
+                    }
+                    MessageBox.Show(Constants.STOCK_UPDATE_SUCCESS);
+                    BindStocks();
+                    txtItQuantity.Clear();
+                    txtItPrice.Clear();
+                }
+                else
+                {
+                    MessageBox.Show(error);
+                }
             }
-            MessageBox.Show(Constants.STOCK_UPDATE_SUCCESS);
-            BindStocks();
-            txtItQuantity.Clear();
-            txtItPrice.Clear();
+            else
+            {
+                MessageBox.Show(Constants.NO_STOCK);
+            }
         }
 
         private void btnDelStock_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Constants.STOCK_DEL_WARNING);
-            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+            if (cboItemName.Items.Count > 0)
             {
-                var text = ((System.Collections.Generic.KeyValuePair<string, string>)cboItemName.SelectedItem).Value;
-                var result = context.DEL_Stock(text, Constants.DELETE, Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
+                MessageBox.Show(Constants.STOCK_DEL_WARNING);
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+                {
+                    var text = ((System.Collections.Generic.KeyValuePair<string, string>)cboItemName.SelectedItem).Value;
+                    var result = context.DEL_Stock(text, Constants.DELETE, Convert.ToDateTime(DateTime.Now), LoginUC.employeeName);
+                }
+                MessageBox.Show(Constants.STOCK_DEL_SUCCESS);
+                BindStocks();
             }
-            MessageBox.Show(Constants.STOCK_DEL_SUCCESS);
-            BindStocks();
+            else
+            {
+                cboIName.DataSource = null;
+                cboItemName.DataSource = null;
+                dgViewStock.DataSource = null;
+                MessageBox.Show(Constants.NO_STOCK);
+            }
         }
 
         #endregion
@@ -148,6 +193,7 @@ namespace MedicalStore
 
         private void BindStocks()
         {
+
             using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
                 stockDetails = context.GET_StockDetails().ToList();
@@ -171,9 +217,9 @@ namespace MedicalStore
                 }
                 else
                 {
-                    dgViewStock.DataSource = null;
+                    cboIName.DataSource = null;
                     cboItemName.DataSource = null;
-                    MessageBox.Show(Constants.COMPANY_NONE);
+                    dgViewStock.DataSource = null;
                 }
             }
         }
@@ -181,6 +227,54 @@ namespace MedicalStore
         private int GetQuantity(int id)
         {
             return stockDetails.Where(x => x.S_Id == id).Select(x => x.S_AvailableQuantity).FirstOrDefault();
+        }
+
+        private string ValidateFields()
+        {
+            if (string.IsNullOrEmpty(txtSQuantity.Text) || string.IsNullOrEmpty(txtSPrice.Text) || string.IsNullOrEmpty(txtSItem.Text))
+            {
+                return Constants.MANDATORY_FIELDS;
+            }
+            return ValidateNumbers();
+        }
+
+        private string ValidateNumbers()
+        {
+            if (!IsNumber(txtSQuantity.Text))
+            {
+                txtSQuantity.Focus();
+                return Constants.STOCK_QUANTITY_ERROR;
+            }
+            if (!IsNumber(txtSPrice.Text))
+            {
+                txtSPrice.Focus();
+                return Constants.STOCK_PRICE_ERROR;
+            }
+            return string.Empty;
+        }
+
+        public static bool IsNumber(string s)
+        {
+            return s.All(char.IsDigit);
+        }
+
+        private string ValidateUpdateFields()
+        {
+            if (string.IsNullOrEmpty(txtItQuantity.Text) || string.IsNullOrEmpty(txtItPrice.Text))
+            {
+                return Constants.MANDATORY_FIELDS;
+            }
+            if (!IsNumber(txtItQuantity.Text))
+            {
+                txtItQuantity.Focus();
+                return Constants.STOCK_QUANTITY_ERROR;
+            }
+            if (!IsNumber(txtItPrice.Text))
+            {
+                txtItPrice.Focus();
+                return Constants.STOCK_PRICE_ERROR;
+            }
+            return string.Empty;
         }
 
         #endregion

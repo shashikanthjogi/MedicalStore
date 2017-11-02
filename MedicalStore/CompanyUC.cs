@@ -43,44 +43,59 @@ namespace MedicalStore
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+            string error = ValidateFields();
+            if (string.IsNullOrEmpty(error))
             {
-                try
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
                 {
-                    var result = context.INS_Company(txtCompanyName.Text,
-                        txtDealerName.Text,
-                        txtAddress.Text,
-                        Convert.ToInt32(txtMobile.Text)
-                        );
-                    FillCompanyList();
-                    txtCompanyName.Clear();
-                    txtAddress.Clear();
-                    txtDealerName.Clear();
-                    txtMobile.Clear();
-                    MessageBox.Show(Constants.COMPANY_ADD_SUCCESS);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(Constants.COMPANY_FAILURE);
-                }
+                    try
+                    {
+                        var result = context.INS_Company(txtCompanyName.Text,
+                            txtDealerName.Text,
+                            txtAddress.Text,
+                            Convert.ToInt64(txtMobile.Text)
+                            );
+                        FillCompanyList();
+                        txtCompanyName.Clear();
+                        txtAddress.Clear();
+                        txtDealerName.Clear();
+                        txtMobile.Clear();
+                        MessageBox.Show(Constants.COMPANY_ADD_SUCCESS);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(Constants.COMPANY_FAILURE);
+                    }
 
+                }
+            }
+            else
+            {
+                MessageBox.Show(error);
             }
         }
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+            if (cmbCompanies.Items.Count > 0)
             {
-                try
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
                 {
-                    var result = context.DEL_Company(Convert.ToInt32(cmbCompanies.SelectedValue.ToString()));
-                    FillCompanyList();
-                    MessageBox.Show(Constants.COMPANY_DEL_SUCCESS);
+                    try
+                    {
+                        var result = context.DEL_Company(Convert.ToInt32(cmbCompanies.SelectedValue.ToString()));
+                        FillCompanyList();
+                        MessageBox.Show(Constants.COMPANY_DEL_SUCCESS);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(Constants.COMPANY_FAILURE);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(Constants.COMPANY_FAILURE);
-                }
+            }
+            else
+            {
+                MessageBox.Show(Constants.COMPANY_NONE);
             }
         }
 
@@ -111,15 +126,43 @@ namespace MedicalStore
                 }
                 else
                 {
-                    dgCompanyList.DataSource = null;
                     cmbCompanies.DataSource = null;
-                    MessageBox.Show(Constants.COMPANY_NONE);
+                    dgCompanyList.DataSource = null;
                 }
             }
         }
 
+        private string ValidateFields()
+        {
+            if (string.IsNullOrEmpty(txtCompanyName.Text) || string.IsNullOrEmpty(txtDealerName.Text) || string.IsNullOrEmpty(txtMobile.Text) ||
+                string.IsNullOrEmpty(txtAddress.Text))
+            {
+                return Constants.MANDATORY_FIELDS;
+            }
+            return ValidateMobile();
+        }
+
+        private string ValidateMobile()
+        {
+            if (!IsNumber(txtMobile.Text))
+            {
+                txtMobile.Focus();
+                return Constants.INVALID_MOBILE;
+            }
+            if (txtMobile.Text.Length != 10)
+            {
+                txtMobile.Focus();
+                return Constants.INVALID_MOBILE;
+            }
+            return string.Empty;
+        }
+
+        public static bool IsNumber(string s)
+        {
+            return s.All(char.IsDigit);
+        }
+
         #endregion
 
-        
     }
 }
