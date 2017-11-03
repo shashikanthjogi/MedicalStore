@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Configuration;
 namespace MedicalStore
 {
     public partial class MasterFrom : Form
@@ -20,6 +20,7 @@ namespace MedicalStore
             LoginUC.parentFormName = this;
             menuMain.Hide();
             lblUserName.Text = string.Empty;
+            lblStoreName.Text = ConfigurationSettings.AppSettings["MedicalStoreName"];
             if (!pnlMaster.Controls.Contains(LoginUC.Instance))
             {
                 pnlMaster.Controls.Add(LoginUC.Instance);

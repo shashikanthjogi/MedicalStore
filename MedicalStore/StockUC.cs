@@ -240,36 +240,31 @@ namespace MedicalStore
 
         private string ValidateNumbers()
         {
-            if (!IsNumber(txtSQuantity.Text))
+            if (!CommonHelper.IsNumber(txtSQuantity.Text))
             {
                 txtSQuantity.Focus();
                 return Constants.STOCK_QUANTITY_ERROR;
             }
-            if (!IsNumber(txtSPrice.Text))
+            if (!CommonHelper.IsNumber(txtSPrice.Text))
             {
                 txtSPrice.Focus();
                 return Constants.STOCK_PRICE_ERROR;
             }
             return string.Empty;
         }
-
-        public static bool IsNumber(string s)
-        {
-            return s.All(char.IsDigit);
-        }
-
+        
         private string ValidateUpdateFields()
         {
             if (string.IsNullOrEmpty(txtItQuantity.Text) || string.IsNullOrEmpty(txtItPrice.Text))
             {
                 return Constants.MANDATORY_FIELDS;
             }
-            if (!IsNumber(txtItQuantity.Text))
+            if (!CommonHelper.IsNumber(txtItQuantity.Text))
             {
                 txtItQuantity.Focus();
                 return Constants.STOCK_QUANTITY_ERROR;
             }
-            if (!IsNumber(txtItPrice.Text))
+            if (!CommonHelper.IsNumber(txtItPrice.Text))
             {
                 txtItPrice.Focus();
                 return Constants.STOCK_PRICE_ERROR;

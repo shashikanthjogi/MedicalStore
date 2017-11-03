@@ -30,7 +30,7 @@
         {
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.pnlMaster = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblStoreName = new System.Windows.Forms.Label();
             this.lblUserName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -51,17 +51,17 @@
             this.pnlMaster.Size = new System.Drawing.Size(1155, 417);
             this.pnlMaster.TabIndex = 13;
             // 
-            // label1
+            // lblStoreName
             // 
-            this.label1.Font = new System.Drawing.Font("Arial Unicode MS", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(254, 33);
-            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(613, 84);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Medical Store Interface";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblStoreName.Font = new System.Drawing.Font("Arial Unicode MS", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStoreName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblStoreName.Location = new System.Drawing.Point(254, 33);
+            this.lblStoreName.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblStoreName.Name = "lblStoreName";
+            this.lblStoreName.Size = new System.Drawing.Size(613, 84);
+            this.lblStoreName.TabIndex = 14;
+            this.lblStoreName.Text = "Medical Store Interface";
+            this.lblStoreName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblUserName
             // 
@@ -82,7 +82,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1210, 575);
             this.Controls.Add(this.lblUserName);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblStoreName);
             this.Controls.Add(this.pnlMaster);
             this.Controls.Add(this.menuMain);
             this.Name = "MasterFrom";
@@ -96,7 +96,7 @@
 
         private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.Panel pnlMaster;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStoreName;
         private System.Windows.Forms.Label lblUserName;
     }
 }

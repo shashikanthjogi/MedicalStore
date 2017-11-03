@@ -144,7 +144,7 @@ namespace MedicalStore
 
         private string ValidateMobile()
         {
-            if (!IsNumber(txtMobile.Text))
+            if (!CommonHelper.IsNumber(txtMobile.Text))
             {
                 txtMobile.Focus();
                 return Constants.INVALID_MOBILE;
@@ -156,12 +156,7 @@ namespace MedicalStore
             }
             return string.Empty;
         }
-
-        public static bool IsNumber(string s)
-        {
-            return s.All(char.IsDigit);
-        }
-
+        
         #endregion
 
     }

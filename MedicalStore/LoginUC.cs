@@ -286,6 +286,12 @@ namespace MedicalStore
             controls = cc[0].Controls.Find("tbStock", true);
             TabControl tc = (TabControl)controls[0];
             TabPage tp = tc.TabPages[index];
+            if (tc.TabPages.Count == 4)
+            {
+                //TabPage reportsTab = tc.TabPages[3];
+                //if (employeeType == (int)Constants.EMPLOYEETYPE.STAFF || employeeType == (int)Constants.EMPLOYEETYPE.TRAINEE)
+                //    tc.TabPages.Remove(reportsTab);
+            }
             tc.SelectTab(tp);
         }
 

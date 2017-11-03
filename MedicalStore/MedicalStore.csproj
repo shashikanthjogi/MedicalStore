@@ -60,6 +60,7 @@
     <Compile Include="BillingUC.Designer.cs">
       <DependentUpon>BillingUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonHelper.cs" />
     <Compile Include="Company.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>

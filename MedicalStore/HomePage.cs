@@ -71,8 +71,8 @@ namespace MedicalStore
                     {
                         using (MedicalDBEntityModelConnection loginContext = new MedicalDBEntityModelConnection())
                         {
-                            string loginId = txtFName.Text + GenerateRandomNo();
-                            string password = Constants.PASS + GenerateRandomNo();
+                            string loginId = txtFName.Text + CommonHelper.GenerateRandomNo();
+                            string password = Constants.PASS + CommonHelper.GenerateRandomNo();
                             var aaa = loginContext.INS_Login(loginId, password, employeeId);
                             MessageBox.Show(Constants.REGISTRATION_SUCCESS + Environment.NewLine +
                             Constants.LOGIN_ID + loginId + Environment.NewLine +
@@ -130,14 +130,6 @@ namespace MedicalStore
             }
         }
 
-        public int GenerateRandomNo()
-        {
-            int _min = 1000;
-            int _max = 9999;
-            Random _rdm = new Random();
-            return _rdm.Next(_min, _max);
-        }
-
         private void ClearAllFields()
         {
             txtFName.Clear();
@@ -174,6 +166,11 @@ namespace MedicalStore
             {
                 txtSalary.Focus();
                 return Constants.INVALID_SALARY;
+            }
+            if (txtSalary.Text.Length > 5)
+            {
+                txtSalary.Focus();
+                return Constants.HIGH_SALARY;
             }
             return string.Empty;
         }

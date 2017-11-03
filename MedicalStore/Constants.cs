@@ -62,6 +62,7 @@ namespace MedicalStore
         public const string MANDATORY_FIELDS = "Please fill all the fields. It's Mandatory";
         public const string INVALID_MOBILE = "Invalid mobile number";
         public const string INVALID_SALARY = "Invalid salary details";
+        public const string HIGH_SALARY = "Sorry!! you are paid too much";
         public const string STOCK_QUANTITY_ERROR = "Invalid stock quantity";
         public const string STOCK_PRICE_ERROR = "Invalid stock price";
 
