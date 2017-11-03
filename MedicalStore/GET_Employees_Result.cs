@@ -11,11 +11,13 @@ namespace MedicalStore
 {
     using System;
     
-    public partial class GET_ALL_VENDORS_Result
+    public partial class GET_Employees_Result
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Address { get; set; }
         public long Mobile { get; set; }
+        public int Designation_Id { get; set; }
+        public int Salary { get; set; }
     }
 }

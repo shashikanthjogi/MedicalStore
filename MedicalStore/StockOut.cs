@@ -15,11 +15,14 @@ namespace MedicalStore
     public partial class StockOut
     {
         public int O_Id { get; set; }
-        public string C_Name { get; set; }
-        public string O_Name { get; set; }
+        public int O_CompanyId { get; set; }
+        public string O_StockName { get; set; }
         public int O_Quantity { get; set; }
         public int O_Price { get; set; }
-        public int O_TotalPrice { get; set; }
         public System.DateTime O_Date { get; set; }
+        public string O_Description { get; set; }
+        public string O_RemoveBy { get; set; }
+    
+        public virtual Company Company { get; set; }
     }
 }

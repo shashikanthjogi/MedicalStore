@@ -19,8 +19,10 @@ namespace MedicalStore
         public string I_Description { get; set; }
         public int I_Quantity { get; set; }
         public int I_Price { get; set; }
-        public int V_Name { get; set; }
-        public System.DateTime I_Exp_Date { get; set; }
+        public int I_CompanyId { get; set; }
+        public System.DateTime I_ExpiryDate { get; set; }
+        public System.DateTime I_CreatedDate { get; set; }
+        public string I_CreatedBy { get; set; }
     
         public virtual Company Company { get; set; }
     }

@@ -26,9 +26,10 @@ namespace MedicalStore
         public string Address { get; set; }
         public long Mobile { get; set; }
         public int Designation_Id { get; set; }
-        public decimal Salary { get; set; }
+        public int Salary { get; set; }
     
-        public virtual Employee_LookUp Employee_LookUp { get; set; }
+        public virtual Employee Employee1 { get; set; }
+        public virtual Employee Employee2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Login> Logins { get; set; }
     }

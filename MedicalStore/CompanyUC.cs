@@ -12,6 +12,9 @@ namespace MedicalStore
 {
     public partial class CompanyUC : UserControl
     {
+
+        #region Fields
+
         private static CompanyUC _instance;
         public static CompanyUC Instance
         {
@@ -22,77 +25,139 @@ namespace MedicalStore
                 return _instance;
             }
         }
+
+        #endregion
+
+        #region Constructor
+
         public CompanyUC()
         {
             InitializeComponent();
-            FillCompanyList();
-
+            if(!LoginUC.isLogOut)
+                FillCompanyList();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Events
+
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            string error = ValidateFields();
+            if (string.IsNullOrEmpty(error))
             {
-                try
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
                 {
-                    var result = context.INS_Company(textBox1.Text,
-                        textBox2.Text,
-                        textBox3.Text,
-                        Convert.ToInt32(textBox4.Text)
-                        );
-                    FillCompanyList();
-                    MessageBox.Show("New company added successfully.");
+                    try
+                    {
+                        var result = context.INS_Company(txtCompanyName.Text,
+                            txtDealerName.Text,
+                            txtAddress.Text,
+                            Convert.ToInt64(txtMobile.Text)
+                            );
+                        FillCompanyList();
+                        txtCompanyName.Clear();
+                        txtAddress.Clear();
+                        txtDealerName.Clear();
+                        txtMobile.Clear();
+                        MessageBox.Show(Constants.COMPANY_ADD_SUCCESS);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(Constants.COMPANY_FAILURE);
+                    }
+
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Sorry!! An error occured during the addition.");
-                }
-                
+            }
+            else
+            {
+                MessageBox.Show(error);
             }
         }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (cmbCompanies.Items.Count > 0)
+            {
+                using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+                {
+                    try
+                    {
+                        var result = context.DEL_Company(Convert.ToInt32(cmbCompanies.SelectedValue.ToString()));
+                        FillCompanyList();
+                        MessageBox.Show(Constants.COMPANY_DEL_SUCCESS);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(Constants.COMPANY_FAILURE);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show(Constants.COMPANY_NONE);
+            }
+        }
+
+        #endregion
+
+        #region Methods
 
         private void FillCompanyList()
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
             {
-                var result = context.GET_Companies().ToList();
-                dataGridView1.DataSource = result;
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
-                Dictionary<string, string> item = new Dictionary<string, string>();
-                foreach (var c in result)
+                var companyList = context.GET_Companies().ToList();
+                if (companyList.Count > 0)
                 {
-                    item.Add(c.C_Id.ToString(), c.CompanyName);
+                    dgCompanyList.DataSource = companyList;
+                    dgCompanyList.Columns[0].Visible = false;
+                    dgCompanyList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
+                    Dictionary<string, string> item = new Dictionary<string, string>();
+                    foreach (var c in companyList)
+                    {
+                        item.Add(c.Id.ToString(), c.CompanyName);
+
+                    }
+                    cmbCompanies.DataSource = new BindingSource(item, null);
+                    cmbCompanies.DisplayMember = "Value";
+                    cmbCompanies.ValueMember = "Key";
                 }
-                cmbCompanies.DataSource = new BindingSource(item, null);
-                cmbCompanies.DisplayMember = "Value";
-                cmbCompanies.ValueMember = "Key";
+                else
+                {
+                    cmbCompanies.DataSource = null;
+                    dgCompanyList.DataSource = null;
+                }
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private string ValidateFields()
         {
-            using (Medical_StoreEntities1 context = new Medical_StoreEntities1())
+            if (string.IsNullOrEmpty(txtCompanyName.Text) || string.IsNullOrEmpty(txtDealerName.Text) || string.IsNullOrEmpty(txtMobile.Text) ||
+                string.IsNullOrEmpty(txtAddress.Text))
             {
-                try
-                {
-                    var result = context.DEL_Company(Convert.ToInt32(cmbCompanies.SelectedValue.ToString()));
-                    FillCompanyList();
-                    MessageBox.Show("Company removed successfully.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Sorry!! An error occured during the deletion.");
-                }
+                return Constants.MANDATORY_FIELDS;
             }
+            return ValidateMobile();
         }
+
+        private string ValidateMobile()
+        {
+            if (!CommonHelper.IsNumber(txtMobile.Text))
+            {
+                txtMobile.Focus();
+                return Constants.INVALID_MOBILE;
+            }
+            if (txtMobile.Text.Length != 10)
+            {
+                txtMobile.Focus();
+                return Constants.INVALID_MOBILE;
+            }
+            return string.Empty;
+        }
+        
+        #endregion
+
     }
 }

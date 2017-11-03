@@ -7,28 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Configuration;
 namespace MedicalStore
 {
     public partial class MasterFrom : Form
     {
+        #region Constructor
+
         public MasterFrom()
         {
             InitializeComponent();
-            LoginUC.ParentFormName = this;
-            menuStrip1.Hide();
-            if (!panel1.Controls.Contains(LoginUC.Instance))
+            LoginUC.parentFormName = this;
+            menuMain.Hide();
+            lblUserName.Text = string.Empty;
+            lblStoreName.Text = ConfigurationSettings.AppSettings["MedicalStoreName"];
+            if (!pnlMaster.Controls.Contains(LoginUC.Instance))
             {
-                panel1.Controls.Add(LoginUC.Instance);
+                pnlMaster.Controls.Add(LoginUC.Instance);
                 LoginUC.Instance.BringToFront();
             }
             else
                 LoginUC.Instance.BringToFront();
         }
 
-        private void MasterFrom_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

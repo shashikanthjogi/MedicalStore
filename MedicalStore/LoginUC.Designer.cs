@@ -28,118 +28,147 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tbLogin = new System.Windows.Forms.TabControl();
+            this.tbpgLogin = new System.Windows.Forms.TabPage();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.txtUName = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.lblUName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbLogin.SuspendLayout();
+            this.tbpgLogin.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tbLogin
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(143, 67);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(977, 393);
-            this.tabControl1.TabIndex = 13;
+            this.tbLogin.Controls.Add(this.tbpgLogin);
+            this.tbLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLogin.Location = new System.Drawing.Point(161, 50);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.SelectedIndex = 0;
+            this.tbLogin.Size = new System.Drawing.Size(943, 361);
+            this.tbLogin.TabIndex = 13;
             // 
-            // tabPage1
+            // tbpgLogin
             // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(969, 367);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Login";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tbpgLogin.BackColor = System.Drawing.Color.NavajoWhite;
+            this.tbpgLogin.Controls.Add(this.btnLogin);
+            this.tbpgLogin.Controls.Add(this.btnReset);
+            this.tbpgLogin.Controls.Add(this.txtPass);
+            this.tbpgLogin.Controls.Add(this.txtUName);
+            this.tbpgLogin.Controls.Add(this.lblPassword);
+            this.tbpgLogin.Controls.Add(this.lblUName);
+            this.tbpgLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbpgLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbpgLogin.Location = new System.Drawing.Point(4, 22);
+            this.tbpgLogin.Name = "tbpgLogin";
+            this.tbpgLogin.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgLogin.Size = new System.Drawing.Size(935, 335);
+            this.tbpgLogin.TabIndex = 0;
+            this.tbpgLogin.Text = "LOGIN";
             // 
-            // button1
+            // btnLogin
             // 
-            this.button1.Location = new System.Drawing.Point(314, 113);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 42);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLogin.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnLogin.Location = new System.Drawing.Point(393, 126);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(101, 56);
+            this.btnLogin.TabIndex = 6;
+            this.btnLogin.Text = "LOGIN";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // button2
+            // btnReset
             // 
-            this.button2.Location = new System.Drawing.Point(495, 113);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 42);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "RESET";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnReset.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnReset.Location = new System.Drawing.Point(535, 126);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(95, 56);
+            this.btnReset.TabIndex = 7;
+            this.btnReset.Text = "RESET";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // textBox2
+            // txtPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(459, 76);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(256, 20);
-            this.textBox2.TabIndex = 5;
+            this.txtPass.Location = new System.Drawing.Point(493, 77);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
+            this.txtPass.Size = new System.Drawing.Size(208, 20);
+            this.txtPass.TabIndex = 5;
             // 
-            // textBox1
+            // txtUName
             // 
-            this.textBox1.Location = new System.Drawing.Point(459, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(256, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtUName.Location = new System.Drawing.Point(493, 35);
+            this.txtUName.Name = "txtUName";
+            this.txtUName.Size = new System.Drawing.Size(208, 20);
+            this.txtUName.TabIndex = 4;
             // 
-            // label3
+            // lblPassword
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(269, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Password";
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(329, 77);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(77, 17);
+            this.lblPassword.TabIndex = 3;
+            this.lblPassword.Text = "Password";
             // 
-            // label2
+            // lblUName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(269, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "UserName";
+            this.lblUName.AutoSize = true;
+            this.lblUName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUName.Location = new System.Drawing.Point(329, 38);
+            this.lblUName.Name = "lblUName";
+            this.lblUName.Size = new System.Drawing.Size(83, 17);
+            this.lblUName.TabIndex = 2;
+            this.lblUName.Text = "UserName";
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 23);
+            this.label4.TabIndex = 0;
             // 
             // LoginUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabControl1);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbLogin);
             this.Name = "LoginUC";
-            this.Size = new System.Drawing.Size(1263, 527);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.Size = new System.Drawing.Size(1293, 573);
+            this.tbLogin.ResumeLayout(false);
+            this.tbpgLogin.ResumeLayout(false);
+            this.tbpgLogin.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabControl tbLogin;
+        private System.Windows.Forms.TabPage tbpgLogin;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.TextBox txtUName;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Label lblUName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Medical_StoreModelStoreContainer" CdmEntityContainer="Medical_StoreEntities1">
-    <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="Medical_StoreModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Employee_LookUp">
       <EntityTypeMapping TypeName="Medical_StoreModel.Employee_LookUp">
         <MappingFragment StoreEntitySet="Employee_LookUp">
@@ -33,48 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GET_ValidateLogin" FunctionName="Medical_StoreModel.Store.GET_ValidateLogin" />
-    <EntitySetMapping Name="Stocks">
-      <EntityTypeMapping TypeName="Medical_StoreModel.Stock">
-        <MappingFragment StoreEntitySet="Stock">
-          <ScalarProperty Name="AvailablePrice" ColumnName="AvailablePrice" />
-          <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
-          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-          <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
-          <ScalarProperty Name="SellQuantity" ColumnName="SellQuantity" />
-          <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StockIns">
-      <EntityTypeMapping TypeName="Medical_StoreModel.StockIn">
-        <MappingFragment StoreEntitySet="StockIn">
-          <ScalarProperty Name="I_Exp_Date" ColumnName="I_Exp_Date" />
-          <ScalarProperty Name="V_Name" ColumnName="V_Name" />
-          <ScalarProperty Name="I_Price" ColumnName="I_Price" />
-          <ScalarProperty Name="I_Quantity" ColumnName="I_Quantity" />
-          <ScalarProperty Name="I_Description" ColumnName="I_Description" />
-          <ScalarProperty Name="I_Name" ColumnName="I_Name" />
-          <ScalarProperty Name="I_Id" ColumnName="I_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StockOuts">
-      <EntityTypeMapping TypeName="Medical_StoreModel.StockOut">
-        <MappingFragment StoreEntitySet="StockOut">
-          <ScalarProperty Name="O_Date" ColumnName="O_Date" />
-          <ScalarProperty Name="O_TotalPrice" ColumnName="O_TotalPrice" />
-          <ScalarProperty Name="O_Price" ColumnName="O_Price" />
-          <ScalarProperty Name="O_Quantity" ColumnName="O_Quantity" />
-          <ScalarProperty Name="O_Name" ColumnName="O_Name" />
-          <ScalarProperty Name="C_Name" ColumnName="C_Name" />
-          <ScalarProperty Name="O_Id" ColumnName="O_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="DEL_Company" FunctionName="Medical_StoreModel.Store.DEL_Company" />
     <FunctionImportMapping FunctionImportName="GET_Companies" FunctionName="Medical_StoreModel.Store.GET_Companies" />
     <FunctionImportMapping FunctionImportName="INS_Company" FunctionName="Medical_StoreModel.Store.INS_Company" />
@@ -89,5 +34,65 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GET_Employee_LookUp" FunctionName="Medical_StoreModel.Store.GET_Employee_LookUp">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employee_LookUp_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_Employees" FunctionName="Medical_StoreModel.Store.GET_Employees">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_Employees_Result">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="StockIns">
+      <EntityTypeMapping TypeName="Medical_StoreModel.StockIn">
+        <MappingFragment StoreEntitySet="StockIn">
+          <ScalarProperty Name="I_CreatedBy" ColumnName="I_CreatedBy" />
+          <ScalarProperty Name="I_CreatedDate" ColumnName="I_CreatedDate" />
+          <ScalarProperty Name="I_Exp_Date" ColumnName="I_Exp_Date" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="I_Price" ColumnName="I_Price" />
+          <ScalarProperty Name="I_Quantity" ColumnName="I_Quantity" />
+          <ScalarProperty Name="I_Description" ColumnName="I_Description" />
+          <ScalarProperty Name="I_Name" ColumnName="I_Name" />
+          <ScalarProperty Name="I_Id" ColumnName="I_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="Medical_StoreModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="INS_Login" FunctionName="Medical_StoreModel.Store.INS_Login" />
+    <FunctionImportMapping FunctionImportName="INS_Employee" FunctionName="Medical_StoreModel.Store.INS_Employee" />
+    <FunctionImportMapping FunctionImportName="GET_ValidateLogin" FunctionName="Medical_StoreModel.Store.GET_ValidateLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_ValidateLogin_Result1">
+          <ScalarProperty Name="Designation_Id" ColumnName="Designation_Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="INS_StockIn" FunctionName="Medical_StoreModel.Store.INS_StockIn" />
   </EntityContainerMapping>
 </Mapping>

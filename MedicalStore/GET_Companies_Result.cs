@@ -13,7 +13,7 @@ namespace MedicalStore
     
     public partial class GET_Companies_Result
     {
-        public int C_Id { get; set; }
+        public int Id { get; set; }
         public string CompanyName { get; set; }
         public string DealerName { get; set; }
         public string Address { get; set; }
