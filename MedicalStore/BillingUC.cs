@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace MedicalStore
 {
@@ -16,6 +18,8 @@ namespace MedicalStore
         #region Fields
 
         DataTable dt = new DataTable();
+        int total = 0;
+        Guid obj = Guid.NewGuid();
         public static List<GET_StockDetails_Result> stockdetails;
         private static BillingUC _instance;
         public static BillingUC Instance
@@ -38,12 +42,14 @@ namespace MedicalStore
 
         public BillingUC()
         {
-            dt.Columns.Add("ItemName", typeof(string));
+            dt.Columns.Add("CompanyId", typeof(int));
+            dt.Columns.Add("StockName", typeof(string));
             dt.Columns.Add("Quantity", typeof(int));
             dt.Columns.Add("Price", typeof(int));
-            dt.Columns.Add("Customer", typeof(string));
-            dt.Columns.Add("Mobile", typeof(int));
-            dt.Columns.Add("TotalAmount", typeof(int));
+            dt.Columns.Add("OrderDate", typeof(DateTime));
+            dt.Columns.Add("OrderDescription", typeof(string));
+            dt.Columns.Add("RemovedBy", typeof(string));
+            dt.Columns.Add("SalesId", typeof(Guid));
             InitializeComponent();
             txtQuantity.Enabled = false;
             txtPrice.Enabled = false;
@@ -82,13 +88,25 @@ namespace MedicalStore
             if (cmbItemName.Items.Count > 0)
             {
                 var text = ((System.Collections.Generic.KeyValuePair<string, string>)cmbItemName.SelectedItem).Value;
-                AddToDT(text, Convert.ToInt32(txtBillingQuantity.Text), Convert.ToInt32(txtPrice.Text), txtCName.Text, Convert.ToInt32(txtMobile.Text), dt);
+                int id = Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cmbItemName.SelectedItem).Key);
+                AddToDT(id, text, Convert.ToInt32(txtBillingQuantity.Text), Convert.ToInt32(txtPrice.Text), txtCName.Text, Convert.ToInt32(txtMobile.Text), dt);
             }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+
             MessageBox.Show("Total amount to be paid is " + lblTotalAmountDisplay.Text);
+            using (MedicalDBEntityModelConnection db = new MedicalDBEntityModelConnection())
+            {
+                var parameter = new SqlParameter("@Stocks", SqlDbType.Structured);
+                parameter.Value = dt;
+                parameter.TypeName = "dbo.SalesTable";
+                var result = db.INS_Customer(txtCName.Text,Convert.ToInt32(txtMobile.Text),obj, total);
+                db.Database.ExecuteSqlCommand("exec dbo.INS_Sales @Stocks", parameter);
+                obj = new Guid();
+                //var b = db.Database.ExecuteSqlCommand("exec dbo.INS_Salestest @Stocks", parameter);
+            }
         }
 
         #endregion
@@ -121,38 +139,39 @@ namespace MedicalStore
             }
         }
 
-        private void AddToDT(string itemname, int quantity, int price, string customername, int mobilenumber, DataTable dt)
+        private void AddToDT(int id, string itemname, int quantity, int price, string customername, int mobilenumber, DataTable dt)
         {
+
             DataRow dr = dt.NewRow();
-            dr["ItemName"] = itemname;
+            dr["CompanyId"] = 13;
+            dr["StockName"] = itemname;
             dr["Quantity"] = quantity;
             dr["Price"] = price;
-            dr["Customer"] = customername;
-            dr["Mobile"] = mobilenumber;
-            dr["TotalAmount"] = quantity * price;
+            dr["OrderDate"] = DateTime.Now.ToString();
+            dr["OrderDescription"] = "SALES";
+            dr["RemovedBy"] = LoginUC.employeeName;
+            dr["SalesId"] = obj.ToString();
             dt.Rows.Add(dr);
             dgAllBill.DataSource = dt;
             if (dgAllBill.Rows.Count > 0)
             {
                 dgAllBill.Show();
                 btnPrint.Enabled = true;
-                BilledAmount(dt);
+                BilledAmount(quantity * price);
             }
             else
                 dgAllBill.Hide();
         }
 
-        private void BilledAmount(DataTable dt)
+        private void BilledAmount(int itemprice)
         {
-            int total = 0;
-            foreach (DataRow dr in dt.Rows)
-            {
-                total += Convert.ToInt32(dr["TotalAmount"]);
-            }
+
+            total += itemprice;
             lblTotalAmountDisplay.Text = total.ToString();
+
         }
 
         #endregion
-        
+
     }
 }

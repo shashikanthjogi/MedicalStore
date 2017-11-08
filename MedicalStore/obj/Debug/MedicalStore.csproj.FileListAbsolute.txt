@@ -16,3 +16,21 @@ C:\Users\shashi\documents\visual studio 2017\Projects\MedicalStore\MedicalStore\
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.HomePage.resources
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.CompanyUC.resources
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Debug\MedicalStore.BillingUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\MedicalStore.exe.config
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\MedicalStore.exe
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\MedicalStore.pdb
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\EntityFramework.dll
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\EntityFramework.SqlServer.dll
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\EntityFramework.xml
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Debug\EntityFramework.SqlServer.xml
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.csprojResolveAssemblyReference.cache
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.BillingUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.CompanyUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.HomePage.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.LoginUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.MasterFrom.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.Properties.Resources.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.StockUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.csproj.GenerateResource.Cache
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.exe
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Debug\MedicalStore.pdb

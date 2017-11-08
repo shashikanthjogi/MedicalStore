@@ -75,6 +75,7 @@
     <EntitySetMapping Name="StockOuts">
       <EntityTypeMapping TypeName="Medical_StoreModel.StockOut">
         <MappingFragment StoreEntitySet="StockOut">
+          <ScalarProperty Name="O_SalesId" ColumnName="O_SalesId" />
           <ScalarProperty Name="O_Id" ColumnName="O_Id" />
           <ScalarProperty Name="O_CompanyId" ColumnName="O_CompanyId" />
           <ScalarProperty Name="O_StockName" ColumnName="O_StockName" />
@@ -146,5 +147,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="Medical_StoreModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="INS_Sales" FunctionName="Medical_StoreModel.Store.INS_Sales" />
+    <FunctionImportMapping FunctionImportName="INS_Salestest" FunctionName="Medical_StoreModel.Store.INS_Salestest" />
+    <FunctionImportMapping FunctionImportName="INS_Customer" FunctionName="Medical_StoreModel.Store.INS_Customer" />
   </EntityContainerMapping>
 </Mapping>

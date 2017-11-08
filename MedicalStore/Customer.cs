@@ -12,18 +12,12 @@ namespace MedicalStore
     using System;
     using System.Collections.Generic;
     
-    public partial class StockOut
+    public partial class Customer
     {
-        public int O_Id { get; set; }
-        public int O_CompanyId { get; set; }
-        public string O_StockName { get; set; }
-        public int O_Quantity { get; set; }
-        public int O_Price { get; set; }
-        public System.DateTime O_Date { get; set; }
-        public string O_Description { get; set; }
-        public string O_RemoveBy { get; set; }
-        public Nullable<System.Guid> O_SalesId { get; set; }
-    
-        public virtual Company Company { get; set; }
+        public int C_Id { get; set; }
+        public string CustomerName { get; set; }
+        public long Mobile { get; set; }
+        public System.Guid SalesId { get; set; }
+        public int TotalBill { get; set; }
     }
 }

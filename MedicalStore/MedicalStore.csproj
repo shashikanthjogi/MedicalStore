@@ -71,6 +71,9 @@
       <DependentUpon>CompanyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>

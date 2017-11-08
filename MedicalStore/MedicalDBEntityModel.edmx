@@ -15,6 +15,16 @@
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="SalesId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TotalBill" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
@@ -82,6 +92,7 @@
           <Property Name="O_Date" Type="date" Nullable="false" />
           <Property Name="O_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="O_RemoveBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="O_SalesId" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_Employee_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
@@ -154,6 +165,12 @@
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
           <Parameter Name="Mobile" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="INS_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="bigint" Mode="In" />
+          <Parameter Name="SalesId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="TotalBill" Type="int" Mode="In" />
+        </Function>
         <Function Name="INS_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
           <Parameter Name="LastName" Type="nvarchar" Mode="In" />
@@ -168,6 +185,8 @@
           <Parameter Name="Pass" Type="nvarchar" Mode="In" />
           <Parameter Name="EId" Type="int" Mode="In" />
         </Function>
+        <Function Name="INS_Sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="INS_Salestest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="INS_StockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
@@ -189,6 +208,7 @@
         </Function>
         <EntityContainer Name="Medical_StoreModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
@@ -301,6 +321,7 @@
           <Property Name="O_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="O_RemoveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_StockOut_Company" FromRole="StockOut" ToRole="Company" />
+          <Property Name="O_SalesId" Type="Guid" />
         </EntityType>
         <Association Name="FK_StockIn_StockIn">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
@@ -430,6 +451,16 @@
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_Employees" ReturnType="Collection(Medical_StoreModel.GET_Employees_Result1)" />
+          <EntitySet Name="Customers" EntityType="Medical_StoreModel.Customer" />
+          <FunctionImport Name="INS_Sales">
+            </FunctionImport>
+          <FunctionImport Name="INS_Salestest" />
+          <FunctionImport Name="INS_Customer">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="Int64" />
+            <Parameter Name="SalesId" Mode="In" Type="Guid" />
+            <Parameter Name="TotalBill" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GET_Companies_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -472,6 +503,16 @@
           <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Salary" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="SalesId" Type="Guid" Nullable="false" />
+          <Property Name="TotalBill" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -552,6 +593,7 @@
           <EntitySetMapping Name="StockOuts">
             <EntityTypeMapping TypeName="Medical_StoreModel.StockOut">
               <MappingFragment StoreEntitySet="StockOut">
+                <ScalarProperty Name="O_SalesId" ColumnName="O_SalesId" />
                 <ScalarProperty Name="O_Id" ColumnName="O_Id" />
                 <ScalarProperty Name="O_CompanyId" ColumnName="O_CompanyId" />
                 <ScalarProperty Name="O_StockName" ColumnName="O_StockName" />
@@ -623,6 +665,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Medical_StoreModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+                <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="INS_Sales" FunctionName="Medical_StoreModel.Store.INS_Sales" />
+          <FunctionImportMapping FunctionImportName="INS_Salestest" FunctionName="Medical_StoreModel.Store.INS_Salestest" />
+          <FunctionImportMapping FunctionImportName="INS_Customer" FunctionName="Medical_StoreModel.Store.INS_Customer" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

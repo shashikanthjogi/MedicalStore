@@ -10,6 +10,16 @@
     <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Mobile" Type="bigint" Nullable="false" />
   </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="C_Id" />
+    </Key>
+    <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="bigint" Nullable="false" />
+    <Property Name="SalesId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TotalBill" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="Id" />
@@ -77,6 +87,7 @@
     <Property Name="O_Date" Type="date" Nullable="false" />
     <Property Name="O_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="O_RemoveBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="O_SalesId" Type="uniqueidentifier" />
   </EntityType>
   <Association Name="FK_Employee_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
@@ -149,6 +160,12 @@
     <Parameter Name="Address" Type="nvarchar" Mode="In" />
     <Parameter Name="Mobile" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="INS_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="bigint" Mode="In" />
+    <Parameter Name="SalesId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="TotalBill" Type="int" Mode="In" />
+  </Function>
   <Function Name="INS_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
     <Parameter Name="LastName" Type="nvarchar" Mode="In" />
@@ -163,6 +180,8 @@
     <Parameter Name="Pass" Type="nvarchar" Mode="In" />
     <Parameter Name="EId" Type="int" Mode="In" />
   </Function>
+  <Function Name="INS_Sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="INS_Salestest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="INS_StockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
     <Parameter Name="Description" Type="nvarchar" Mode="In" />
@@ -184,6 +203,7 @@
   </Function>
   <EntityContainer Name="Medical_StoreModelStoreContainer">
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee_LookUp" EntityType="Self.Employee_LookUp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />

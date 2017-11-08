@@ -34,6 +34,7 @@ namespace MedicalStore
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     
         public virtual int DEL_Company(Nullable<int> companyId)
         {
@@ -233,6 +234,37 @@ namespace MedicalStore
         public virtual ObjectResult<GET_Employees_Result1> GET_Employees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_Employees_Result1>("GET_Employees");
+        }
+    
+        public virtual int INS_Sales()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Sales");
+        }
+    
+        public virtual int INS_Salestest()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Salestest");
+        }
+    
+        public virtual int INS_Customer(string name, Nullable<long> mobile, Nullable<System.Guid> salesId, Nullable<int> totalBill)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var mobileParameter = mobile.HasValue ?
+                new ObjectParameter("Mobile", mobile) :
+                new ObjectParameter("Mobile", typeof(long));
+    
+            var salesIdParameter = salesId.HasValue ?
+                new ObjectParameter("SalesId", salesId) :
+                new ObjectParameter("SalesId", typeof(System.Guid));
+    
+            var totalBillParameter = totalBill.HasValue ?
+                new ObjectParameter("TotalBill", totalBill) :
+                new ObjectParameter("TotalBill", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Customer", nameParameter, mobileParameter, salesIdParameter, totalBillParameter);
         }
     }
 }

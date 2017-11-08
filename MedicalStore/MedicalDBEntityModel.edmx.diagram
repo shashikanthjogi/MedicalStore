@@ -16,6 +16,7 @@
         <AssociationConnector Association="Medical_StoreModel.FK_StockOut_Company" ManuallyRouted="false" />
         <AssociationConnector Association="Medical_StoreModel.FK_Employee_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="Medical_StoreModel.FK_Login_Employee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Medical_StoreModel.Customer" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

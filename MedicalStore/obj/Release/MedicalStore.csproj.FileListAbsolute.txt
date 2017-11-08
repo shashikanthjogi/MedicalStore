@@ -16,3 +16,21 @@ C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.pdb
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.csprojResolveAssemblyReference.cache
 C:\Users\shashi\Documents\Visual Studio 2017\Projects\MedicalStore\MedicalStore\obj\Release\MedicalStore.BillingUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\MedicalStore.exe.config
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\MedicalStore.exe
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\MedicalStore.pdb
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\EntityFramework.dll
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\EntityFramework.SqlServer.dll
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\EntityFramework.xml
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\bin\Release\EntityFramework.SqlServer.xml
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.csprojResolveAssemblyReference.cache
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.BillingUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.CompanyUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.HomePage.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.LoginUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.MasterFrom.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.Properties.Resources.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.StockUC.resources
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.csproj.GenerateResource.Cache
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.exe
+D:\MedicalStore_Develop\MedicalStore\MedicalStore\obj\Release\MedicalStore.pdb

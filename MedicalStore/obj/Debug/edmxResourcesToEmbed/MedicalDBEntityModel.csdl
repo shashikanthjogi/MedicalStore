@@ -85,6 +85,7 @@
     <Property Name="O_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="O_RemoveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Company" Relationship="Self.FK_StockOut_Company" FromRole="StockOut" ToRole="Company" />
+    <Property Name="O_SalesId" Type="Guid" />
   </EntityType>
   <Association Name="FK_StockIn_StockIn">
     <End Role="Company" Type="Self.Company" Multiplicity="1" />
@@ -214,6 +215,15 @@
       <Parameter Name="CreatedBy" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GET_Employees" ReturnType="Collection(Medical_StoreModel.GET_Employees_Result1)" />
+    <EntitySet Name="Customers" EntityType="Medical_StoreModel.Customer" />
+    <FunctionImport Name="INS_Sales" />
+    <FunctionImport Name="INS_Salestest" />
+    <FunctionImport Name="INS_Customer">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="Int64" />
+      <Parameter Name="SalesId" Mode="In" Type="Guid" />
+      <Parameter Name="TotalBill" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GET_Companies_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -256,4 +266,14 @@
     <Property Type="String" Name="Type" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Salary" Nullable="false" />
   </ComplexType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="C_Id" />
+    </Key>
+    <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <Property Name="SalesId" Type="Guid" Nullable="false" />
+    <Property Name="TotalBill" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

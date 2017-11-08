@@ -180,7 +180,7 @@
             this.btnAddBill.Name = "btnAddBill";
             this.btnAddBill.Size = new System.Drawing.Size(110, 40);
             this.btnAddBill.TabIndex = 28;
-            this.btnAddBill.Text = "Add To Bill";
+            this.btnAddBill.Text = "Add To Kart";
             this.btnAddBill.UseVisualStyleBackColor = false;
             this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
             // 
