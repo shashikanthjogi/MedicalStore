@@ -10,14 +10,11 @@
 namespace MedicalStore
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class GET_CompanyByStockName_Result
     {
-        public int C_Id { get; set; }
-        public string CustomerName { get; set; }
-        public Nullable<long> Mobile { get; set; }
-        public System.Guid SalesId { get; set; }
-        public int TotalBill { get; set; }
+        public int Id { get; set; }
+        public string CompanyName { get; set; }
+        public System.DateTime I_CreatedDate { get; set; }
     }
 }

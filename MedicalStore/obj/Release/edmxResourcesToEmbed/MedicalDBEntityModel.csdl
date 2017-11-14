@@ -271,8 +271,8 @@
       <PropertyRef Name="C_Id" />
     </Key>
     <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="Int64" />
     <Property Name="SalesId" Type="Guid" Nullable="false" />
     <Property Name="TotalBill" Type="Int32" Nullable="false" />
   </EntityType>

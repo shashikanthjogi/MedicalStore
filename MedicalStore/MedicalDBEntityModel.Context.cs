@@ -266,5 +266,36 @@ namespace MedicalStore
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("INS_Customer", nameParameter, mobileParameter, salesIdParameter, totalBillParameter);
         }
+    
+        public virtual ObjectResult<GET_CompanyByStockName_Result> GET_CompanyByStockName(string stockName)
+        {
+            var stockNameParameter = stockName != null ?
+                new ObjectParameter("StockName", stockName) :
+                new ObjectParameter("StockName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_CompanyByStockName_Result>("GET_CompanyByStockName", stockNameParameter);
+        }
+    
+        public virtual int UPD_MainStock(string name, Nullable<int> quantity, Nullable<int> price)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(int));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("Price", price) :
+                new ObjectParameter("Price", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UPD_MainStock", nameParameter, quantityParameter, priceParameter);
+        }
+    
+        public virtual ObjectResult<GET_SalesDetails_Result> GET_SalesDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_SalesDetails_Result>("GET_SalesDetails");
+        }
     }
 }

@@ -224,6 +224,15 @@
       <Parameter Name="SalesId" Mode="In" Type="Guid" />
       <Parameter Name="TotalBill" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GET_CompanyByStockName" ReturnType="Collection(Medical_StoreModel.GET_CompanyByStockName_Result)">
+      <Parameter Name="StockName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UPD_MainStock">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="Price" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GET_SalesDetails" ReturnType="Collection(Medical_StoreModel.GET_SalesDetails_Result)" />
   </EntityContainer>
   <ComplexType Name="GET_Companies_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -271,9 +280,23 @@
       <PropertyRef Name="C_Id" />
     </Key>
     <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Mobile" Type="Int64" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="Int64" />
     <Property Name="SalesId" Type="Guid" Nullable="false" />
     <Property Name="TotalBill" Type="Int32" Nullable="false" />
   </EntityType>
+  <ComplexType Name="GET_CompanyByStockName_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="I_CreatedDate" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GET_SalesDetails_Result">
+    <Property Type="String" Name="O_StockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="O_Quantity" Nullable="false" />
+    <Property Type="Int32" Name="TotalBill" Nullable="false" />
+    <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="Mobile" Nullable="true" />
+    <Property Type="Guid" Name="SalesId" Nullable="false" />
+    <Property Type="DateTime" Name="O_Date" Nullable="false" />
+  </ComplexType>
 </Schema>

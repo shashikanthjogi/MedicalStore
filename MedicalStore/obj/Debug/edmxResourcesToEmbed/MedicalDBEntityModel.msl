@@ -159,7 +159,29 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="INS_Sales" FunctionName="Medical_StoreModel.Store.INS_Sales" />
-    <FunctionImportMapping FunctionImportName="INS_Salestest" FunctionName="Medical_StoreModel.Store.INS_Salestest" />
     <FunctionImportMapping FunctionImportName="INS_Customer" FunctionName="Medical_StoreModel.Store.INS_Customer" />
+    <FunctionImportMapping FunctionImportName="GET_CompanyByStockName" FunctionName="Medical_StoreModel.Store.GET_CompanyByStockName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_CompanyByStockName_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="I_CreatedDate" ColumnName="I_CreatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UPD_MainStock" FunctionName="Medical_StoreModel.Store.UPD_MainStock" />
+    <FunctionImportMapping FunctionImportName="GET_SalesDetails" FunctionName="Medical_StoreModel.Store.GET_SalesDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_SalesDetails_Result">
+          <ScalarProperty Name="O_StockName" ColumnName="O_StockName" />
+          <ScalarProperty Name="O_Quantity" ColumnName="O_Quantity" />
+          <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+          <ScalarProperty Name="O_Date" ColumnName="O_Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

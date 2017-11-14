@@ -83,6 +83,9 @@
     <Compile Include="GET_Companies_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GET_CompanyByStockName_Result.cs">
+      <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GET_Employees_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>
@@ -90,6 +93,9 @@
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_Employee_LookUp_Result.cs">
+      <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GET_SalesDetails_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GET_StockDetails_Result.cs">

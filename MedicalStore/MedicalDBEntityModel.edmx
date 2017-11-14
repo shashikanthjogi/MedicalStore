@@ -20,8 +20,8 @@
             <PropertyRef Name="C_Id" />
           </Key>
           <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="bigint" />
           <Property Name="SalesId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TotalBill" Type="int" Nullable="false" />
         </EntityType>
@@ -152,8 +152,12 @@
           <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GET_Companies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_CompanyByStockName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StockName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GET_Employee_LookUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_Employees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_SalesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_StockDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_ValidateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
@@ -186,7 +190,6 @@
           <Parameter Name="EId" Type="int" Mode="In" />
         </Function>
         <Function Name="INS_Sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="INS_Salestest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="INS_StockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
@@ -196,6 +199,11 @@
           <Parameter Name="E_Date" Type="date" Mode="In" />
           <Parameter Name="C_Date" Type="datetime" Mode="In" />
           <Parameter Name="CreatedBy" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UPD_MainStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="int" Mode="In" />
         </Function>
         <Function Name="UPD_StockIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Sid" Type="int" Mode="In" />
@@ -461,6 +469,15 @@
             <Parameter Name="SalesId" Mode="In" Type="Guid" />
             <Parameter Name="TotalBill" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GET_CompanyByStockName" ReturnType="Collection(Medical_StoreModel.GET_CompanyByStockName_Result)" >
+          <Parameter Name="StockName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UPD_MainStock">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GET_SalesDetails" ReturnType="Collection(Medical_StoreModel.GET_SalesDetails_Result)" />
         </EntityContainer>
         <ComplexType Name="GET_Companies_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -508,11 +525,25 @@
             <PropertyRef Name="C_Id" />
           </Key>
           <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="Int64" />
           <Property Name="SalesId" Type="Guid" Nullable="false" />
           <Property Name="TotalBill" Type="Int32" Nullable="false" />
         </EntityType>
+        <ComplexType Name="GET_CompanyByStockName_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="I_CreatedDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GET_SalesDetails_Result">
+          <Property Type="String" Name="O_StockName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="O_Quantity" Nullable="false" />
+          <Property Type="Int32" Name="TotalBill" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="Mobile" Nullable="true" />
+          <Property Type="Guid" Name="SalesId" Nullable="false" />
+          <Property Type="DateTime" Name="O_Date" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -677,8 +708,30 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="INS_Sales" FunctionName="Medical_StoreModel.Store.INS_Sales" />
-          <FunctionImportMapping FunctionImportName="INS_Salestest" FunctionName="Medical_StoreModel.Store.INS_Salestest" />
           <FunctionImportMapping FunctionImportName="INS_Customer" FunctionName="Medical_StoreModel.Store.INS_Customer" />
+          <FunctionImportMapping FunctionImportName="GET_CompanyByStockName" FunctionName="Medical_StoreModel.Store.GET_CompanyByStockName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_CompanyByStockName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="I_CreatedDate" ColumnName="I_CreatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UPD_MainStock" FunctionName="Medical_StoreModel.Store.UPD_MainStock" />
+          <FunctionImportMapping FunctionImportName="GET_SalesDetails" FunctionName="Medical_StoreModel.Store.GET_SalesDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Medical_StoreModel.GET_SalesDetails_Result">
+                <ScalarProperty Name="O_StockName" ColumnName="O_StockName" />
+                <ScalarProperty Name="O_Quantity" ColumnName="O_Quantity" />
+                <ScalarProperty Name="TotalBill" ColumnName="TotalBill" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+                <ScalarProperty Name="O_Date" ColumnName="O_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

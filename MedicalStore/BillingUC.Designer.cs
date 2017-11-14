@@ -47,12 +47,12 @@
             this.lblCurrentQuantity = new System.Windows.Forms.Label();
             this.lblIName = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dgBillReport = new System.Windows.Forms.DataGridView();
+            this.dgSales = new System.Windows.Forms.DataGridView();
             this.tbBilling.SuspendLayout();
             this.tbBill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllBill)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgBillReport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSales)).BeginInit();
             this.SuspendLayout();
             // 
             // tbBilling
@@ -236,7 +236,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.NavajoWhite;
-            this.tabPage2.Controls.Add(this.dgBillReport);
+            this.tabPage2.Controls.Add(this.dgSales);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -244,14 +244,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Sales";
             // 
-            // dgBillReport
+            // dgSales
             // 
-            this.dgBillReport.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgBillReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBillReport.Location = new System.Drawing.Point(71, 6);
-            this.dgBillReport.Name = "dgBillReport";
-            this.dgBillReport.Size = new System.Drawing.Size(1054, 379);
-            this.dgBillReport.TabIndex = 0;
+            this.dgSales.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSales.Location = new System.Drawing.Point(173, 55);
+            this.dgSales.Name = "dgSales";
+            this.dgSales.Size = new System.Drawing.Size(811, 327);
+            this.dgSales.TabIndex = 0;
             // 
             // BillingUC
             // 
@@ -266,7 +266,7 @@
             this.tbBill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllBill)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgBillReport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSales)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -287,11 +287,11 @@
         private System.Windows.Forms.Label lblCurrentQuantity;
         private System.Windows.Forms.Label lblIName;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dgBillReport;
         private System.Windows.Forms.TextBox txtMobile;
         private System.Windows.Forms.Label lblMobile;
         private System.Windows.Forms.TextBox txtCName;
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.Label lblTotalAmountDisplay;
+        private System.Windows.Forms.DataGridView dgSales;
     }
 }

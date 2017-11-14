@@ -152,7 +152,7 @@ namespace MedicalStore
 
         private string ValidateMobileAndSalary()
         {
-            if (!IsNumber(txtMobile.Text))
+            if (!CommonHelper.IsNumber(txtMobile.Text))
             {
                 txtMobile.Focus();
                 return Constants.INVALID_MOBILE;
@@ -162,7 +162,7 @@ namespace MedicalStore
                 txtMobile.Focus();
                 return Constants.INVALID_MOBILE;
             }
-            if (!IsNumber(txtSalary.Text))
+            if (!CommonHelper.IsNumber(txtSalary.Text))
             {
                 txtSalary.Focus();
                 return Constants.INVALID_SALARY;
@@ -173,11 +173,6 @@ namespace MedicalStore
                 return Constants.HIGH_SALARY;
             }
             return string.Empty;
-        }
-
-        public static bool IsNumber(string s)
-        {
-            return s.All(char.IsDigit);
         }
 
         #endregion
