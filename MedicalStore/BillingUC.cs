@@ -102,9 +102,16 @@ namespace MedicalStore
                     }
                     else
                     {
-                        var text = ((System.Collections.Generic.KeyValuePair<string, string>)cmbItemName.SelectedItem).Value;
-                        int id = Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cmbItemName.SelectedItem).Key);
-                        AddToDT(id, text, billQuantity, Convert.ToInt32(txtPrice.Text));
+                        if (cmbItemName.SelectedItem == null)
+                        {
+                            MessageBox.Show("Error in drop down selection for item name");
+                        }
+                        else
+                        {
+                            var text = ((System.Collections.Generic.KeyValuePair<string, string>)cmbItemName.SelectedItem).Value;
+                            int id = Convert.ToInt32(((System.Collections.Generic.KeyValuePair<string, string>)cmbItemName.SelectedItem).Key);
+                            AddToDT(id, text, billQuantity, Convert.ToInt32(txtPrice.Text));
+                        }
                     }
                 }
             }
@@ -131,11 +138,13 @@ namespace MedicalStore
                 {
                     txtMobile.Focus();
                     MessageBox.Show(Constants.INVALID_MOBILE);
+                    return;
                 }
                 if (txtMobile.Text.Length != 10)
                 {
                     txtMobile.Focus();
                     MessageBox.Show(Constants.INVALID_MOBILE);
+                    return;
                 }
                 PrintBill();
             }
@@ -228,23 +237,23 @@ namespace MedicalStore
                 var parameter = new SqlParameter("@Stocks", SqlDbType.Structured);
                 parameter.Value = dt;
                 parameter.TypeName = "dbo.SalesTable";
-                int? mobile = null;
+                long? mobile = null;
                 if (string.IsNullOrEmpty(txtMobile.Text))
                     mobile = null;
                 else
-                    mobile = Convert.ToInt32(txtMobile.Text);
-                var result = db.INS_Customer(txtCName.Text, mobile, obj, total);
+                    mobile = Convert.ToInt64(txtMobile.Text);
                 db.Database.ExecuteSqlCommand("exec dbo.INS_Sales @Stocks", parameter);
-
+                var result = db.INS_Customer(txtCName.Text, mobile, obj, total);
                 obj = new Guid();
             }
-            using (MedicalDBEntityModelConnection mainSales = new MedicalDBEntityModelConnection())
-            {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    var result = mainSales.UPD_MainStock(dr["StockName"].ToString(), Convert.ToInt32(dr["Quantity"].ToString()), Convert.ToInt32(dr["Price"].ToString()));
-                }
-            }
+            //Not required now as we have replaced the call with after insert trigger
+            //using (MedicalDBEntityModelConnection mainSales = new MedicalDBEntityModelConnection())
+            //{
+            //    foreach (DataRow dr in dt.Rows)
+            //    {
+            //        var result = mainSales.UPD_MainStock(dr["StockName"].ToString(), Convert.ToInt32(dr["Quantity"].ToString()), Convert.ToInt32(dr["Price"].ToString()));
+            //    }
+            //}
             dt.Rows.Clear();
             dgAllBill.DataSource = null;
             dgAllBill.Hide();
