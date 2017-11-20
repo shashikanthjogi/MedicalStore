@@ -59,12 +59,19 @@
             this.cboItemName = new System.Windows.Forms.ComboBox();
             this.tbpgViewStock = new System.Windows.Forms.TabPage();
             this.dgViewStock = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtSName = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.dgStockResult = new System.Windows.Forms.DataGridView();
             this.tbStock.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tbpgUpdStock.SuspendLayout();
             this.tbpgDelStock.SuspendLayout();
             this.tbpgViewStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgViewStock)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStockResult)).BeginInit();
             this.SuspendLayout();
             // 
             // tbStock
@@ -73,6 +80,7 @@
             this.tbStock.Controls.Add(this.tbpgUpdStock);
             this.tbStock.Controls.Add(this.tbpgDelStock);
             this.tbStock.Controls.Add(this.tbpgViewStock);
+            this.tbStock.Controls.Add(this.tabPage2);
             this.tbStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbStock.Location = new System.Drawing.Point(78, 21);
             this.tbStock.Name = "tbStock";
@@ -378,6 +386,55 @@
             this.dgViewStock.Size = new System.Drawing.Size(914, 247);
             this.dgViewStock.TabIndex = 0;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.NavajoWhite;
+            this.tabPage2.Controls.Add(this.dgStockResult);
+            this.tabPage2.Controls.Add(this.btnSearch);
+            this.tabPage2.Controls.Add(this.txtSName);
+            this.tabPage2.Controls.Add(this.lblName);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1071, 493);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "Search Stock";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(346, 66);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(94, 17);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Stock Name";
+            // 
+            // txtSName
+            // 
+            this.txtSName.Location = new System.Drawing.Point(485, 60);
+            this.txtSName.Name = "txtSName";
+            this.txtSName.Size = new System.Drawing.Size(187, 23);
+            this.txtSName.TabIndex = 1;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnSearch.Location = new System.Drawing.Point(740, 50);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 43);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // dgStockResult
+            // 
+            this.dgStockResult.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgStockResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgStockResult.Location = new System.Drawing.Point(170, 124);
+            this.dgStockResult.Name = "dgStockResult";
+            this.dgStockResult.Size = new System.Drawing.Size(745, 250);
+            this.dgStockResult.TabIndex = 3;
+            // 
             // StockUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +452,9 @@
             this.tbpgDelStock.PerformLayout();
             this.tbpgViewStock.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgViewStock)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgStockResult)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -432,5 +492,10 @@
         private System.Windows.Forms.Label lblItemQuantity;
         private System.Windows.Forms.TextBox txtItPrice;
         private System.Windows.Forms.Label iblIPrice;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dgStockResult;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSName;
+        private System.Windows.Forms.Label lblName;
     }
 }

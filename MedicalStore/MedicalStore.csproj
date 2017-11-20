@@ -98,6 +98,9 @@
     <Compile Include="GET_SalesDetails_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GET_SearchStock_Result.cs">
+      <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GET_StockDetails_Result.cs">
       <DependentUpon>MedicalDBEntityModel.tt</DependentUpon>
     </Compile>

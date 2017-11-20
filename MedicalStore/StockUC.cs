@@ -273,6 +273,20 @@ namespace MedicalStore
         }
 
         #endregion
-        
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            using (MedicalDBEntityModelConnection context = new MedicalDBEntityModelConnection())
+            {
+                dgStockResult.DataSource = null;
+                if (txtSName.Text == string.Empty)
+                {
+                    MessageBox.Show("Please enter a valid stock name");
+                    return;
+                }
+                var searchResult = context.GET_SearchStock(txtSName.Text).ToList();
+                dgStockResult.DataSource = searchResult;
+            }
+        }
     }
 }

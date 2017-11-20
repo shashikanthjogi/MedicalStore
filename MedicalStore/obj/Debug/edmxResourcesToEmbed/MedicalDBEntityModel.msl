@@ -183,5 +183,18 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_SearchStock" FunctionName="Medical_StoreModel.Store.GET_SearchStock">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Medical_StoreModel.GET_SearchStock_Result">
+          <ScalarProperty Name="S_Id" ColumnName="S_Id" />
+          <ScalarProperty Name="S_Name" ColumnName="S_Name" />
+          <ScalarProperty Name="S_Price" ColumnName="S_Price" />
+          <ScalarProperty Name="S_SellQuantity" ColumnName="S_SellQuantity" />
+          <ScalarProperty Name="S_AvailableQuantity" ColumnName="S_AvailableQuantity" />
+          <ScalarProperty Name="S_SellPrice" ColumnName="S_SellPrice" />
+          <ScalarProperty Name="S_AvailablePrice" ColumnName="S_AvailablePrice" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

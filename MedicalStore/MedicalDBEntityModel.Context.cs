@@ -297,5 +297,14 @@ namespace MedicalStore
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_SalesDetails_Result>("GET_SalesDetails");
         }
+    
+        public virtual ObjectResult<GET_SearchStock_Result> GET_SearchStock(string stockName)
+        {
+            var stockNameParameter = stockName != null ?
+                new ObjectParameter("StockName", stockName) :
+                new ObjectParameter("StockName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_SearchStock_Result>("GET_SearchStock", stockNameParameter);
+        }
     }
 }

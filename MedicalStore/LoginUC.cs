@@ -135,6 +135,9 @@ namespace MedicalStore
                 case Constants.REPORTS:
                     SelectStockTabs(3);
                     break;
+                case "Search Stock":
+                    SelectStockTabs(4);
+                    break;
                 case Constants.NEW_BILL:
                     SelectBilling(0);
                     break;
@@ -220,6 +223,11 @@ namespace MedicalStore
             {
                 item = new ToolStripMenuItem();
                 item.Text = Constants.REPORTS;
+                item.Click += Item_Click;
+                stock.DropDownItems.Add(item);
+
+                item = new ToolStripMenuItem();
+                item.Text = "Search Stock";
                 item.Click += Item_Click;
                 stock.DropDownItems.Add(item);
 

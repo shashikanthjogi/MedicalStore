@@ -233,6 +233,9 @@
       <Parameter Name="Price" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GET_SalesDetails" ReturnType="Collection(Medical_StoreModel.GET_SalesDetails_Result)" />
+    <FunctionImport Name="GET_SearchStock" ReturnType="Collection(Medical_StoreModel.GET_SearchStock_Result)">
+      <Parameter Name="StockName" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GET_Companies_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -298,5 +301,14 @@
     <Property Type="Int64" Name="Mobile" Nullable="true" />
     <Property Type="Guid" Name="SalesId" Nullable="false" />
     <Property Type="DateTime" Name="O_Date" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GET_SearchStock_Result">
+    <Property Type="Int32" Name="S_Id" Nullable="false" />
+    <Property Type="String" Name="S_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="S_Price" Nullable="false" />
+    <Property Type="Int32" Name="S_SellQuantity" Nullable="false" />
+    <Property Type="Int32" Name="S_AvailableQuantity" Nullable="false" />
+    <Property Type="Int32" Name="S_SellPrice" Nullable="false" />
+    <Property Type="Int32" Name="S_AvailablePrice" Nullable="false" />
   </ComplexType>
 </Schema>
